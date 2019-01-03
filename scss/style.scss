@@ -12,47 +12,72 @@ body{
 main {
   background-color: yellow;
   display: flex;
-  max-width: 900px;
+  // max-width: 900px;
   width: 100%;
   height: 90vh;
-    .board{
-      background-color: red;
-      width:70%;
-      height:100%;
-    }
-    .info{
-      background-color: green;
-      width:30%;
-      height: 100%;
+  .board{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    .grid{
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      h1 {
-        font-size: 2em;
-        margin: 0;
-        text-align: center;
-        color: $black;
-        border: 2px solid $black;
-        background-color: $grey;
-      }
-      .turn{
-        font-size: 1.5em;
-        text-align: center;
-        color: $white;
-        border: 2px solid $white;
-        background-color: $black;
-      }
-      .scores{
-        font-size: 1em;
-        text-align: center;
-        color: $black;
-        border: 2px solid $black;
-        background-color: $white;
-      }
-      .undo{
-        height: 70%;
-        width: auto;
-        background-color: orange;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items:center;
+      background-color: red;
+      width:600px;
+      height:600px;
+      .tile{
+        margin:2px;
+        width: 24%;
+        height: 24%;
+        border: 1px solid black;
+
+        &.black{
+          background-color: $black
+        }
+        
+        &.white{
+          background-color: $white
+        }
       }
     }
+  }
+  .info{
+    background-color: green;
+    width:30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;
+    h1 {
+      font-size: 2em;
+      margin: 0;
+      text-align: center;
+      color: $black;
+      border: 2px solid $black;
+      background-color: $grey;
+    }
+    .turn{
+      font-size: 1.5em;
+      text-align: center;
+      color: $white;
+      border: 2px solid $white;
+      background-color: $black;
+    }
+    .scores{
+      font-size: 1em;
+      text-align: center;
+      color: $black;
+      border: 2px solid $black;
+      background-color: $white;
+    }
+    .undo{
+      height: 70%;
+      width: auto;
+      background-color: orange;
+    }
+  }
 }
