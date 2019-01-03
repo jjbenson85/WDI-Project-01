@@ -14,12 +14,35 @@ function addTile(tile, player){
   tile.addClass(player)
 }
 
+function isEmpty(tile){
+
+  if(tile.hasClass('white')||tile.hasClass('black')) return false
+  return true
+}
+
+function checkIfValid(tile, player){
+  //check to see if the tile is empty
+  if(isEmpty(tile)) return false
+
+  //check to see if there is an opponent tile next to this tile
+  
+
+    //If there is, check to see if there is either a opponent or player tile next to it
+    //Add opponent tiles to array
+
+    //As log as it isn't empty, keep looking
+
+    //If it is empty, start again
+
+    //if it finds a player tile, flip all tiles in array
+}
+
 function play(e){
   let player = turnCount++%2 == 0 ? 'black':'white'
   let tile = $(e.target)
 
   //check if it is a valid move
-
+  console.log(checkIfValid(tile, player))
   //if it is valid add tile
   addTile(tile, player)
 
