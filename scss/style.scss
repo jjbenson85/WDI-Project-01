@@ -1,5 +1,58 @@
 @import '_vars';
 
-h1 {
-  color: $color;
+
+body{
+  background-color: blue;
+  display:flex;
+  width: 100%;
+  height:100vh;
+  align-items: center;
+  justify-content: center;
+}
+main {
+  background-color: yellow;
+  display: flex;
+  max-width: 900px;
+  width: 100%;
+  height: 90vh;
+    .board{
+      background-color: red;
+      width:70%;
+      height:100%;
+    }
+    .info{
+      background-color: green;
+      width:30%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      h1 {
+        font-size: 2em;
+        margin: 0;
+        text-align: center;
+        color: $black;
+        border: 2px solid $black;
+        background-color: $grey;
+      }
+      .turn{
+        font-size: 1.5em;
+        text-align: center;
+        color: $white;
+        border: 2px solid $white;
+        background-color: $black;
+      }
+      .scores{
+        font-size: 1em;
+        text-align: center;
+        color: $black;
+        border: 2px solid $black;
+        background-color: $white;
+      }
+      .undo{
+        height: 70%;
+        width: auto;
+        background-color: orange;
+      }
+    }
 }
