@@ -30,8 +30,10 @@ main {
         height: 24%;
         border: 1px solid black; }
         main .board .grid .tile.black {
+          color: #FEFEFE;
           background-color: #111111; }
         main .board .grid .tile.white {
+          color: #111111;
           background-color: #FEFEFE; }
   main .info {
     background-color: green;

@@ -35,10 +35,12 @@ main {
         border: 1px solid black;
 
         &.black{
+          color:$white;
           background-color: $black
         }
-        
+
         &.white{
+          color:$black;
           background-color: $white
         }
       }
