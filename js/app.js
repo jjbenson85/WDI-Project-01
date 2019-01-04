@@ -17,6 +17,7 @@ let winner
 let validMovesArr
 let player
 let opponent
+let clickable = true
 const noValidMoves = {
   'black': false,
   'white': false
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 function resetVars(){
   debug()
   turnCount = 0
+  clickable = true
 
   gridClassArray = []
 
@@ -270,6 +272,9 @@ function nextPlayerTurn(){
   //history
   history[turnCount+1] = JSON.parse(JSON.stringify(gridClassArray))
 
+  //Allow click
+  clickable = true
+
   //Update to show the next players turn
   $turn.html(`${opponent} turn`)
 
@@ -329,6 +334,7 @@ function updatePlayerAndOpponent(){
 }
 
 function play(e){
+  if(!clickable)return
   debug()
   const tile = $(e.currentTarget)
 
@@ -355,6 +361,9 @@ function play(e){
 
   //If the valid moves array contains this tile
   if(validMovesArr[id]){
+
+    //disable click
+    clickable = false
 
     //Add the tile that was clicked
     addTile(tile, player, opponent)
