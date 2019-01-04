@@ -1,12 +1,14 @@
 //LOGS
-const validMovesLog = true
-const debugLog = true
+const validMovesLog = false
+const debugLog = false
 let debugCounter = 0
 
 
 //globals
 const width = 8
 let gridArray = []
+let gridClassArray = []
+const history = []
 let turnCount
 let whiteCount
 let blackCount
@@ -15,12 +17,12 @@ let winner
 let validMovesArr
 let player
 let opponent
-let noValidMoves = {
-  'black':false,
-  'white':false
+const noValidMoves = {
+  'black': false,
+  'white': false
 }
 
-
+let $grid
 let $blackScore
 let $whiteScore
 let $turn
@@ -41,6 +43,8 @@ function resetVars(){
   debug()
   turnCount = 0
 
+  gridClassArray = []
+
   for(let i=0;i<width*width;i++){
     const tile = gridArray[i]
     $(tile).removeClass('black').removeClass('white')
@@ -52,11 +56,12 @@ function resetVars(){
     const black = white + 1
     const black2 = white + width
 
-    if(i === black || i === black2) $(tile).addClass('black')
-    else if(i === white || i === white2) $(tile).addClass('white')
+    if(i === black || i === black2) addTile(tile, 'black', 'white') //$(tile).addClass('black')
+    else if(i === white || i === white2) addTile(tile, 'white', 'black')//$(tile).addClass('white')
 
 
   }
+  history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
   calculateScores()
   updateScores()
   updatePlayerAndOpponent()
@@ -69,6 +74,9 @@ function addTile(tile, player, opponent){
   debug()
   $(tile).removeClass(opponent).removeClass('valid')
   $(tile).addClass(player)
+
+  const id = parseInt($(tile).attr('data-id'))
+  gridClassArray[id] = player
 }
 
 function isOccupied(tile){
@@ -259,6 +267,9 @@ function gameOver(){
 }
 
 function nextPlayerTurn(){
+  //history
+  history[turnCount+1] = JSON.parse(JSON.stringify(gridClassArray))
+
   //Update to show the next players turn
   $turn.html(`${opponent} turn`)
 
@@ -351,12 +362,10 @@ function play(e){
     const timerArr = []
     const delay = 250
     //Flip each tile for this move
-    console.log('validMovesArr',validMovesArr, id)
     validMovesArr[id].forEach((elem, index)=>{
       const thisPlayer = player
       const thisOpponent = opponent
       const timerId = setTimeout(function(){
-        console.log('HERE', elem, thisPlayer, thisOpponent)
         addTile(elem, thisPlayer, thisOpponent)
         timerArr.pop()
       },delay*(index+1))
@@ -369,7 +378,7 @@ function play(e){
       nextPlayerTurn()
       $message.html('')
 
-      console.log('Valid')
+      // console.log('Valid')
 
       //Work out scores
       calculateScores()
@@ -388,7 +397,7 @@ function play(e){
 
 function buildGame(){
   // GET HTML ELEMENTS
-  const $grid = $('.grid')
+  $grid = $('.grid')
 
   //Build tiles
   for(let i=0;i<width*width;i++){
@@ -421,6 +430,37 @@ function buildGame(){
   gridArray.on('mouseenter',validHoverOn)
   gridArray.on('mouseout',validHoverOff)
 }
+function undoRedoUpdate(){
+
+  // console.log('history',history, 'turnCount', turnCount)
+  gridClassArray = []
+  for(let i=0;i<width*width;i++){
+    const tile = gridArray[i]
+    $(tile).removeClass('black').removeClass('white')
+  }
+  history[turnCount].forEach((elem,index)=>{
+    const tile = gridArray[index]
+    // $(tile).removeClass('black').removeClass('white')
+    $(tile).addClass(elem)
+    gridClassArray[index] = elem
+  })
+  calculateScores()
+  updateScores()
+  updatePlayerAndOpponent()
+  $turn.html(`${player} turn`)
+  getValidMoves(player,opponent)
+}
+function undoMove(){
+  turnCount--
+  if(turnCount<0)turnCount=0
+  undoRedoUpdate()
+}
+function redoMove(){
+  turnCount++
+  if(turnCount>=history.length)turnCount=history.length-1
+  undoRedoUpdate()
+
+}
 
 function init(){
   debug()
@@ -432,10 +472,14 @@ function init(){
   let $startButton = $('.startButton')
   let $menuButton = $('.menuButton')
   let $resetButton = $('.reset')
+  let $undoButton = $('.undo')
+  let $redoButton = $('.redo')
 
   $startButton.on('click', startGame)
   $menuButton.on('click', goToMenu)
   $resetButton.on('click', resetVars)
+  $undoButton.on('click', undoMove)
+  $redoButton.on('click', redoMove)
 
   // startGame()
 

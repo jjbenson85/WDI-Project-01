@@ -149,10 +149,18 @@ main {
         border: 2px solid $black;
         background-color: $white;
       }
-      .undo{
+      .options{
+        display: flex;
+        justify-content: space-around;
+      }
+      .undoRedo{
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
         height: 70%;
         width: auto;
         background-color: orange;
+        padding-bottom: 20px;
       }
     }
   }

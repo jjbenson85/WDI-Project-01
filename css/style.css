@@ -96,9 +96,16 @@ main {
         color: #111111;
         border: 2px solid #111111;
         background-color: #FEFEFE; }
-      main .game .info .undo {
+      main .game .info .options {
+        display: flex;
+        justify-content: space-around; }
+      main .game .info .undoRedo {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
         height: 70%;
         width: auto;
-        background-color: orange; }
+        background-color: orange;
+        padding-bottom: 20px; }
 
 /*# sourceMappingURL=style.css.map */
