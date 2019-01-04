@@ -35,6 +35,8 @@ main {
         main .board .grid .tile.white {
           color: #111111;
           background-color: #FEFEFE; }
+        main .board .grid .tile.valid {
+          border: 1px solid blue; }
   main .info {
     background-color: green;
     width: 30%;

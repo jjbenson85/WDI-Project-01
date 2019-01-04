@@ -43,6 +43,10 @@ main {
           color:$black;
           background-color: $white
         }
+
+        &.valid{
+          border: 1px solid blue;
+        }
       }
     }
   }
