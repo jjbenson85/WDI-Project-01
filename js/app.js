@@ -7,6 +7,10 @@ let turnCount
 const debugLog = true
 let debugCounter = 0
 
+let $blackScore
+let $whiteScore
+let $turn
+
 function debug(note){
   if(debugLog){
     const argumentsArray = [].slice.apply(arguments.callee.caller.arguments)
@@ -20,7 +24,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 function resetVars(){
   debug()
-  turnCount = 1
+  turnCount = 0
+
+  $turn.html('Black turn')
+
+  for(let i=0;i<width*width;i++){
+    const tile = gridArray[i]
+    $(tile).removeClass('black').removeClass('white')
+
+    //Work out middle squares for any even integer sized board
+    const half = (width/2)-1
+    const white = half + width*half
+    const white2 = white+ width +1
+    const black = white + 1
+    const black2 = white + width
+
+    if(i === black || i === black2) $(tile).addClass('black')
+    else if(i === white || i === white2) $(tile).addClass('white')
+  }
 
 }
 
@@ -178,6 +199,8 @@ function play(e){
   const opponent = turnCount%2 === 0 ? 'white':'black'
   const tile = $(e.target)
 
+
+
   //check if it is a valid move
   const tilesToFlip = checkIfValid(tile, player, opponent)
   console.log('tilesToFlip',tilesToFlip)
@@ -188,6 +211,7 @@ function play(e){
       addTile(elem, player, opponent)
     })
     addTile(tile, player, opponent)
+    $turn.html(`${opponent} turn`)
     turnCount++
     console.log('Valid')
   }else{
@@ -199,12 +223,28 @@ function play(e){
 
 
   //Increase counter
-
+  let whiteCount = 0
+  let blackCount = 0
+  let emptyCount = 0
   //Check game if game is over
   //Count occupied squares?
+  for(let i=0;i<width*width;i++){
+    const tileState = isOccupied(gridArray[i])
+    if(tileState==='white') whiteCount++
+    else if(tileState==='black') blackCount++
+    else emptyCount++
+  }
 
-  if(turnCount===(width*width)-4){
-    window.alert('Game Over')
+  $blackScore.html(`Black: ${blackCount}`)
+  $whiteScore.html(`White: ${whiteCount}`)
+
+
+
+
+
+  console.log(`BLACK:${blackCount}, WHITE:${whiteCount}`)
+  if(emptyCount===0){
+    if(window.confirm('Game Over \n Play Again?')) resetVars()
   }
   //else do nothing
 
@@ -224,18 +264,26 @@ function init(){
 
   //Build tiles
   for(let i=0;i<width*width;i++){
-    let square
-    if(i==2 || i==5 || i==6 || i==6 || i==7 || i==10) square = `<div class='tile black' data-id=${i}>${i}</div>`
-    else if(i==3||i==9) square = `<div class='tile white' data-id=${i}>${i}</div>`
-    else square = `<div class='tile' data-id=${i}>${i}</div>`
+    // let square
+    // if(i==2 || i==5 || i==6 || i==6 || i==7 || i==10) square = `<div class='tile black' data-id=${i}>${i}</div>`
+    // else if(i==3||i==9) square = `<div class='tile white' data-id=${i}>${i}</div>`
+    // else square = `<div class='tile' data-id=${i}>${i}</div>`
+    const square = `<div class='tile' data-id=${i}>${i}</div>`
 
     $grid.append(square)
   }
+
+  gridArray = $grid.find('div')
+
+  const $scores = $('.scores')
+  $blackScore = $scores.find('.black')
+  $whiteScore = $scores.find('.white')
+
+  $turn = $('.turn')
 
   //reset
   resetVars()
 
   //Add on click
-  gridArray = $grid.find('div')
   gridArray.on('click', play)
 }
