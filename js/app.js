@@ -5,7 +5,7 @@ let debugCounter = 0
 
 
 //globals
-const width = 4
+const width = 8
 let gridArray = []
 let turnCount
 let whiteCount
@@ -57,6 +57,8 @@ function resetVars(){
 
 
   }
+  calculateScores()
+  updateScores()
   updatePlayerAndOpponent()
   $turn.html(`${player} turn`)
   getValidMoves(player,opponent)
@@ -191,8 +193,8 @@ function checkIfValid(tile, player, opponent){
           //Add the potential flips from this search to the flip array
           flipArr = flipArr.concat(potentialArr)
 
-          //Add the tile-neighbour tile to the array
-          flipArr.push(elem)
+          //Add the tile-neighbour tile to the front array
+          flipArr.unshift(elem)
 
           //Return the array, this counts as a valid move
           return flipArr
@@ -248,13 +250,11 @@ function updateScores(){
 }
 
 function gameOver(){
-  // if(emptyCount===0){
 
-    if(winner === 'tie')$message.html('It\'s a tie!')
-    else $message.html(`${winner} wins!`)
+  if(winner === 'tie')$message.html('It\'s a tie!')
+  else $message.html(`${winner} wins!`)
 
-    if(window.confirm('Game Over \n Play Again?')) resetVars()
-  // }
+  // if(window.confirm('Game Over \n Play Again?')) resetVars()
 
 }
 
@@ -282,18 +282,21 @@ function getValidMoves(player,opponent){
     const tilesToFlip = checkIfValid(testTile, player, opponent)
     if(tilesToFlip){
       validMovesArr[i] = tilesToFlip
-      $(gridArray[i]).html(`${i} VALID`)
+      // $(gridArray[i]).html(`${i} VALID`)
     }else{
-        $(gridArray[i]).html(`${i}`)
+      // $(gridArray[i]).html(`${i}`)
     }
   }
 }
 
 function validHoverOn(e){
   // debug()
-
-  const tile = $(e.target)
+  const tile = $(e.currentTarget)
   const id = parseInt($(tile).attr('data-id'))
+
+  for(let i=0;i<width*width;i++){
+    $(gridArray[i]).removeClass('valid')
+  }
 
   if(validMovesArr[id]){
     tile.addClass('valid')
@@ -301,14 +304,10 @@ function validHoverOn(e){
 }
 
 function validHoverOff(e){
-  // debug()
-  const tile = $(e.target)
-  tile.removeClass('valid')
-  // const id = parseInt($(tile).attr('data-id'))
-  //
-  // if(validMovesArr[id]){
-  //   tile.removeClass('valid')
-  // }
+  // // debug()
+  // const tile = $(e.currentTarget)
+  // tile.removeClass('valid')
+
 }
 
 function updatePlayerAndOpponent(){
@@ -320,7 +319,7 @@ function updatePlayerAndOpponent(){
 
 function play(e){
   debug()
-  const tile = $(e.target)
+  const tile = $(e.currentTarget)
 
   validMovesLog && console.log('validMovesArr',validMovesArr)
 
@@ -344,58 +343,68 @@ function play(e){
   const id = parseInt($(tile).attr('data-id'))
 
   //If the valid moves array contains this tile
-  // if(validMovesArr[id]){
-
-    //Flip each tile for this move
-    validMovesArr[id].forEach((elem)=>{
-      addTile(elem, player, opponent)
-    })
+  if(validMovesArr[id]){
 
     //Add the tile that was clicked
     addTile(tile, player, opponent)
 
-    nextPlayerTurn()
-    $message.html('')
+    const timerArr = []
+    const delay = 250
+    //Flip each tile for this move
+    console.log('validMovesArr',validMovesArr, id)
+    validMovesArr[id].forEach((elem, index)=>{
+      const thisPlayer = player
+      const thisOpponent = opponent
+      const timerId = setTimeout(function(){
+        console.log('HERE', elem, thisPlayer, thisOpponent)
+        addTile(elem, thisPlayer, thisOpponent)
+        timerArr.pop()
+      },delay*(index+1))
+      timerArr.push(timerId)
+    })
 
-    // //Update to show the next players turn
-    // $turn.html(`${opponent} turn`)
-    //
-    // //Increase the turn count
-    // turnCount++
+    const wait = timerArr.length*delay
+    setTimeout(function(){
 
-    console.log('Valid')
-  // }else{
-  //   //Invalid move
-  //   console.log('Invalid')
-  // }
+      nextPlayerTurn()
+      $message.html('')
 
-  //Work out scores
-  calculateScores()
+      console.log('Valid')
 
-  //Display Scores
-  updateScores()
+      //Work out scores
+      calculateScores()
 
-  //Check for end of Game
-  if(emptyCount===0){
-    gameOver()
+      //Display Scores
+      updateScores()
+
+      //Check for end of Game
+      if(emptyCount===0){
+        gameOver()
+      }
+    },wait)
   }
 
 }
-function init(){
-  debug()
 
+function buildGame(){
   // GET HTML ELEMENTS
   const $grid = $('.grid')
 
   //Build tiles
   for(let i=0;i<width*width;i++){
-    const tile = `<div class='tile' data-id=${i}>${i}</div>`
+    const tile = `<div class='tile' data-id=${i}>
+                    <div class='rotate'>
+                      <div class='counter'>
+                        ${i}
+                      </div>
+                    </div>
+                  </div>`
     $grid.append(tile)
   }
 
   //Get DOM elements
   //Get an array of all tiles
-  gridArray = $grid.find('div')
+  gridArray = $grid.find('.tile')
 
   const $scores = $('.scores')
   $blackScore = $scores.find('.black')
@@ -411,4 +420,35 @@ function init(){
   gridArray.on('click', play)
   gridArray.on('mouseenter',validHoverOn)
   gridArray.on('mouseout',validHoverOff)
+}
+
+function init(){
+  debug()
+
+  buildGame()
+
+  let $start = $('.start')
+  let $game = $('.game')
+  let $startButton = $('.startButton')
+  let $menuButton = $('.menuButton')
+  let $resetButton = $('.reset')
+
+  $startButton.on('click', startGame)
+  $menuButton.on('click', goToMenu)
+  $resetButton.on('click', resetVars)
+
+  // startGame()
+
+  function startGame(){
+    $start.hide()
+    $game.show()
+  }
+  function goToMenu(){
+    if(turnCount) $startButton.html('Continue Game')
+    else $startButton.html('New Game')
+    $game.hide()
+    $start.show()
+  }
+
+
 }

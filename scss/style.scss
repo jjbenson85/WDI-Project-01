@@ -2,88 +2,158 @@
 
 
 body{
+  margin:0;
+}
+main {
   background-color: blue;
   display:flex;
   width: 100%;
   height:100vh;
   align-items: center;
   justify-content: center;
-}
-main {
-  background-color: yellow;
-  display: flex;
-  // max-width: 900px;
-  width: 100%;
-  height: 90vh;
-  .board{
+
+  .start{
     display: flex;
+    // display:none;
+    &[style*='display: block']{
+        display: flex !important;
+    }
+
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 70%;
-    .grid{
+    h1{
+
+    }
+    p{
+
+    }
+    button{
+
+    }
+  }
+  .game{
+    // .class{display: none}
+
+  &[style*='display: block']{
+      display: flex !important;
+  }
+    // display: flex;
+    display:none;
+    background-color: yellow;
+    // max-width: 900px;
+    width: 100%;
+    height: 90vh;
+    .board{
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      align-items:center;
-      background-color: red;
-      width:600px;
-      height:600px;
-      .tile{
-        margin:2px;
-        width: 24%;
-        height: 24%;
-        border: 1px solid black;
+      align-items: center;
+      width: 70%;
+      .grid{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items:center;
+        background-color: red;
+        width:600px;
+        height:600px;
+        .tile{
+          margin:2px;
+          width: 11%;
+          height: 11%;
+          border: 1px solid black;
+          text-align: center;
 
-        &.black{
-          color:$white;
-          background-color: $black
-        }
+          @keyframes flipBlack {
+            from {
+              transform: scaleX(-1);
+            }
+            to {
+              transform: scaleX(1);
+            }
 
-        &.white{
-          color:$black;
-          background-color: $white
-        }
+          }
+          @keyframes flipWhite {
+            from {
+              transform: scaleX(1);
+            }
+            to {
 
-        &.valid{
-          border: 1px solid blue;
+              transform: scaleX(-1);
+            }
+
+          }
+          .rotate{
+            height:100%;
+            width:100%;
+            transform: rotate(30deg);
+          }
+          .counter{
+            height:100%;
+            width:100%;
+            border-radius: 100%;
+          }
+
+          &.black{
+            .counter{
+              color:$white;
+              background-color: $black;
+              animation: flipBlack 0.5s;
+            }
+
+          }
+
+          &.white{
+            .counter{
+              color:$black;
+              background-color: $white;
+              animation: flipWhite 0.5s;
+            }
+
+
+          }
+
+          &.valid{
+            border: 1px solid blue;
+          }
         }
       }
     }
-  }
-  .info{
-    background-color: green;
-    width:30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: 10px;
-    h1 {
-      font-size: 2em;
-      margin: 0;
-      text-align: center;
-      color: $black;
-      border: 2px solid $black;
-      background-color: $grey;
-    }
-    .turn{
-      font-size: 1.5em;
-      text-align: center;
-      color: $white;
-      border: 2px solid $white;
-      background-color: $black;
-    }
-    .scores{
-      font-size: 1em;
-      text-align: center;
-      color: $black;
-      border: 2px solid $black;
-      background-color: $white;
-    }
-    .undo{
-      height: 70%;
-      width: auto;
-      background-color: orange;
+    .info{
+      background-color: green;
+      width:30%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 10px;
+      h1 {
+        font-size: 2em;
+        margin: 0;
+        text-align: center;
+        color: $black;
+        border: 2px solid $black;
+        background-color: $grey;
+      }
+      .turn{
+        font-size: 1.5em;
+        text-align: center;
+        color: $white;
+        border: 2px solid $white;
+        background-color: $black;
+      }
+      .scores{
+        font-size: 1em;
+        text-align: center;
+        color: $black;
+        border: 2px solid $black;
+        background-color: $white;
+      }
+      .undo{
+        height: 70%;
+        width: auto;
+        background-color: orange;
+      }
     }
   }
 }
