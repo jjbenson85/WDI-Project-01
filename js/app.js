@@ -1,16 +1,18 @@
 //LOGS
-const validMovesLog = false
+const validMovesLog = true
 const debugLog = false
 let debugCounter = 0
+const delay = 250
 
 
 //globals
-let width = 8
+//SAVE SETTINGS DIFFERENT WIDTH NOT ALL VALID OPTIONS SHOWING
+const width = 8
 let gridArray = []
 let gridClassArray = []
 const history = []
 let cpu
-let cpuType = 'greedy'
+let cpuType = 'random'
 let turnCount
 let whiteCount
 let blackCount
@@ -60,18 +62,35 @@ function resetVars(){
     const black = white + 1
     const black2 = white + width
 
-    if(i === black || i === black2) addTile(tile, 'black', 'white') //$(tile).addClass('black')
-    else if(i === white || i === white2) addTile(tile, 'white', 'black')//$(tile).addClass('white')
+    if(i === black || i === black2) addTile(tile, 'black', 'white')
+    else if(i === white || i === white2) addTile(tile, 'white', 'black')
 
 
   }
   history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
+
+  nextTurn()
+
+}
+function endTurn(){
+  $message.html('')
+
+  history[turnCount+1] = JSON.parse(JSON.stringify(gridClassArray))
+
+  //Allow click
+  clickable = true
+
+  //Increase the turn count
+  turnCount++
+}
+function nextTurn(){
+  //Work out scores
   calculateScores()
+  //Display Scores
   updateScores()
   updatePlayerAndOpponent()
   $turn.html(`${player} turn`)
   getValidMoves(player,opponent)
-
 }
 
 function addTile(tile, player, opponent){
@@ -149,9 +168,9 @@ function checkIfValid(tile, player, opponent){
   debug()
 
   let flipArr = []
-
   //check to see if the tile is empty
   if(isOccupied(tile)) return false
+  console.log(tile)
 
 
   //check to see if there is an opponent tile next to this tile
@@ -271,77 +290,64 @@ function gameOver(){
 }
 
 function cpuPlay(){
-
   console.log('cpuPlay', validMovesArr)
-  if(!validMovesArr) {
-    gridArray[0].click()
-    return
-  }
-
-  if(cpuType==='first'){
-    for(let i=0;i<width*width;i++){
-      if(validMovesArr[i]){
-        gridArray[i].click()
-        break
-      }
-    }
-  }else if(cpuType==='random'){
-    console.log('random')
-    const list =[]
-    for(let i=0;i<width*width;i++){
-      if(validMovesArr[i]){
-        list.push(gridArray[i])
-      }
-    }
-    const rndm = Math.random()
-    const selected = Math.floor(rndm*list.length)
-    list[selected].click()
-    console.log(`rndm: ${rndm} selected:${selected} gridArray[selected]:${list[selected]} `)
-
-  }else if(cpuType==='greedy'){
-    console.log('greedy')
-    // const list =[]
-    let selected = 0
-    let selectedLen = 0
-    for(let i=0;i<width*width;i++){
-      if(validMovesArr[i]){
-        if(validMovesArr[i].length > selectedLen) {
-          selected = gridArray[i]
-          selectedLen = validMovesArr[i].length
-        }
-        selected.click()
-      }
-    }
-  }
-
-}
-
-function nextPlayerTurn(){
-  //history
-  history[turnCount+1] = JSON.parse(JSON.stringify(gridClassArray))
-
-  //Allow click
-  clickable = true
-
-  //Update to show the next players turn
-  $turn.html(`${opponent} turn`)
-
-  //Increase the turn count
-  turnCount++
-
-  debug(`player:${player} opponent:${opponent}`)
-  updatePlayerAndOpponent()
-  debug(`player:${player} opponent:${opponent}`)
-
-  getValidMoves(player,opponent)
-
   if(player === 'white' && cpu === true){
     setTimeout(function(){
-      cpuPlay()
+      cpuMove()
     },1000)
   }
 
+  function cpuMove(){
+    let rndm
+    let selected
+    let selectedLen
+    let list
+
+    console.log('cpuMove', validMovesArr)
+    if(validMovesArr.length===0) {
+      gridArray[0].click()
+      return
+    }
+
+    switch(cpuType){
+      case 'first':
+        for(let i=0;i<width*width;i++){
+          if(validMovesArr[i]){
+            gridArray[i].click()
+            break
+          }
+        }
+        break
+      case 'random':
+        list =[]
+        for(let i=0;i<width*width;i++){
+          if(validMovesArr[i]){
+            list.push(gridArray[i])
+          }
+        }
+        rndm = Math.random()
+        selected = Math.floor(rndm*list.length)
+        list[selected].click()
+        break
+      case 'greedy':
+        selected = 0
+        selectedLen = 0
+        for(let i=0;i<width*width;i++){
+          if(validMovesArr[i]){
+            if(validMovesArr[i].length > selectedLen) {
+              selected = gridArray[i]
+              selectedLen = validMovesArr[i].length
+            }
+            selected.click()
+          }
+        }
+        break
+    }
+
+  }
+
 }
+
 
 function getValidMoves(player,opponent){
   debug()
@@ -350,13 +356,13 @@ function getValidMoves(player,opponent){
   for(let i=0;i<width*width;i++){
     const testTile = gridArray[i]
     const tilesToFlip = checkIfValid(testTile, player, opponent)
+    console.log('i',i, 'testTile',testTile, 'tilesToFlip',tilesToFlip)
+
     if(tilesToFlip){
       validMovesArr[i] = tilesToFlip
-      // $(gridArray[i]).html(`${i} VALID`)
-    }else{
-      // $(gridArray[i]).html(`${i}`)
     }
   }
+  validMovesLog && console.log('validMovesArr',validMovesArr)
 }
 
 function validHoverOn(e){
@@ -364,6 +370,7 @@ function validHoverOn(e){
   const tile = $(e.currentTarget)
   const id = parseInt($(tile).attr('data-id'))
 
+  //Remove class from all, (mouseout had some weird behaviours)
   for(let i=0;i<width*width;i++){
     $(gridArray[i]).removeClass('valid')
   }
@@ -373,12 +380,6 @@ function validHoverOn(e){
   }
 }
 
-function validHoverOff(e){
-  // // debug()
-  // const tile = $(e.currentTarget)
-  // tile.removeClass('valid')
-
-}
 
 function updatePlayerAndOpponent(){
   player = turnCount%2 === 0 ? 'black':'white'
@@ -392,15 +393,16 @@ function play(e){
   debug()
   const tile = $(e.currentTarget)
 
-  validMovesLog && console.log('validMovesArr',validMovesArr)
-
   if(validMovesArr.length === 0){
     noValidMoves[player] = true
 
     if(noValidMoves[opponent] === true) gameOver()
 
     console.log('No Valid Moves')
-    nextPlayerTurn()
+    endTurn()
+    nextTurn()
+    cpuPlay()
+
     $message.html('No Valid Moves')
     //Invalid move
     console.log('Invalid')
@@ -408,7 +410,6 @@ function play(e){
   }
 
   noValidMoves[player] = false
-
 
   //check if it is a valid move
   const id = parseInt($(tile).attr('data-id'))
@@ -423,7 +424,7 @@ function play(e){
     addTile(tile, player, opponent)
 
     const timerArr = []
-    const delay = 250
+
     //Flip each tile for this move
     validMovesArr[id].forEach((elem, index)=>{
       const thisPlayer = player
@@ -438,16 +439,11 @@ function play(e){
     const wait = timerArr.length*delay
     setTimeout(function(){
 
-      nextPlayerTurn()
-      $message.html('')
+      endTurn()
 
-      // console.log('Valid')
+      nextTurn()
 
-      //Work out scores
-      calculateScores()
-
-      //Display Scores
-      updateScores()
+      cpuPlay()
 
       //Check for end of Game
       if(emptyCount===0){
@@ -500,11 +496,9 @@ function buildGame(){
   //Add on click
   gridArray.on('click', play)
   gridArray.on('mouseenter',validHoverOn)
-  gridArray.on('mouseout',validHoverOff)
 }
 function undoRedoUpdate(){
 
-  // console.log('history',history, 'turnCount', turnCount)
   gridClassArray = []
   for(let i=0;i<width*width;i++){
     const tile = gridArray[i]
@@ -512,60 +506,59 @@ function undoRedoUpdate(){
   }
   history[turnCount].forEach((elem,index)=>{
     const tile = gridArray[index]
-    // $(tile).removeClass('black').removeClass('white')
     $(tile).addClass(elem)
     gridClassArray[index] = elem
   })
-  calculateScores()
-  updateScores()
-  updatePlayerAndOpponent()
-  $turn.html(`${player} turn`)
-  getValidMoves(player,opponent)
+  nextTurn()
 }
 function undoMove(){
-  turnCount--
-  if(turnCount<0)turnCount=0
-  undoRedoUpdate()
+
+  function action(){
+    console.log('action')
+    turnCount--
+    if(turnCount<0)turnCount=0
+    undoRedoUpdate()
+  }
+
+  //If playing computer, undo two moves
+  if(cpu){
+    setTimeout(action,delay)
+  }
+
+  action()
+
 }
 function redoMove(){
-  turnCount++
-  if(turnCount>=history.length)turnCount=history.length-1
-  undoRedoUpdate()
+  function action(){
+    turnCount++
+    if(turnCount>=history.length)turnCount=history.length-1
+    undoRedoUpdate()
+
+  }
+
+  //If playing CPU redo two moves
+  if(cpu){
+    setTimeout(action,delay)
+  }
+
+  action()
 
 }
 
 function saveSettings(e){
   e.preventDefault()
 
-  // $form.submit(function() {
-  // Get all the forms elements and their values in one step
-  // const $form = $('.form')
-
-  // const values = $form.serialize()
   const values = {}
   $.each($('.form').serializeArray(), function(i, field) {
     values[field.name] = field.value
   })
 
-  width = parseInt(values['board-size'])
   cpuType = values['cpu-type']
 
-  buildGame()
-
-
+  init()
 
   console.log('Test values', values)
   console.log('Test width', width, 'cpuType', cpuType )
-  // })
-
-  // console.log('save settings')
-  // // const $inputs = $('.form :input')
-  // // const values = {}
-  // // $inputs.each(function() {
-  // //   values[this.name] = $(this).val()
-  // // }
-  // var values = $(this).serialize()
-  // console.log('values',values)
 
 }
 
@@ -596,10 +589,6 @@ function init(){
   $undoButton.on('click', undoMove)
   $redoButton.on('click', redoMove)
   $settingsSaveButton.on('click', saveSettings)
-
-
-
-  // startGame()
 
   function goToGame(){
     cpu = false
