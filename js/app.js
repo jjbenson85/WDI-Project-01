@@ -5,10 +5,12 @@ let debugCounter = 0
 
 
 //globals
-const width = 8
+let width = 8
 let gridArray = []
 let gridClassArray = []
 const history = []
+let cpu
+let cpuType = 'greedy'
 let turnCount
 let whiteCount
 let blackCount
@@ -268,6 +270,52 @@ function gameOver(){
 
 }
 
+function cpuPlay(){
+
+  console.log('cpuPlay', validMovesArr)
+  if(!validMovesArr) {
+    gridArray[0].click()
+    return
+  }
+
+  if(cpuType==='first'){
+    for(let i=0;i<width*width;i++){
+      if(validMovesArr[i]){
+        gridArray[i].click()
+        break
+      }
+    }
+  }else if(cpuType==='random'){
+    console.log('random')
+    const list =[]
+    for(let i=0;i<width*width;i++){
+      if(validMovesArr[i]){
+        list.push(gridArray[i])
+      }
+    }
+    const rndm = Math.random()
+    const selected = Math.floor(rndm*list.length)
+    list[selected].click()
+    console.log(`rndm: ${rndm} selected:${selected} gridArray[selected]:${list[selected]} `)
+
+  }else if(cpuType==='greedy'){
+    console.log('greedy')
+    // const list =[]
+    let selected = 0
+    let selectedLen = 0
+    for(let i=0;i<width*width;i++){
+      if(validMovesArr[i]){
+        if(validMovesArr[i].length > selectedLen) {
+          selected = gridArray[i]
+          selectedLen = validMovesArr[i].length
+        }
+        selected.click()
+      }
+    }
+  }
+
+}
+
 function nextPlayerTurn(){
   //history
   history[turnCount+1] = JSON.parse(JSON.stringify(gridClassArray))
@@ -286,6 +334,12 @@ function nextPlayerTurn(){
   debug(`player:${player} opponent:${opponent}`)
 
   getValidMoves(player,opponent)
+
+  if(player === 'white' && cpu === true){
+    setTimeout(function(){
+      cpuPlay()
+    },1000)
+  }
 
 }
 
@@ -408,21 +462,30 @@ function buildGame(){
   // GET HTML ELEMENTS
   $grid = $('.grid')
 
+  //Clear grid
+  $grid.html('')
+
   //Build tiles
   for(let i=0;i<width*width;i++){
     const tile = `<div class='tile' data-id=${i}>
-                    <div class='rotate'>
-                      <div class='counter'>
-                        ${i}
-                      </div>
-                    </div>
-                  </div>`
+    <div class='rotate'>
+    <div class='counter'>
+    ${i}
+    </div>
+    </div>
+    </div>`
     $grid.append(tile)
   }
 
   //Get DOM elements
   //Get an array of all tiles
   gridArray = $grid.find('.tile')
+  const size = (Math.floor(100/width)-1)+'%'
+  console.log('SIZE',size)
+  gridArray.css({
+    'width': size,
+    'height': size
+  })
 
   const $scores = $('.scores')
   $blackScore = $scores.find('.black')
@@ -471,36 +534,95 @@ function redoMove(){
 
 }
 
+function saveSettings(e){
+  e.preventDefault()
+
+  // $form.submit(function() {
+  // Get all the forms elements and their values in one step
+  // const $form = $('.form')
+
+  // const values = $form.serialize()
+  const values = {}
+  $.each($('.form').serializeArray(), function(i, field) {
+    values[field.name] = field.value
+  })
+
+  width = parseInt(values['board-size'])
+  cpuType = values['cpu-type']
+
+  buildGame()
+
+
+
+  console.log('Test values', values)
+  console.log('Test width', width, 'cpuType', cpuType )
+  // })
+
+  // console.log('save settings')
+  // // const $inputs = $('.form :input')
+  // // const values = {}
+  // // $inputs.each(function() {
+  // //   values[this.name] = $(this).val()
+  // // }
+  // var values = $(this).serialize()
+  // console.log('values',values)
+
+}
+
 function init(){
   debug()
 
   buildGame()
 
-  let $start = $('.start')
-  let $game = $('.game')
-  let $startButton = $('.startButton')
-  let $menuButton = $('.menuButton')
-  let $resetButton = $('.reset')
-  let $undoButton = $('.undo')
-  let $redoButton = $('.redo')
+  const $screens = $('.screen')
+  const $start = $('.start')
+  const $game = $('.game')
+  const $settings = $('.settings')
+  const $startButton = $('.startButton')
+  const $startButtonSingle = $('.startButtonSingle')
+  const $menuButton = $('.menuButton')
+  const $resetButton = $('.reset')
+  const $undoButton = $('.undo')
+  const $redoButton = $('.redo')
+  const $settingsButton = $('.settingsButton')
+  const $form = $('.form')
+  const $settingsSaveButton = $form.find('button')
 
-  $startButton.on('click', startGame)
+  $startButton.on('click', goToGame)
+  $startButtonSingle.on('click', goToSingleGame)
   $menuButton.on('click', goToMenu)
+  $settingsButton.on('click', goToSettings)
   $resetButton.on('click', resetVars)
   $undoButton.on('click', undoMove)
   $redoButton.on('click', redoMove)
+  $settingsSaveButton.on('click', saveSettings)
+
+
 
   // startGame()
 
-  function startGame(){
-    $start.hide()
+  function goToGame(){
+    cpu = false
+    $screens.hide()
     $game.show()
   }
+
+  function goToSingleGame(){
+    cpu = true
+    console.log('cpu true')
+    $screens.hide()
+    $game.show()
+  }
+
   function goToMenu(){
     if(turnCount) $startButton.html('Continue Game')
     else $startButton.html('New Game')
-    $game.hide()
+    $screens.hide()
     $start.show()
+  }
+  function goToSettings(){
+    $screens.hide()
+    $settings.show()
   }
 
 

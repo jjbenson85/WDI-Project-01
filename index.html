@@ -9,13 +9,36 @@
 </head>
 <body>
   <main>
-    <div class="start">
+    <div class="screen start">
       <h1>Reversi</h1>
       <p>Welcome to Reversi!</p>
-      <button class='startButton'>Start</button>
+      <button class='startButtonSingle'>Single Player</button>
+      <button class='startButton'>Two Player</button>
+      <button class='settingsButton'>Settings</button>
+    </div>
+    <div class="screen settings">
+      <h1>Settings</h1>
+      <p>Change some settings</p>
+      <form class="form" action="index.html" method="post">
+        <label for="cpu-type">Select CPU Type</label><br>
+        <input type="radio" name="cpu-type" value="first" checked> First<br>
+        <input type="radio" name="cpu-type" value="random"> Random<br>
+        <input type="radio" name="cpu-type" value="greedy"> Greedy<br>
+
+        <label for="board-size">Select Board Size</label><br>
+        <input type="radio" name="board-size" value="4" > 4<br>
+        <input type="radio" name="board-size" value="6"> 6<br>
+        <input type="radio" name="board-size" value="8" checked> 8<br>
+        <input type="radio" name="board-size" value="10" checked> 10<br>
+
+
+
+        <button type="submit" name="button">Save Settings</button>
+      </form>
+      <button class="menuButton">Main Menu</button>
     </div>
 
-    <div class="game">
+    <div class="screen game">
 
 
       <div class="board">
