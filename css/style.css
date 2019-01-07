@@ -1,8 +1,116 @@
+@keyframes bounceWhite {
+  0% {
+    transform: translateY(-40px); }
+  25% {
+    transform: translateY(-50px); }
+  75% {
+    transform: translateY(-30px); }
+  100% {
+    transform: translateY(-40px); } }
+@keyframes bounceBlack {
+  0% {
+    transform: translateY(-40px); }
+  25% {
+    transform: translateY(-50px); }
+  75% {
+    transform: translateY(-30px); }
+  100% {
+    transform: translateY(-40px); } }
+.hex-grid {
+  width: 100%;
+  transform: scale(0.6);
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 250ms cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+
+.even, .odd {
+  height: 13em;
+  display: flex;
+  align-items: center; }
+
+.even {
+  /* background: yellow; */ }
+
+.odd {
+  /* background: red; */
+  margin-top: -167px;
+  margin-bottom: -167px; }
+
+.hex {
+  position: relative;
+  margin-right: 45px;
+  width: 100px;
+  height: 100px;
+  transform: rotate(0deg);
+  transition: all 250ms cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+  .hex .seg {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    transform: rotate(225deg);
+    font-size: 2em;
+    text-align: center;
+    background: grey;
+    border: 2px solid white;
+    transition: all 250ms ease-in-out; }
+  .hex .scale {
+    transform: scaleX(0.577); }
+  .hex .rotate2:first-child {
+    transform: rotate(-30deg) translate(0px, 0px); }
+    .hex .rotate2:first-child .seg {
+      background: #555; }
+  .hex .rotate2:nth-child(2) {
+    transform: rotate(30deg) translate(10px, -127px); }
+    .hex .rotate2:nth-child(2) .seg {
+      background: #666; }
+  .hex .rotate2:nth-child(3) {
+    transform: rotate(90deg) translate(-273px, -36px); }
+    .hex .rotate2:nth-child(3) .seg {
+      background: #777; }
+  .hex:hover {
+    cursor: pointer; }
+    .hex:hover .rotate2:first-child .seg {
+      border-color: #800; }
+    .hex:hover .rotate2:nth-child(2) .seg {
+      border-color: #700; }
+    .hex:hover .rotate2:nth-child(3) .seg {
+      border-color: #600; }
+  .hex.valid:hover .rotate2:first-child .seg {
+    border-color: #070; }
+  .hex.valid:hover .rotate2:nth-child(2) .seg {
+    border-color: #060; }
+  .hex.valid:hover .rotate2:nth-child(3) .seg {
+    border-color: #050; }
+  .hex.white {
+    transform: translateY(-40px);
+    animation: bounceWhite 250ms; }
+    .hex.white .rotate2:first-child .seg {
+      background: #EEE; }
+    .hex.white .rotate2:nth-child(2) .seg {
+      background: #DDD; }
+    .hex.white .rotate2:nth-child(3) .seg {
+      background: #CCC; }
+  .hex.black {
+    transform: translateY(-40px);
+    animation: bounceBlack 250ms; }
+    .hex.black .rotate2:first-child .seg {
+      border-color: white;
+      background: #222; }
+    .hex.black .rotate2:nth-child(2) .seg {
+      border-color: white;
+      background: #111; }
+    .hex.black .rotate2:nth-child(3) .seg {
+      color: white;
+      border-color: white;
+      background: #000; }
+
 body {
   margin: 0; }
 
 main {
-  background-color: blue;
+  background-color: #555;
   display: flex;
   width: 100%;
   height: 100vh;
@@ -25,58 +133,9 @@ main {
   main .game {
     display: none;
     flex-direction: row;
-    background-color: yellow;
-    width: 100%;
+    width: 70%;
     height: 90vh; }
-    main .game .board {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 70%; }
-      main .game .board .grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        background-color: red;
-        width: 600px;
-        height: 600px; }
-        main .game .board .grid .tile {
-          margin: 2px;
-          width: 11%;
-          height: 11%;
-          border: 1px solid black;
-          text-align: center; }
-@keyframes flipBlack {
-  from {
-    transform: scaleX(-1); }
-  to {
-    transform: scaleX(1); } }
-@keyframes flipWhite {
-  from {
-    transform: scaleX(1); }
-  to {
-    transform: scaleX(-1); } }
-          main .game .board .grid .tile .rotate {
-            height: 100%;
-            width: 100%;
-            transform: rotate(30deg); }
-          main .game .board .grid .tile .counter {
-            height: 100%;
-            width: 100%;
-            border-radius: 100%; }
-          main .game .board .grid .tile.black .counter {
-            color: #FEFEFE;
-            background-color: #111111;
-            animation: flipBlack 0.5s; }
-          main .game .board .grid .tile.white .counter {
-            color: #111111;
-            background-color: #FEFEFE;
-            animation: flipWhite 0.5s; }
-          main .game .board .grid .tile.valid {
-            border: 1px solid blue; }
     main .game .info {
-      background-color: green;
       width: 30%;
       height: 100%;
       display: flex;
@@ -118,7 +177,6 @@ main {
         align-items: flex-end;
         height: 70%;
         width: auto;
-        background-color: orange;
         padding-bottom: 20px; }
 
 /*# sourceMappingURL=style.css.map */
