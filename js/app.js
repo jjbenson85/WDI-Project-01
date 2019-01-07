@@ -12,11 +12,11 @@ const delay = 250
 const width = 6
 const numberOfTiles = 61
 const leftIds = []
-let upLeftIds = []
-let downLeftIds = []
+const upLeftIds = []
+const downLeftIds = []
 const rightIds = []
-let upRightIds = []
-let downRightIds = []
+const upRightIds = []
+const downRightIds = []
 const upIds = []
 const downIds = []
 
@@ -81,43 +81,12 @@ function resetVars(){
   debug()
   turnCount = 0
   clickable = true
-  // if(tileShape==='square') {
-  //   gridArray.addClass('square')
-  //   liberties = 8
-  // }
-  // if(tileShape==='hexagon'){
-  //   gridArray.addClass('hexagon')
-  //   liberties = 6
-  // }
-
   gridClassArray = []
-
-  // for(let i=0;i<numberOfTiles;i++){
-  //   const tile = gridArray[i]
-  //   $(tile).removeClass('black').removeClass('white')
-  //
-  //   //Work out middle squares for any even integer sized board
-  //   const half = (width/2)-1
-  //   const white = half + width*half
-  //   const white2 = white+ width +1
-  //   const black = white + 1
-  //   const black2 = white + width
-  //
-  //   if(i === black || i === black2) addTile(tile, 'black', 'white')
-  //   else if(i === white || i === white2) addTile(tile, 'white', 'black')
-  //
-  //
-  // }
   gridArray.removeClass('black').removeClass('white')
   addTile(gridArray[19], 'black', 'white')
   addTile(gridArray[25], 'white', 'black')
   addTile(gridArray[30], 'black', 'white')
   addTile(gridArray[24], 'white', 'black')
-
-  // for(let i=0;i<numberOfTiles-1;i++){
-  //   addTile(gridArray[i], 'white', 'black')
-  // }
-
 
   history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
 
@@ -136,7 +105,6 @@ function endTurn(){
   turnCount++
 }
 function nextTurn(){
-  // console.log("NExTTURN")
   //Work out scores
   calculateScores()
   //Display Scores
@@ -144,12 +112,6 @@ function nextTurn(){
   updatePlayerAndOpponent()
   $turn.html(`${player} turn`)
   getValidMoves()
-  // gridArray.each((elem)=>{
-  //   $(elem).removeClass('valid')
-  // })
-  // validMovesArr.forEach((elem, index)=>{
-  //   $(gridArray[index]).addClass('valid')
-  // })
 }
 
 function addTile(tile, player, opponent){
@@ -160,23 +122,9 @@ function addTile(tile, player, opponent){
   const id = parseInt($(tile).attr('data-id'))
   gridClassArray[id] = player
 
-
   if(gameStart){
-    //set the src to the correct file
-    // audioPlayer.src = 'assets/bell_c3.wav'
-
-    //play sound
-    // const sound = id%7
-    // console.log('sound',sound)
-    // audioPlayerArr[sound].pause()
-    // audioPlayerArr[sound].currentime = 0
-    // audioPlayerArr[sound].play()
     playSound(id)
-
   }
-
-
-
 }
 
 function isOccupied(tile){
@@ -186,7 +134,6 @@ function isOccupied(tile){
   return false
 }
 
-// const directions = [-width-1,-width,-width+1,-1,0,1,width-1,width,width+1]
 const directions = [-width,(-2*width)+1,-width+1,-1,0,1,width-1,(2*width)-1,width]
 
 function createLookups(){
@@ -246,9 +193,6 @@ function createLookups(){
 
 
   //DOWN LEFT
-  // for(i=numberOfTiles-(width-1);i<numberOfTiles;i++){
-  //   downLeftIds.push(i)
-  // }
   for(i=0;i<downIds.length;i+=2){
     downLeftIds.push(downIds[i])
   }
@@ -260,9 +204,6 @@ function createLookups(){
 
 
   //DOWN RIGHT
-  // for(i=numberOfTiles-(width-1);i<numberOfTiles;i++){
-  //   downRightIds.push(i)
-  // }
   for(i=0;i<downIds.length;i+=2){
     downRightIds.push(downIds[i])
   }
@@ -271,8 +212,6 @@ function createLookups(){
     downRightIds.push(rightIds[i])
   }
   console.log('downRightIds',downRightIds)
-
-
 }
 
 function getNeighbours(tile){
@@ -338,14 +277,12 @@ function validFlip(elem,index){
 
   //If this neighbour-tile is an opponent, look on the other side of it
   if($(elem).hasClass(opponent)){
-    // console.log('validFlip has Opponent')
     //check to see if there is a player tile in this direction
     //max travel the twice width of the board -2
     for(let i=0;i<(2*width)-2;i++){
 
       //Do test to see which row or column nextId is in
       //If it is on an edge and is going in that direction, this is not a valid move
-
       if(upLeftIds.includes(id) && (index === 0) ) {
         console.log('upLeft Invalid')
         return false
@@ -385,8 +322,6 @@ function validFlip(elem,index){
         return false
       }
 
-      // console.log('Valid', index)
-
       //The nextId is the current nextId plus the direction, the direction is the index! (This is really neat!)
       nextId += directions[index]
 
@@ -398,16 +333,6 @@ function validFlip(elem,index){
         console.log('found player')
         potentialArr.unshift(elem)
         return potentialArr
-
-        // //Add the potential flips from this search to the flip array
-        // flipArr = flipArr.concat(potentialArr)
-        //
-        // //Add the tile-neighbour tile to the front array
-        // flipArr.unshift(elem)
-        //
-        // //Return the array, this counts as a valid move
-        // console.log('flipArr validMove',flipArr)
-        // return flipArr
 
         //If the next tile is an opponent tile, keep searching in this direction
       }else if ($(nextTile).hasClass(opponent)){
@@ -421,9 +346,7 @@ function validFlip(elem,index){
         //This tile is empty it is not a valid move
         return false
       }
-
     }
-
   }
 }
 function checkTileIsValid(tile){
@@ -439,7 +362,6 @@ function checkTileIsValid(tile){
 
   //for each neighbour check it is a valid move
   neighbours.some((elem, index)=>{
-    // console.log('Check valid Neighbour', $(elem))
     const arr = validFlip(elem,index)
     if(arr) flipArr.push(arr)
   })
@@ -480,7 +402,6 @@ function calculateScores(){
   blackCount = 0
   emptyCount = 0
   //Check game if game is over
-  //Count occupied squares?
   for(let i=0;i<numberOfTiles;i++){
     const tileState = isOccupied(gridArray[i])
     if(tileState==='white') whiteCount++
@@ -496,21 +417,17 @@ function updateScores(){
   winner = 'black'
   if(whiteCount>blackCount) winner = 'white'
   if(whiteCount===blackCount) winner = 'tie'
-
 }
 
 function gameOver(){
   console.log('Game Over')
   if(winner === 'tie')$message.html('It\'s a tie!')
   else $message.html(`${winner} wins!`)
-
-  // if(window.confirm('Game Over \n Play Again?')) resetVars()
-
 }
 
 function cpuPlay(){
-  // console.log('cpuPlay', validMovesArr)
   if(player === 'black' && cpu === true){
+    $(gridArray).removeClass('valid')
     setTimeout(function(){
       cpuMove()
     },1000)
@@ -522,7 +439,6 @@ function cpuPlay(){
     let selectedLen
     let list
 
-    // console.log('cpuMove', validMovesArr)
     if(validMovesArr.length===0) {
       gridArray[0].click()
       return
@@ -537,6 +453,7 @@ function cpuPlay(){
           }
         }
         break
+
       case 'random':
         list =[]
         for(let i=0;i<numberOfTiles;i++){
@@ -554,6 +471,7 @@ function cpuPlay(){
           gridArray[0].click()
         }
         break
+
       case 'greedy':
         selected = 0
         selectedLen = 0
@@ -568,9 +486,7 @@ function cpuPlay(){
         }
         break
     }
-
   }
-
 }
 
 
@@ -597,9 +513,6 @@ function validHoverOn(e){
   const tile = $(e.currentTarget)
   const id = parseInt($(tile).attr('data-id'))
 
-
-  // playSound(id)
-
   //Remove class from all, (mouseout had some weird behaviours)
   for(let i=0;i<numberOfTiles;i++){
     $(gridArray[i]).removeClass('valid')
@@ -607,7 +520,7 @@ function validHoverOn(e){
 
   if(validMovesArr[id]){
     tile.addClass('valid')
-  }'hover'
+  }
 }
 
 function updatePlayerAndOpponent(){
@@ -623,7 +536,7 @@ function play(e){
   const tile = $(e.currentTarget)
 
 
-  console.log('validMovesArr.some((elem)=>elem',validMovesArr.some((elem)=>elem))
+  // console.log('validMovesArr.some((elem)=>elem',validMovesArr.some((elem)=>elem))
 
   if(!validMovesArr.some((elem)=>elem)){
     noValidMoves[player] = true
@@ -704,7 +617,11 @@ function buildGame(){
   createLookups()
 
   // GET HTML ELEMENTS
-  $grid = $('.hex-grid')
+
+
+
+  $game = $('.game')
+  $grid = $game.find('.hex-grid')
 
 
   //Clear grid
@@ -722,20 +639,20 @@ function buildGame(){
 
   }
 
-  const $evens = $('.even')
-  const $odds = $('.odd')
+  const $evens = $grid.find('.even')
+  const $odds = $grid.find('.odd')
   const hex = `<div class="hex">
-    <div class="rotate2">
+    <div class="diamond">
       <div class="scale">
         <div class="seg"></div>
       </div>
     </div>
-    <div class="rotate2">
+    <div class="diamond">
       <div class="scale">
         <div class="seg"></div>
       </div>
     </div>
-    <div class="rotate2">
+    <div class="diamond">
       <div class="scale">
         <div class="seg"></div>
       </div>
@@ -756,9 +673,9 @@ function buildGame(){
   }
   // }
   // }
-  const $hexs = $('.hex')
+  const $hexs = $grid.find('.hex')
 
-  const $firstSegs = $hexs.find('.rotate2:last-child .seg')
+  const $firstSegs = $hexs.find('.diamond:last-child .seg')
   console.log($firstSegs)
 
 //   $( "li" ).each(function( index ) {
@@ -906,6 +823,7 @@ function init(){
   const $game = $('.game')
   const $settings = $('.settings')
   const $startButton = $('.startButton')
+  const $startButtonText = $startButton.find('h2')
   const $startButtonSingle = $('.startButtonSingle')
   const $menuButton = $('.menuButton')
   const $resetButton = $('.reset')
@@ -940,8 +858,11 @@ function init(){
   }
 
   function goToMenu(){
-    if(turnCount) $startButton.html('Continue Game')
-    else $startButton.html('New Game')
+    $startButtonText
+    if(turnCount) $startButtonText.html('Continue')
+    else $startButtonText.html('Vs')
+    // if(turnCount) $startButton.html('Continue Game')
+    // else $startButton.html('New Game')
     $screens.hide()
     $start.show()
   }

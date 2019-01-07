@@ -2,7 +2,8 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>Project 1</title>
+  <title>Light & Shadow</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/app.js" charset="utf-8"></script>
@@ -10,11 +11,83 @@
 <body>
   <main>
     <div class="screen start">
-      <h1>Reversi</h1>
-      <p>Welcome to Reversi!</p>
-      <button class='startButtonSingle'>Single Player</button>
+      <div class="intro">
+        <h1>Light & Shadow</h1>
+        <p>Something poetic about darkness and light...</p>
+
+      </div>
+      <div class="hex-grid start">
+        <div class="odd">
+          <div class="hex settingsButton">
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"></div>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"></div>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg">
+                <h2 class="text">
+                    Settings
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="even">
+          <div class="hex startButton">
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"></div>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"></div>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"><h2 class="text">
+                  V.S.
+                </h2></div>
+              </div>
+            </div>
+          </div>
+          <div class="hex startButtonSingle">
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"></div>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"></div>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg">
+                  <h2 class="text">
+                    STORY
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+      <!-- <button class='startButtonSingle'>Single Player</button>
       <button class='startButton'>Two Player</button>
-      <button class='settingsButton'>Settings</button>
+      <button class='settingsButton'>Settings</button> -->
     </div>
     <div class="screen settings">
       <h1>Settings</h1>
@@ -42,7 +115,7 @@
       <div class="hex-grid">
       </div>
       <div class="info">
-        <h1>Reversi</h1>
+        <!-- <h1>Reversi</h1> -->
         <div class="turn">
           Black Turn
         </div>

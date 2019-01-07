@@ -13,95 +13,39 @@
   100%{transform: translateY(-40px);}
 }
 
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
 .hex-grid{
-  // background: grey;
   width: 100%;
   transform: scale(0.6);
   margin-left: 100px;
-  // padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all 250ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  &.start{
+    transform: scale(1);
+    margin-left: 0;
+    // margin-top: 250px;
+  }
 }
 
 .even, .odd{
   height: 13em;
   display: flex;
-  // justify-content: space-around;
   align-items: center;
-  // display: block;
-  // list-style-type: decimal;
-  // margin-block-start: 1em;
-  // margin-block-end: 1em;
-  // margin-inline-start: 0px;
-  // margin-inline-end: 0px;
-  // padding-inline-start: 40px;
 }
 .even{
-  // position: relative;
-  /* background: yellow; */
-  // margin-left: 86px;
+
 }
 
 .odd{
-  // position: relative;
-  /* background: red; */
-  // margin-top: -82px;
-  // margin-bottom: -82px;
   margin-top: -167px;
   margin-bottom: -167px;
 }
 
-// .hex{
-//   position: relative;
-//   margin-right: 42px;
-//   right: -12px;
-//   width: 62px;
-//   height: 100px;
-//   border-radius: 5px;
-//   background: #ccc;
-//   transform: rotate(-90deg);
-//   transition: all 150ms ease-in-out;
-//   &:hover{
-//     cursor:pointer;
-//     background:red;
-//
-//   }
-//   &.valid{
-//     &:hover{
-//       background:green;
-//     }
-//   }
-//   &.white{
-//     background:$white;
-//   }
-//   &.black{
-//     background:$black;
-//   }
-//
-//   &::before, &::after{
-//     display: inline-block;
-//     position: relative;
-//     width:inherit; height:inherit;
-//     border-radius: inherit;
-//     background: inherit;
-//     content: '';
-//   }
-//   &::before{
-//     transform: rotate(60deg);
-//     // background: red;
-//   }
-//   &::after{
-//     // right:-70pxx
-//     top:-104px;
-//     transform: rotate(-60deg);
-//     // background: yellow;
-//     //translate(151px, -88px)
-//   }
-//
-//
-// }
 .hex{
   position: relative;
   margin-right: 45px;
@@ -132,7 +76,7 @@
     transform:scaleX(0.577);
 
   }
-  .rotate2{
+  .diamond{
 
     &:first-child{
       transform: rotate(-30deg) translate(0px,0px);
@@ -150,9 +94,9 @@
 
 
   &:hover{
-    cursor:pointer;
+
     // background:red;
-    .rotate2{
+    .diamond{
       // background:$white;
       &:first-child{
         .seg{border-color: $in-valid1;}
@@ -168,8 +112,9 @@
   }
   &.valid{
     &:hover{
+      cursor:pointer;
       // background:green;
-      .rotate2{
+      .diamond{
         // background:$white;
         &:first-child{
           .seg{border-color: $valid1;}
@@ -188,16 +133,21 @@
     // transform: rotate(240deg)translate(32px,100px);
     transform: translateY(-40px);
     animation: bounceWhite 250ms;
-    .rotate2{
+
+    .diamond{
       // background:$white;
+      .seg{
+        color: black;
+        border-color: white !important;
+      }
       &:first-child{
-        .seg{background: $white1;}
+        .seg{background: $white3;}
       }
       &:nth-child(2){
         .seg{background: $white2;}
       }
       &:nth-child(3){
-        .seg{background: $white3;}
+        .seg{background: $white1;}
       }
     }
   }
@@ -205,24 +155,24 @@
     // transform: rotate(120deg)translate(-143px,40px);
     transform: translateY(-40px);
     animation: bounceBlack 250ms;
-    .rotate2{
+    .diamond{
       // background:$black;
+      .seg{
+        color: white;
+        border-color: white !important;
+      }
       &:first-child{
         .seg{
-          border-color: white;
           background: $black1;
         }
       }
       &:nth-child(2){
         .seg{
-          border-color: white;
           background: $black2;
         }
       }
       &:nth-child(3){
         .seg{
-          color: white;
-          border-color: white;
           background: $black3;
         }
       }
@@ -261,7 +211,8 @@ body{
   margin:0;
 }
 main {
-  background-color: $grey1;
+  // background-color: $grey1;
+  background-image: linear-gradient($blue1, $white);
   display:flex;
   width: 100%;
   height:100vh;
@@ -280,7 +231,47 @@ main {
   }
   .start{
     display: flex;
-    background-color: yellow;
+    width:50%;
+    height:75%;
+    // background-color: $grey1;
+    .intro{
+      margin-bottom:100px;
+    }
+    .odd{
+      margin-top: 0px;
+      margin-bottom: -166px;
+    }
+    .hex{
+      &:hover{
+        transform: translateY(-40px);
+        .seg{
+          color: black;
+          border-color: white !important;
+        }
+        &:first-child{
+          .seg{background: $white3;}
+        }
+        &:nth-child(2){
+          .seg{background: $white2;}
+        }
+        &:nth-child(3){
+          .seg{background: $white1;}
+        }
+      }
+    }
+    // .diamond{
+      // background:$white;
+
+    // }
+    .seg{
+      font-size: 1.2em;
+      h2{
+        color:white;
+        transform: rotate(45deg);
+        margin-left:10px;
+        // margin-top:-4px;
+      }
+    }
   }
   .settings{
     background-color: orange;
@@ -295,86 +286,7 @@ main {
     // background-color: yellow;
     width: 70%;
     height: 90vh;
-    // .board{
-    //   display: flex;
-    //   justify-content: center;
-    //   align-items: center;
-    //   width: 70%;
-    //   .grid{
-    //     display: flex;
-    //     flex-wrap: wrap;
-    //     justify-content: center;
-    //     align-items:center;
-    //     background-color: red;
-    //     width:600px;
-    //     height:600px;
-    //     .tile{
-    //       margin:2px;
-    //       width: 11%;
-    //       height: 11%;
-    //       border: 1px solid black;
-    //       text-align: center;
-    //
-    //
-    //       &.square{
-    //
-    //       }
-    //
-    //       @keyframes flipBlack {
-    //         from {
-    //           transform: scaleX(-1);
-    //         }
-    //         to {
-    //           transform: scaleX(1);
-    //         }
-    //
-    //       }
-    //       @keyframes flipWhite {
-    //         from {
-    //           transform: scaleX(1);
-    //         }
-    //         to {
-    //
-    //           transform: scaleX(-1);
-    //         }
-    //
-    //       }
-    //       .rotate{
-    //         height:100%;
-    //         width:100%;
-    //         transform: rotate(30deg);
-    //       }
-    //       .counter{
-    //         height:100%;
-    //         width:100%;
-    //         border-radius: 100%;
-    //       }
-    //
-    //       &.black{
-    //         .counter{
-    //           color:$white;
-    //           background-color: $black;
-    //           animation: flipBlack 0.5s;
-    //         }
-    //
-    //       }
-    //
-    //       &.white{
-    //         .counter{
-    //           color:$black;
-    //           background-color: $white;
-    //           animation: flipWhite 0.5s;
-    //         }
-    //
-    //
-    //       }
-    //
-    //       &.valid{
-    //         border: 1px solid blue;
-    //       }
-    //     }
-    //   }
-    // }
+
     .info{
       // background-color: green;
       width:30%;
