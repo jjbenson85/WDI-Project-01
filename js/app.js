@@ -920,9 +920,9 @@ class GameLevel{
     // level = 1
     switch(level){
       case 1:
-        $(this.$hexArray[7]).removeClass('hidden').addClass('white')
-        $(this.$hexArray[12]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[17]).removeClass('hidden')
+        $(this.$hexArray[25]).removeClass('hidden').addClass('white')
+        $(this.$hexArray[30]).removeClass('hidden').addClass('black')
+        $(this.$hexArray[35]).removeClass('hidden')
         break
       case 2:
         $(this.$hexArray[46]).removeClass('hidden')
@@ -937,7 +937,6 @@ class GameLevel{
         $(this.$hexArray[29]).removeClass('hidden').addClass('white')
         $(this.$hexArray[36]).removeClass('hidden').addClass('black')
         $(this.$hexArray[31]).removeClass('hidden').addClass('white')
-        this.addTile(this.$hexArray[selected],'invert')
         break
       case 4:
         for(let i=0; i < numberOfTiles;i++){
@@ -948,7 +947,8 @@ class GameLevel{
         $(this.$hexArray[25]).removeClass('hidden').addClass('white')
         $(this.$hexArray[30]).removeClass('hidden').addClass('black')
         $(this.$hexArray[24]).removeClass('hidden').addClass('white')
-        this.addTile(this.$hexArray[selected],'bomb')
+        this.addTile(this.$hexArray[selected],'invert')
+        // this.addTile(this.$hexArray[selected],'bomb')
         break
       case 5:
         $(this.$hexArray[selected]).addClass('invert')
@@ -1578,9 +1578,23 @@ function saveSettings(e){
   // console.log('Test width', width, 'cpuType', cpuType )
 
 }
-
+// function navbarScroll(){
+//   var prevScrollpos = window.pageYOffset
+//   window.addEventListener('scroll', function() {
+//     console.log('A')
+//     var currentScrollPos = window.pageYOffset
+//     if (prevScrollpos > currentScrollPos) {
+//       document.getElementById('navbar').style.top = '0'
+//     } else {
+//       console.log('B')
+//       document.getElementById('navbar').style.top = '-50px'
+//     }
+//     prevScrollpos = currentScrollPos
+//   })
+// }
 function init(){
   debug()
+  // navbarScroll()
   createLookups()
 
   const $game = $('.game')

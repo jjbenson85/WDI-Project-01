@@ -51,6 +51,72 @@
 
 body{
   font-family: 'Roboto', sans-serif;
+   margin: 0;
+}
+
+header{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 150px;
+  background: rgba(0,0,0,0);
+  &:hover, &.down{
+    nav,{
+    top: 0px;
+    opacity: 1;
+    }
+  }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      background-color: #333;
+      position: fixed;
+      top: -60px;
+      opacity: 0;
+      width: 100%;
+      // display: block;
+      transition: top 0.3s;
+
+      transition: all 500ms;
+
+      .left{
+        // flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+      }
+      .center{
+        // flex-grow: 1;
+        display: flex;
+        justify-content: center;
+      }
+      .right{
+        // flex-grow: 1;
+        justify-content: flex-end;
+        display: flex;
+      }
+
+       button, p {
+        // float: left;
+        display: block;
+        color: #f2f2f2;
+        background-color: inherit;
+        border: none;
+        text-align: center;
+        padding: 15px;
+        margin: 0px;
+        text-decoration: none;
+        font-size: 1.5em;
+      }
+
+      button:hover {
+        background-color: #ddd;
+        color: black;
+      }
+
+  }
+
+
+
 }
 
 .hex-grid{
@@ -63,12 +129,12 @@ body{
   transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
   margin-left: -20px;
   margin-top: 170px;
-  &.start{
-    transform: scale(1);
-    margin-left: 0;
-    margin-top: 140px;
-    // margin-top: 250px;
-  }
+  // &.start{
+  //   transform: scale(1);
+  //   margin-left: 0;
+  //   margin-top: 60px;
+  //   // margin-top: 250px;
+  // }
 }
 
 .even, .odd{
@@ -102,6 +168,7 @@ body{
   }
   &.hidden{
     opacity: 0;
+    pointer-events: none;
   }
 
 
@@ -115,10 +182,10 @@ body{
     text-align: center;
 
     background: grey;
-    border: 2px solid #DDD;
+    border: 2px solid rgba(0,0,0,0);
+    box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.1);
+
     transition: all $anim-time ease-in-out;
-
-
   }
   .scale{
     transform:scaleX(0.577);
@@ -194,7 +261,7 @@ body{
       .seg{
         color: black;
         border-color: white !important;
-        box-shadow: 0px 0px 15px 2px $white;
+        // box-shadow: 0px 0px 15px 2px $white;
         animation: bounceSegWhite $anim-time;
       }
       &:first-child{
@@ -376,9 +443,24 @@ main {
     display: flex;
     width:50%;
     height:75%;
+    transform: scale(1);
+    margin-left: 0;
+    margin-top: 60px;
     // background-color: $grey1;
     .intro{
-      margin-bottom:100px;
+      margin-bottom:0px;
+      color: $intro-colour;
+      font-size: 10em;
+      // border: 2px solid rgba(0,0,0,0);
+      text-shadow: 0px 0px 20px $intro-colour-trans;
+      transform: translate(-110px,100px) rotateX(55deg);
+      .angle1{
+        transform: rotate(-45deg);
+      }
+      .angle2{
+        transform: rotate(45deg) translate(44px, -310px);
+
+      }
     }
     .odd{
       // margin-top: 0px;
@@ -386,8 +468,8 @@ main {
     }
     .hex{
       .seg{
-        color: black;
-        border-color: white !important;
+        // color: black;
+        // border-color: white !important;
       }
       &.level1{
         &:first-child{.seg{background: $blue3;}}
@@ -409,6 +491,67 @@ main {
         &:nth-child(2){.seg{background: $blue11;}}
         &:nth-child(3){.seg{background: $blue10;}}
       }
+      &.level5{
+        &:first-child{.seg{background: $green3;}}
+        &:nth-child(2){.seg{background: $green2;}}
+        &:nth-child(3){.seg{background: $green1;}}
+      }
+      &.level6{
+        &:first-child{.seg{background: $green6;}}
+        &:nth-child(2){.seg{background: $green5;}}
+        &:nth-child(3){.seg{background: $green4;}}
+      }
+      &.level7{
+        &:first-child{.seg{background: $green9;}}
+        &:nth-child(2){.seg{background: $green8;}}
+        &:nth-child(3){.seg{background: $green7;}}
+      }
+      &.level8{
+        &:first-child{.seg{background: $green12;}}
+        &:nth-child(2){.seg{background: $green11;}}
+        &:nth-child(3){.seg{background: $green10;}}
+      }
+      &.level9{
+        &:first-child{.seg{background: $yellow3;}}
+        &:nth-child(2){.seg{background: $yellow2;}}
+        &:nth-child(3){.seg{background: $yellow1;}}
+      }
+      &.level10{
+        &:first-child{.seg{background: $yellow6;}}
+        &:nth-child(2){.seg{background: $yellow5;}}
+        &:nth-child(3){.seg{background: $yellow4;}}
+      }
+      &.level11{
+        &:first-child{.seg{background: $yellow9;}}
+        &:nth-child(2){.seg{background: $yellow8;}}
+        &:nth-child(3){.seg{background: $yellow7;}}
+      }
+      &.level12{
+        &:first-child{.seg{background: $yellow12;}}
+        &:nth-child(2){.seg{background: $yellow11;}}
+        &:nth-child(3){.seg{background: $yellow10;}}
+      }
+      &.level13{
+        &:first-child{.seg{background: $red3;}}
+        &:nth-child(2){.seg{background: $red2;}}
+        &:nth-child(3){.seg{background: $red1;}}
+      }
+      &.level14{
+        &:first-child{.seg{background: $red6;}}
+        &:nth-child(2){.seg{background: $red5;}}
+        &:nth-child(3){.seg{background: $red4;}}
+      }
+      &.level15{
+        &:first-child{.seg{background: $red9;}}
+        &:nth-child(2){.seg{background: $red8;}}
+        &:nth-child(3){.seg{background: $red7;}}
+      }
+      &.level16{
+        &:first-child{.seg{background: $red12;}}
+        &:nth-child(2){.seg{background: $red11;}}
+        &:nth-child(3){.seg{background: $red10;}}
+      }
+
       &:hover{
         &.settingsButton, &.startButton, &.startButtonSingle{
           transform: translateY(-40px);

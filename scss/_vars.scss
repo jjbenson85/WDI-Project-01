@@ -6,6 +6,11 @@ $grey: #A6A6A6;
 $hex-size:100px;
 $anim-time: 500ms;
 
+$intro-colour:rgba(255,255,222,1);
+$intro-colour-trans:rgba($intro-colour,0.6);
+
+
+
 $grey1:#99A;
 $grey2:#888;
 $grey3:#778;
@@ -23,20 +28,79 @@ $bg-blue2:#325;
 
 
 $blue1:#357;
-$blue2:darken( $blue1, 10% );
-$blue3:darken( $blue1, 20% );
+$blue-lighten:lighten( $blue1, 40% );
+$green1:#363;
+$green-lighten:lighten( $green1, 40% );
+$yellow1:#761;
+$red1:#622;
 
-$blue4:lighten( $blue1, 20% );
+$blue2:darken( $blue-lighten, 10% );
+$blue3:darken( $blue-lighten, 20% );
+
+// $blue4:lighten( $blue1, 20% );
+$blue4: mix($blue-lighten, $green-lighten,75);
 $blue5:darken($blue4, 10% );
 $blue6:darken( $blue4, 20% );
 
-$blue7:lighten( $blue4, 20% );
+// $blue7:lighten( $blue4, 20% );
+$blue7: mix($blue-lighten, $green-lighten,50);
 $blue8:darken($blue7, 10% );
 $blue9:darken($blue7, 10% );
 
-$blue10:lighten( $blue7, 20% );
+// $blue10:lighten( $blue7, 20% );
+$blue10: mix($blue-lighten, $green-lighten,25);
 $blue11:darken($blue10, 10% );
 $blue12:darken($blue10, 10% );
+
+
+$green2:darken( $green1, 10% );
+$green3:darken( $green1, 20% );
+
+$green4:lighten( $green1, 20% );
+$green5:darken($green4, 10% );
+$green6:darken( $green4, 20% );
+
+$green7:lighten( $green4, 20% );
+$green8:darken($green7, 10% );
+$green9:darken($green7, 10% );
+
+$green10:lighten( $green7, 20% );
+$green11:darken($green10, 10% );
+$green12:darken($green10, 10% );
+
+
+$yellow2:darken( $yellow1, 10% );
+$yellow3:darken( $yellow1, 20% );
+
+$yellow4:lighten( $yellow1, 20% );
+$yellow5:darken($yellow4, 10% );
+$yellow6:darken( $yellow4, 20% );
+
+$yellow7:lighten( $yellow4, 20% );
+$yellow8:darken($yellow7, 10% );
+$yellow9:darken($yellow7, 10% );
+
+$yellow10:lighten( $yellow7, 20% );
+$yellow11:darken($yellow10, 10% );
+$yellow12:darken($yellow10, 10% );
+
+
+$red2:darken( $red1, 10% );
+$red3:darken( $red1, 20% );
+
+$red4:lighten( $red1, 20% );
+$red5:darken($red4, 10% );
+$red6:darken( $red4, 20% );
+
+$red7:lighten( $red4, 20% );
+$red8:darken($red7, 10% );
+$red9:darken($red7, 10% );
+
+$red10:lighten( $red7, 20% );
+$red11:darken($red10, 10% );
+$red12:darken($red10, 10% );
+
+
 
 
 // $white1:$black;
@@ -46,9 +110,9 @@ $blue12:darken($blue10, 10% );
 // $black1:$grey;
 // $black2:$white;
 // $black3:$black;
-$green1:#070;
-$green2:#060;
-$green3:#050;
+// $green1:#070;
+// $green2:#060;
+// $green3:#050;
 
 $valid1:$green1;
 $valid2:$green2;
