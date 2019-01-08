@@ -4,22 +4,23 @@ $white: #FEFEFE;
 $grey: #A6A6A6;
 
 $hex-size:100px;
+$anim-time: 500ms;
 
-$grey1:#555;
-$grey2:#666;
-$grey3:#777;
+$grey1:#99A;
+$grey2:#888;
+$grey3:#778;
 
 $white1:#EEE;
 $white2:#DDD;
 $white3:#CCC;
 
-$black1:#222;
-$black2:#111;
+$black1:#111;
+$black2:#222;
 $black3:#000;
 
-$blue1:#37F;
+$blue1:#357;
 $blue2:#EEF;
-$blue3:#005;
+$blue3:#325;
 
 
 // $white1:$black;
@@ -29,10 +30,26 @@ $blue3:#005;
 // $black1:$grey;
 // $black2:$white;
 // $black3:$black;
+$green1:#070;
+$green2:#060;
+$green3:#050;
 
-$valid1:#070;
-$valid2:#060;
-$valid3:#050;
+$valid1:$green1;
+$valid2:$green2;
+$valid3:$green3;
+
+
+$invert1:$green1;
+$invert2:$green2;
+$invert3:$green3;
+
+$invert-white1:#EFE;
+$invert-white2:#DED;
+$invert-white3:#CDC;
+
+$invert-black1:#252;
+$invert-black2:#141;
+$invert-black3:#030;
 
 $in-valid1:#800;
 $in-valid2:#700;

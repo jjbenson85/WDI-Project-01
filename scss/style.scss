@@ -1,10 +1,46 @@
 @import '_vars';
 
+// @keyframes hexHide{
+//   0%{
+//     transform: translateY(-40px);
+//   }
+//   25%{
+//     transform: translateY(0px);
+//   }
+//   75%{
+//     transform: translateY(0px);
+//   }
+//   100%{
+//     transform: translateY(-40px);
+//   }
+// }
 @keyframes bounceWhite{
-  0%{transform: translateY(-40px);}
-  25%{transform: translateY(-50px);}
-  75%{transform: translateY(-30px);}
-  100%{transform: translateY(-40px);}
+  0%{
+    transform: translateY(-40px);
+  }
+  25%{
+    transform: translateY(-50px);
+  }
+  75%{
+    transform: translateY(-30px);
+  }
+  100%{
+    transform: translateY(-40px);
+  }
+}
+@keyframes bounceSegWhite{
+  0%{
+    box-shadow: 0px 0px 15px 2px $white;
+  }
+  25%{
+    box-shadow: 0px 0px 15px 4px $white;
+  }
+  75%{
+    box-shadow: 0px 0px 5px 2px $white;
+  }
+  100%{
+    box-shadow: 0px 0px 15px 2px $white;
+  }
 }
 @keyframes bounceBlack{
   0%{transform: translateY(-40px);}
@@ -20,14 +56,17 @@ body{
 .hex-grid{
   width: 100%;
   transform: scale(0.6);
-  margin-left: 100px;
+  // margin-left: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 250ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  margin-left: -20px;
+  margin-top: 170px;
   &.start{
     transform: scale(1);
     margin-left: 0;
+    margin-top: 140px;
     // margin-top: 250px;
   }
 }
@@ -52,10 +91,18 @@ body{
   width: 100px;
   height: 100px;
 
-  transform: rotate(0deg);
+  // transform: rotate(0deg);
 
 
-  transition: all 250ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  // transition: transform 2000ms;
+
+  &.level1,&.level2,&.level3{
+
+  }
+  &.hidden{
+    opacity: 0;
+  }
 
 
 
@@ -68,8 +115,9 @@ body{
     text-align: center;
 
     background: grey;
-    border: 2px solid white;
-    transition: all 250ms ease-in-out;
+    border: 2px solid #DDD;
+    transition: all $anim-time ease-in-out;
+
 
   }
   .scale{
@@ -80,7 +128,7 @@ body{
 
     &:first-child{
       transform: rotate(-30deg) translate(0px,0px);
-      .seg{background: $grey1;}
+      .seg{background: $grey3;}
     }
     &:nth-child(2){
       transform: rotate(30deg)translate(10px,-127px);
@@ -88,13 +136,20 @@ body{
     }
     &:nth-child(3){
       transform: rotate(90deg)translate(-273px,-36px);
-      .seg{background: $grey3;}
+      .seg{background: $grey1;}
     }
   }
 
 
   &:hover{
 
+    &.white, &.black{
+      // pointer-events: none;
+      // animation: hexHide 2000ms;
+      // transform: translate(0px);
+
+      // opacity: 0.5;
+    }
     // background:red;
     .diamond{
       // background:$white;
@@ -132,13 +187,15 @@ body{
   &.white{
     // transform: rotate(240deg)translate(32px,100px);
     transform: translateY(-40px);
-    animation: bounceWhite 250ms;
+    animation: bounceWhite $anim-time;
 
     .diamond{
       // background:$white;
       .seg{
         color: black;
         border-color: white !important;
+        box-shadow: 0px 0px 15px 2px $white;
+        animation: bounceSegWhite $anim-time;
       }
       &:first-child{
         .seg{background: $white3;}
@@ -154,16 +211,16 @@ body{
   &.black{
     // transform: rotate(120deg)translate(-143px,40px);
     transform: translateY(-40px);
-    animation: bounceBlack 250ms;
+    animation: bounceBlack $anim-time;
     .diamond{
       // background:$black;
       .seg{
         color: white;
-        border-color: white !important;
+        border-color: #555 !important;
       }
       &:first-child{
         .seg{
-          background: $black1;
+          background: $black3;
         }
       }
       &:nth-child(2){
@@ -173,7 +230,89 @@ body{
       }
       &:nth-child(3){
         .seg{
-          background: $black3;
+          background: $black1;
+        }
+      }
+    }
+  }
+  &.invert{
+    // transform: rotate(120deg)translate(-143px,40px);
+    &.white, &.black{
+
+      transform: translateY(-40px);
+      animation: bounceBlack $anim-time;
+      // .seg{
+      //   background: $invert1 !important;
+      // }
+
+    }
+    &.white{
+      .diamond{
+        // background:$black;
+        .seg{
+          color: white;
+          border-color: white !important;
+        }
+        &:first-child{
+          .seg{
+            background: $invert-white1;
+          }
+        }
+        &:nth-child(2){
+          .seg{
+            background: $invert-white2;
+          }
+        }
+        &:nth-child(3){
+          .seg{
+            background: $invert-white3;
+          }
+        }
+      }
+    }
+    &.black{
+      .diamond{
+        // background:$black;
+        .seg{
+          color: white;
+          border-color: white !important;
+        }
+        &:first-child{
+          .seg{
+            background: $invert-black1;
+          }
+        }
+        &:nth-child(2){
+          .seg{
+            background: $invert-black2;
+          }
+        }
+        &:nth-child(3){
+          .seg{
+            background: $invert-black3;
+          }
+        }
+      }
+    }
+    .diamond{
+      // background:$black;
+      .seg{
+        color: white;
+        border-color: white !important;
+      }
+      &:first-child{
+        .seg{
+          background: $invert1;
+        }
+      }
+      &:nth-child(2){
+        .seg{
+          background: $invert2;
+        }
+      }
+      &:nth-child(3){
+        .seg{
+          background: $invert3;
         }
       }
     }
@@ -212,7 +351,11 @@ body{
 }
 main {
   // background-color: $grey1;
-  background-image: linear-gradient($blue1, $white);
+  background-image: linear-gradient($blue3, $blue1);
+   // background-image: url("../images/landscape.jpg");
+   // background-position: center;
+   // background-repeat: no-repeat;
+   // background-size:cover;
   display:flex;
   width: 100%;
   height:100vh;
@@ -238,12 +381,14 @@ main {
       margin-bottom:100px;
     }
     .odd{
-      margin-top: 0px;
-      margin-bottom: -166px;
+      // margin-top: 0px;
+      // margin-bottom: -166px;
     }
     .hex{
       &:hover{
-        transform: translateY(-40px);
+        &.settingsButton, &.startButton, &.level1, &.level2, &.level3{
+          transform: translateY(-40px);
+        }
         .seg{
           color: black;
           border-color: white !important;

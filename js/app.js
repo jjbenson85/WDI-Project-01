@@ -20,25 +20,27 @@ const downRightIds = []
 const upIds = []
 const downIds = []
 
+const showNumbers = true
+
 let gridToneArray = []
 const srcArray = [
   '1_C3.wav',
-  '2_Cs3.wav',
+  // '2_Cs3.wav',
   '3_D3.wav',
   '4_Eb3.wav',
   '5_E3.wav',
   '6_F3.wav',
-  '7_Fs3.wav',
+  // '7_Fs3.wav',
   '8_G3.wav',
-  '9_Gs3.wav',
+  // '9_Gs3.wav',
   '10_A3.wav',
   '11_Bb3.wav',
-  '12_B3.wav',
+  // '12_B3.wav',
   '13_C4.wav'
 ]
 
 let gameStart = false
-
+let level = 1
 let gridArray = []
 let gridClassArray = []
 const history = []
@@ -63,6 +65,9 @@ let $blackScore
 let $whiteScore
 let $turn
 let $message
+let $screens
+let $start
+
 let audioPlayer
 const audioPlayerArr = []
 
@@ -82,11 +87,34 @@ function resetVars(){
   turnCount = 0
   clickable = true
   gridClassArray = []
-  gridArray.removeClass('black').removeClass('white')
-  addTile(gridArray[19], 'black', 'white')
-  addTile(gridArray[25], 'white', 'black')
-  addTile(gridArray[30], 'black', 'white')
-  addTile(gridArray[24], 'white', 'black')
+  gridArray.removeClass('black').removeClass('white').removeClass('invert')
+  addTile(gridArray[19], 'black')
+  addTile(gridArray[25], 'white')
+  addTile(gridArray[30], 'black')
+  addTile(gridArray[24], 'white')
+
+  function selectRandom(){
+    const rndm = Math.random()
+    const selected = Math.floor(rndm*numberOfTiles)
+    if($(gridArray[selected]).hasClass('white')||$(gridArray[selected]).hasClass('black')) return selectRandom()
+    return selected
+  }
+
+  const selected = selectRandom()
+  // level = 1
+  switch(level){
+    case 1: break
+    case 2:
+
+      addTile(gridArray[selected],'invert')
+      break
+    case 3:
+      addTile(gridArray[selected],'bomb')
+      break
+    case 4:
+      addTile(gridArray[selected],'invert')
+      break
+  }
 
   history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
 
@@ -114,15 +142,32 @@ function nextTurn(){
   getValidMoves()
 }
 
-function addTile(tile, player, opponent){
+function addTile(tile, player, sound=true){
+  console.log('addtile', sound)
   debug()
+  opponent = 'black'
+  if(player === 'black') opponent = 'white'
   $(tile).removeClass(opponent).removeClass('valid')
   $(tile).addClass(player)
+
 
   const id = parseInt($(tile).attr('data-id'))
   gridClassArray[id] = player
 
-  if(gameStart){
+  // if($(tile).hasClass('invert')){
+  //   for(let i=0;i<numberOfTiles;i++){
+  //     if($(gridArray[i]).hasClass('white')){
+  //       $(gridArray[i]).removeClass('white')
+  //       $(gridArray[i]).addClass('black')
+  //     }else if($(gridArray[i]).hasClass('black')){
+  //       $(gridArray[i]).removeClass('black')
+  //       $(gridArray[i]).addClass('white')
+  //     }
+  //     if(gridClassArray[id] === 'white') gridClassArray[id] === 'black'
+  //     if(gridClassArray[id] === 'black') gridClassArray[id] === 'white'
+  //   }
+  // }
+  if(sound && gameStart){
     playSound(id)
   }
 }
@@ -150,7 +195,7 @@ function createLookups(){
 
   i = width-1
   rightIds.push(i)
-  while(i<numberOfTiles){
+  while(i<numberOfTiles-width){
     i+=width-1
     rightIds.push(i)
     i+=width
@@ -171,7 +216,7 @@ function createLookups(){
   console.log('downIds',downIds)
 
 
-  for(i=0;i<width-1;i++){
+  for(i=0;i<width;i++){
     upLeftIds.push(i)
   }
   for(i=0;i<leftIds.length;i+=2){
@@ -181,10 +226,13 @@ function createLookups(){
 
 
   //UP RIGHT
-  for(i=0;i<upIds.length;i+=2){
-    upRightIds.push(upIds[i])
+  for(i=0;i<width-1;i++){
+    upRightIds.push(i)
   }
-  // upRightIds = upRightIds.concat(upIds)
+  // for(i=0;i<upIds.length;i+=2){
+  //   upRightIds.push(upIds[i])
+  // }
+
 
   for(i=0;i<rightIds.length;i+=2){
     upRightIds.push(rightIds[i])
@@ -193,8 +241,8 @@ function createLookups(){
 
 
   //DOWN LEFT
-  for(i=0;i<downIds.length;i+=2){
-    downLeftIds.push(downIds[i])
+  for(i=55;i<numberOfTiles;i++){
+    downLeftIds.push(i)
   }
 
   for(i=0;i<leftIds.length;i+=2){
@@ -204,8 +252,8 @@ function createLookups(){
 
 
   //DOWN RIGHT
-  for(i=0;i<downIds.length;i+=2){
-    downRightIds.push(downIds[i])
+  for(i=55;i<numberOfTiles;i++){
+    downRightIds.push(i)
   }
 
   for(i=0;i<rightIds.length;i+=2){
@@ -257,9 +305,9 @@ function getNeighbours(tile){
       neighbourArr.push(gridArray[neighbourId])
     }
   }
-  console.log('tile',tile)
-  console.log('neighbourArr',neighbourArr)
-  console.log('\n')
+  // console.log('tile',tile)
+  // console.log('neighbourArr',neighbourArr)
+  // console.log('\n')
   return neighbourArr
 }
 
@@ -423,6 +471,9 @@ function gameOver(){
   console.log('Game Over')
   if(winner === 'tie')$message.html('It\'s a tie!')
   else $message.html(`${winner} wins!`)
+  level++
+  $screens.hide()
+  $start.show()
 }
 
 function cpuPlay(){
@@ -529,7 +580,23 @@ function updatePlayerAndOpponent(){
   debug(`player:${player} opponent:${opponent}`)
 
 }
-
+function invertCapture(tile){
+  if($(tile).hasClass('invert')){
+    for(let i=0;i<numberOfTiles;i++){
+      if($(gridArray[i]).hasClass('white')){
+        $(gridArray[i]).removeClass('white')
+        $(gridArray[i]).addClass('black')
+      }else if($(gridArray[i]).hasClass('black')){
+        $(gridArray[i]).removeClass('black')
+        $(gridArray[i]).addClass('white')
+      }
+      if(gridClassArray[i] === 'white') gridClassArray[i] === 'black'
+      if(gridClassArray[i] === 'black') gridClassArray[i] === 'white'
+    }
+    $(tile).addClass(player)
+    $(tile).removeClass(opponent)
+  }
+}
 function play(e){
   if(!clickable)return
   debug()
@@ -569,30 +636,36 @@ function play(e){
     clickable = false
 
     //Add the tile that was clicked
-    addTile(tile, player, opponent)
+    addTile(tile, player)
+
+
 
     const timerArr = []
 
     //Get tiles to flip
     const tilesToFlip = getTilesToFlip(tile)
-    console.log('tilesToFlip',tilesToFlip)
+    // console.log('tilesToFlip',tilesToFlip)
     //Flip each tile for this move
     // validMovesArr[id].forEach((elem, index)=>{
     tilesToFlip.forEach((elem, index)=>{
-      console.log('tilesToFlip.forEach elem', elem, 'index', index)
+      // console.log('tilesToFlip.forEach elem', elem, 'index', index)
       const thisPlayer = player
-      const thisOpponent = opponent
+      // const thisOpponent = opponent
 
       elem.forEach((thisTile, i)=>{
         const timerId = setTimeout(function(){
-          addTile(thisTile, thisPlayer, thisOpponent)
+          if(index===0)addTile(thisTile, thisPlayer)
+          else addTile(thisTile, thisPlayer, false)
+          invertCapture(thisTile)
           timerArr.pop()
         },delay*(i+1))
         timerArr.push(timerId)
 
       })
-      console.log(turnCount,'delay*(index+1)',delay*(index+1),'index',index)
+      // console.log(turnCount,'delay*(index+1)',delay*(index+1),'index',index)
     })
+
+    invertCapture(tile)
 
     const wait = timerArr.length*delay
     setTimeout(function(){
@@ -620,7 +693,7 @@ function buildGame(){
 
 
 
-  $game = $('.game')
+  const $game = $('.game')
   $grid = $game.find('.hex-grid')
 
 
@@ -674,17 +747,26 @@ function buildGame(){
   // }
   // }
   const $hexs = $grid.find('.hex')
+  // $hexs
+
+  // $($hexs).click(function (e) {
+  //   if($(this).hasClass('white')||$(this).hasClass('black')){
+  //     $(this).hide()
+  //     $(document.elementFromPoint(e.clientX, e.clientY)).trigger('click')
+  //     $(this).show()
+  //
+  //   }
+  // })
+
+
 
   const $firstSegs = $hexs.find('.diamond:last-child .seg')
-  console.log($firstSegs)
+  if(showNumbers === true){
+    $firstSegs.each(function( index ){
+      this.append(index)
+    })
 
-//   $( "li" ).each(function( index ) {
-//   console.log( index + ": " + $( this ).text() );
-// });
-
-  $firstSegs.each(function( index ){
-    this.append(index)
-  })
+  }
   // for(let i=0;i<numberOfTiles;i++){
   //   const tile = `<div class='tile' data-id=${i}>
   //   <div class='rotate'>
@@ -705,7 +787,7 @@ function buildGame(){
 
   }
 
-  for(let i=0;i<12;i++){
+  for(let i=0;i<9;i++){
     audioPlayer = document.createElement('audio')
     audioPlayer.src = 'assets/'+srcArray[i]
     audioPlayerArr.push(audioPlayer)
@@ -715,12 +797,12 @@ function buildGame(){
   let j = 0
   for(let i=0;i<numberOfTiles;i++){
     gridToneArray[i] = j
-    j = (j+7)%12
+    j = (j+7)%9
   }
 
 
   // console.log(audioPlayerArr)
-  console.log('gridToneArray',gridToneArray)
+  // console.log('gridToneArray',gridToneArray)
 
 
   // console.log(gridArray)
@@ -808,8 +890,8 @@ function saveSettings(e){
 
   init()
 
-  console.log('Test values', values)
-  console.log('Test width', width, 'cpuType', cpuType )
+  // console.log('Test values', values)
+  // console.log('Test width', width, 'cpuType', cpuType )
 
 }
 
@@ -818,13 +900,16 @@ function init(){
 
   buildGame()
 
-  const $screens = $('.screen')
-  const $start = $('.start')
+  $screens = $('.screen')
+  $start = $('.start')
   const $game = $('.game')
   const $settings = $('.settings')
   const $startButton = $('.startButton')
-  const $startButtonText = $startButton.find('h2')
-  const $startButtonSingle = $('.startButtonSingle')
+  const $level1Button = $('.level1')
+  const $level2Button = $('.level2')
+  const $level3Button = $('.level3')
+  // const $startButtonText = $startButton.find('h2')
+  // const $startButtonSingle = $('.startButtonSingle')
   const $menuButton = $('.menuButton')
   const $resetButton = $('.reset')
   const $undoButton = $('.undo')
@@ -833,8 +918,12 @@ function init(){
   const $form = $('.form')
   const $settingsSaveButton = $form.find('button')
 
-  $startButton.on('click', goToGame)
-  $startButtonSingle.on('click', goToSingleGame)
+  // $startButton.on('click', goToGame)
+  $level1Button.on('click', ()=>goToGame(1))
+  $level2Button.on('click', ()=>goToGame(2))
+  $level3Button.on('click', ()=>goToGame(3))
+  $startButton.on('click', ()=>goToGame(false))
+  // $startButtonSingle.on('click', goToSingleGame)
   $menuButton.on('click', goToMenu)
   $settingsButton.on('click', goToSettings)
   $resetButton.on('click', resetVars)
@@ -842,25 +931,30 @@ function init(){
   $redoButton.on('click', redoMove)
   $settingsSaveButton.on('click', saveSettings)
 
-  function goToGame(){
-    gameStart = true
+  function goToGame(gameLevel){
     cpu = false
+    if(gameLevel){
+      level = gameLevel
+      cpu = true
+    }
+    gameStart = true
+    resetVars()
     $screens.hide()
     $game.show()
   }
 
-  function goToSingleGame(){
-    gameStart = true
-    cpu = true
-    console.log('cpu true')
-    $screens.hide()
-    $game.show()
-  }
+  // function goToSingleGame(){
+  //   gameStart = true
+  //   cpu = true
+  //   // console.log('cpu true')
+  //   $screens.hide()
+  //   $game.show()
+  // }
 
   function goToMenu(){
-    $startButtonText
-    if(turnCount) $startButtonText.html('Continue')
-    else $startButtonText.html('Vs')
+    // $startButtonText
+    // if(turnCount) $startButtonText.html('Continue')
+    // else $startButtonText.html('Vs')
     // if(turnCount) $startButton.html('Continue Game')
     // else $startButton.html('New Game')
     $screens.hide()
