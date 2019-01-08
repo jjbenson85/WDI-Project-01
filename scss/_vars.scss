@@ -18,9 +18,25 @@ $black1:#111;
 $black2:#222;
 $black3:#000;
 
+$bg-blue1:#357;
+$bg-blue2:#325;
+
+
 $blue1:#357;
-$blue2:#EEF;
-$blue3:#325;
+$blue2:darken( $blue1, 10% );
+$blue3:darken( $blue1, 20% );
+
+$blue4:lighten( $blue1, 20% );
+$blue5:darken($blue4, 10% );
+$blue6:darken( $blue4, 20% );
+
+$blue7:lighten( $blue4, 20% );
+$blue8:darken($blue7, 10% );
+$blue9:darken($blue7, 10% );
+
+$blue10:lighten( $blue7, 20% );
+$blue11:darken($blue10, 10% );
+$blue12:darken($blue10, 10% );
 
 
 // $white1:$black;

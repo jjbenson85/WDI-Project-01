@@ -351,7 +351,7 @@ body{
 }
 main {
   // background-color: $grey1;
-  background-image: linear-gradient($blue3, $blue1);
+  background-image: linear-gradient($bg-blue2, $bg-blue1);
    // background-image: url("../images/landscape.jpg");
    // background-position: center;
    // background-repeat: no-repeat;
@@ -385,8 +385,32 @@ main {
       // margin-bottom: -166px;
     }
     .hex{
+      .seg{
+        color: black;
+        border-color: white !important;
+      }
+      &.level1{
+        &:first-child{.seg{background: $blue3;}}
+        &:nth-child(2){.seg{background: $blue2;}}
+        &:nth-child(3){.seg{background: $blue1;}}
+      }
+      &.level2{
+        &:first-child{.seg{background: $blue6;}}
+        &:nth-child(2){.seg{background: $blue5;}}
+        &:nth-child(3){.seg{background: $blue4;}}
+      }
+      &.level3{
+        &:first-child{.seg{background: $blue9;}}
+        &:nth-child(2){.seg{background: $blue8;}}
+        &:nth-child(3){.seg{background: $blue7;}}
+      }
+      &.level4{
+        &:first-child{.seg{background: $blue12;}}
+        &:nth-child(2){.seg{background: $blue11;}}
+        &:nth-child(3){.seg{background: $blue10;}}
+      }
       &:hover{
-        &.settingsButton, &.startButton, &.level1, &.level2, &.level3{
+        &.settingsButton, &.startButton, &.startButtonSingle{
           transform: translateY(-40px);
         }
         .seg{

@@ -177,7 +177,34 @@ main {
     height: 75%; }
     main .start .intro {
       margin-bottom: 100px; }
-    main .start .hex:hover.settingsButton, main .start .hex:hover.startButton, main .start .hex:hover.level1, main .start .hex:hover.level2, main .start .hex:hover.level3 {
+    main .start .hex .seg {
+      color: black;
+      border-color: white !important; }
+    main .start .hex.level1:first-child .seg {
+      background: #142230; }
+    main .start .hex.level1:nth-child(2) .seg {
+      background: #243c53; }
+    main .start .hex.level1:nth-child(3) .seg {
+      background: #357; }
+    main .start .hex.level2:first-child .seg {
+      background: #335577; }
+    main .start .hex.level2:nth-child(2) .seg {
+      background: #426f9b; }
+    main .start .hex.level2:nth-child(3) .seg {
+      background: #5888b8; }
+    main .start .hex.level3:first-child .seg {
+      background: #7ca2c7; }
+    main .start .hex.level3:nth-child(2) .seg {
+      background: #7ca2c7; }
+    main .start .hex.level3:nth-child(3) .seg {
+      background: #a0bbd6; }
+    main .start .hex.level4:first-child .seg {
+      background: #c4d5e6; }
+    main .start .hex.level4:nth-child(2) .seg {
+      background: #c4d5e6; }
+    main .start .hex.level4:nth-child(3) .seg {
+      background: #e7eef5; }
+    main .start .hex:hover.settingsButton, main .start .hex:hover.startButton, main .start .hex:hover.startButtonSingle {
       transform: translateY(-40px); }
     main .start .hex:hover .seg {
       color: black;
