@@ -4,7 +4,12 @@ const debugLog = false
 let debugCounter = 0
 const delay = 250
 
+class Game{
+  constructor{
+    
+  }
 
+}
 //globals
 //SAVE SETTINGS DIFFERENT WIDTH NOT ALL VALID OPTIONS SHOWING
 // let tileShape = 'hexagon'
@@ -183,6 +188,23 @@ const directions = [-width,(-2*width)+1,-width+1,-1,0,1,width-1,(2*width)-1,widt
 
 function createLookups(){
 
+  // const $topTiles = $grid.find('.even:first-child')
+  // console.log('$topTile',$topTiles)
+  // const $bottomTiles = $grid.find('.even:last-child')
+  //
+  // const $rows = $grid.find('div')
+  // const $leftTiles = $rows.find('.hex:first-child')
+  // const $rightTiles = $rows.find('.hex:last-child')
+  //
+  // $topTiles.addClass('invert')
+  // $bottomTiles.addClass('invert')
+  // $leftTiles.addClass('invert')
+  // $rightTiles.addClass('invert')
+
+  // $leftTiles.merge()
+
+  let numEdges = 11
+
   let i = 0
   leftIds.push(i)
   while(i<numberOfTiles-width){
@@ -191,7 +213,6 @@ function createLookups(){
     i+=width-1
     leftIds.push(i)
   }
-  console.log('leftIds',leftIds)
 
   i = width-1
   rightIds.push(i)
@@ -201,19 +222,16 @@ function createLookups(){
     i+=width
     rightIds.push(i)
   }
-  console.log('rightIds',rightIds)
 
 
   for(i=0;i<11;i++){
     upIds.push(i)
   }
-  console.log('upIds',upIds)
 
 
   for(i=50;i<61;i++){
     downIds.push(i)
   }
-  console.log('downIds',downIds)
 
 
   for(i=0;i<width;i++){
@@ -222,7 +240,6 @@ function createLookups(){
   for(i=0;i<leftIds.length;i+=2){
     upLeftIds.push(leftIds[i])
   }
-  console.log('upLeftIds',upLeftIds)
 
 
   //UP RIGHT
@@ -237,7 +254,6 @@ function createLookups(){
   for(i=0;i<rightIds.length;i+=2){
     upRightIds.push(rightIds[i])
   }
-  console.log('upRightIds',upRightIds)
 
 
   //DOWN LEFT
@@ -248,7 +264,6 @@ function createLookups(){
   for(i=0;i<leftIds.length;i+=2){
     downLeftIds.push(leftIds[i])
   }
-  console.log('downLeftIds',downLeftIds)
 
 
   //DOWN RIGHT
@@ -259,6 +274,15 @@ function createLookups(){
   for(i=0;i<rightIds.length;i+=2){
     downRightIds.push(rightIds[i])
   }
+
+
+  console.log('leftIds',leftIds)
+  console.log('rightIds',rightIds)
+  console.log('upIds',upIds)
+  console.log('downIds',downIds)
+  console.log('upLeftIds',upLeftIds)
+  console.log('upRightIds',upRightIds)
+  console.log('downLeftIds',downLeftIds)
   console.log('downRightIds',downRightIds)
 }
 
@@ -270,7 +294,9 @@ function getNeighbours(tile){
 
     const neighbourId = id + directions[i]
     //If going upLeft and has no neighbour
-    if(upLeftIds.includes(id) && (i === 0) ) {
+    if($(gridArray[neighbourId]).hasClass('hidden')){
+      neighbourArr.push('hidden')
+    }else if(upLeftIds.includes(id) && (i === 0) ) {
       neighbourArr.push('upLeft')
 
       //If going up and has no neighbour
@@ -403,6 +429,7 @@ function checkTileIsValid(tile){
   const flipArr = []
   //check to see if the tile is empty
   if(isOccupied(tile)) return false
+  if($(tile).hasClass('hidden'))return false
 
   //check to see if there is an opponent tile next to this tile
   //create array of neighbours
@@ -448,12 +475,14 @@ function calculateScores(){
   //Increase counter
   whiteCount = 0
   blackCount = 0
+  let hiddenCount = 0
   emptyCount = 0
   //Check game if game is over
   for(let i=0;i<numberOfTiles;i++){
     const tileState = isOccupied(gridArray[i])
     if(tileState==='white') whiteCount++
     else if(tileState==='black') blackCount++
+    else if(tileState==='hidden') hiddenCount++
     else emptyCount++
   }
 }
@@ -491,7 +520,7 @@ function cpuPlay(){
     let list
 
     if(validMovesArr.length===0) {
-      gridArray[0].click()
+      gridArray[20].click()
       return
     }
 
@@ -687,8 +716,8 @@ function play(e){
 
 function buildGame(){
 
-  createLookups()
 
+  createLookups()
   // GET HTML ELEMENTS
 
 
@@ -786,6 +815,22 @@ function buildGame(){
     $(gridArray[i]).attr('data-id',i)
 
   }
+
+
+
+  const $topTiles = $grid.find('.even:first-child > .hex')
+
+  const $bottomTiles = $grid.find('.even:last-child > .hex')
+  const $rows = $grid.find('div')
+  const $leftTiles = $evens.find('.hex:first-child')
+  const $rightTiles = $evens.find('.hex:last-child')
+
+  $topTiles.addClass('hidden')
+  $bottomTiles.addClass('hidden')
+  $leftTiles.addClass('hidden')
+  $rightTiles.addClass('hidden')
+
+
 
   for(let i=0;i<9;i++){
     audioPlayer = document.createElement('audio')
