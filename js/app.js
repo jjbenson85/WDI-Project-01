@@ -1404,6 +1404,7 @@ class GameLevel{
     // if(winner === 'tie')$message.html('It\'s a tie!')
     // else $message.html(`${winner} wins!`)
 
+    const that = this
     if(this.winner === 'white'){
       this.$hexArray.off()
 
@@ -1412,13 +1413,12 @@ class GameLevel{
     }else{
       console.log('You Lose')
       setTimeout(function() {
-        this.resetVariables()
-        this.updatePlayerAndOpponent()
-        this.getValidMoves()
+        that.resetVariables()
+        that.updatePlayerAndOpponent()
+        that.getValidMoves()
       }, 500)
       return
     }
-    const that = this
     this.$grid.addClass('hideLeft')
     setTimeout(function() {
       that.$grid.addClass('hideRight')
@@ -1685,22 +1685,22 @@ function redoMove(){
 
 }
 
-function saveSettings(e){
-  e.preventDefault()
-
-  const values = {}
-  $.each($('.form').serializeArray(), function(i, field) {
-    values[field.name] = field.value
-  })
-
-  cpuType = values['cpu-type']
-
-  init()
-
-  // console.log('Test values', values)
-  // console.log('Test width', width, 'cpuType', cpuType )
-
-}
+// function saveSettings(e){
+//   e.preventDefault()
+//
+//   const values = {}
+//   $.each($('.form').serializeArray(), function(i, field) {
+//     values[field.name] = field.value
+//   })
+//
+//   cpuType = values['cpu-type']
+//
+//   init()
+//
+//   // console.log('Test values', values)
+//   // console.log('Test width', width, 'cpuType', cpuType )
+//
+// }
 // function navbarScroll(){
 //   var prevScrollpos = window.pageYOffset
 //   window.addEventListener('scroll', function() {
@@ -1719,8 +1719,33 @@ function init(){
   debug()
   // navbarScroll()
   createLookups()
+//
+//   var maxWidth  = $('#outer').width();
+//   var maxHeight = $('#outer').height();
+//
+//
+//
+// $(window).resize(function(evt) {
+//     var $window = $(window);
+//     var width = $window.width();
+//     var height = $window.height();
+//     var scale;
+//
+//     // early exit
+//     if(width >= maxWidth && height >= maxHeight) {
+//         $('#outer').css({'-webkit-transform': ''});
+//         $('#wrap').css({ width: '', height: '' });
+//         return;
+//     }
+//
+//     scale = Math.min(width/maxWidth, height/maxHeight);
+//
+//     $('#outer').css({'-webkit-transform': 'scale(' + scale + ')'});
+//     $('#wrap').css({ width: maxWidth * scale, height: maxHeight * scale });
+// });
 
   const $game = $('.game')
+
   // const gameLevel1 = new GameLevel($game,'level 1')
 
   // buildGame()
@@ -1733,34 +1758,53 @@ function init(){
   $footer = $('footer')
   $turnIcon = $footer.find('.hex')
   // $gameOver = $('.gameOver')
-  const $settings = $('.settings')
+  // const $settings = $('.settings')
   // const $startButton = $('.start-button')
   const $twoPlayerButton = $('.two-player-button')
+  const $levelButtons = $('.level')
+  console.log($levelButtons)
   const $level1Button = $('.level1')
   const $level2Button = $('.level2')
   const $level3Button = $('.level3')
   const $level4Button = $('.level4')
+  const $level5Button = $('.level5')
+  const $level6Button = $('.level6')
+  const $level7Button = $('.level7')
+  const $level8Button = $('.level8')
+  const $level9Button = $('.level9')
+  const $level10Button = $('.level10')
+  const $level11Button = $('.level11')
+  const $level12Button = $('.level12')
+  const $level14Button = $('.level13')
+  const $level15Button = $('.level14')
+  const $level16Button = $('.level15')
   // const $startButtonText = $startButton.find('h2')
   // const $startButton-single = $('.start-button-single')
   const $menuButton = $('.menu-button')
-  console.log('$menuButton',$menuButton)
+  // console.log('$menuButton',$menuButton)
   // const $resetButton = $('.reset')
-  const $undoButton = $('.undo')
-  const $redoButton = $('.redo')
-  const $settingsButton = $('.settingsButton')
-  const $form = $('.form')
-  const $settingsSaveButton = $form.find('button')
+  // const $undoButton = $('.undo')
+  // const $redoButton = $('.redo')
+  // const $settingsButton = $('.settingsButton')
+  // const $form = $('.form')
+  // const $settingsSaveButton = $form.find('button')
 
   // $startButton.on('click', goToGame)
-  $level1Button.on('click', ()=>goToGame(1))
-  // $level1Button.on('click', ()=>goToGame(4))
-  $level2Button.on('click', ()=>goToGame(2))
-  $level3Button.on('click', ()=>goToGame(3))
-  $level4Button.on('click', ()=>goToGame(4))
+  $levelButtons.on('click', function(){
+    console.log($(this).attr('data-id'))
+    let id = $(this).attr('data-id')
+    id = parseInt(id)
+    goToGame(id)
+  })
+  // $level1Button.on('click', ()=>goToGame(1))
+  // // $level1Button.on('click', ()=>goToGame(4))
+  // $level2Button.on('click', ()=>goToGame(2))
+  // $level3Button.on('click', ()=>goToGame(3))
+  // $level4Button.on('click', ()=>goToGame(4))
   $twoPlayerButton.on('click', ()=>goToGame(0,false))
   // $startButton-single.on('click', goToSingleGame)
   $menuButton.on('click', goToMenu)
-  $settingsButton.on('click', goToSettings)
+  // $settingsButton.on('click', goToSettings)
   // $resetButton.on('click', resetVars)
   // $undoButton.on('click', undoMove)
   // $redoButton.on('click', redoMove)
@@ -1799,21 +1843,22 @@ function init(){
     // else $startButtonText.html('Vs')
     // if(turnCount) $startButton.html('Continue Game')
     // else $startButton.html('New Game')
-    const $startHexs = $start.find(`.level${level}`)
-    console.log('$startHexs',$startHexs)
-    setTimeout(function () {
-
-      $startHexs.removeClass('hidden')
-    }, 1000)
+    for(let i=1;i<=level;i++){
+      const $startHexs = $start.find(`.level${i}`)
+      console.log('$startHexs',$startHexs)
+      setTimeout(function () {
+        $startHexs.removeClass('hidden')
+      }, 500*i)
+    }
 
     $screens.hide()
     $start.show()
   }
 
-  function goToSettings(){
-    $screens.hide()
-    $settings.show()
-  }
+  // function goToSettings(){
+  //   $screens.hide()
+  //   $settings.show()
+  // }
 
 
 }

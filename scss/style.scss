@@ -207,7 +207,7 @@ header{
 
   }
   &.hidden{
-    opacity: 0;
+    opacity: 0.5;
     transform: translateY(50px);
     pointer-events: none;
   }
