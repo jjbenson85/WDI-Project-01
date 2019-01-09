@@ -168,6 +168,7 @@ header{
   }
   &.hidden{
     opacity: 0;
+    transform: translateY(50px);
     pointer-events: none;
   }
 
@@ -553,7 +554,7 @@ main {
       }
 
       &:hover{
-        &.settingsButton, &.startButton, &.startButtonSingle{
+        &.settingsButton, &.start-button, &.start-button-single{
           transform: translateY(-40px);
         }
         .seg{

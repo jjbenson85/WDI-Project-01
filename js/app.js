@@ -1,5 +1,5 @@
 //LOGS
-const validMovesLog = false
+// const validMovesLog = false
 const debugLog = false
 let debugCounter = 0
 const delay = 250
@@ -27,7 +27,7 @@ const downIds = []
 
 const showNumbers = true
 
-let gridToneArray = []
+// const gridToneArray = []
 const srcArray = [
   '1_C3.m4a',
   // '2_Cs3.m4a',
@@ -46,7 +46,7 @@ const srcArray = [
 
 let gameStart = false
 let level = 1
-let $hexArray = []
+const $hexArray = []
 let gridClassArray = []
 const history = []
 let cpu
@@ -56,7 +56,7 @@ let whiteCount
 let blackCount
 let emptyCount
 let winner
-let validMovesArr
+// let validMovesArr
 let player
 let opponent
 let clickable = true
@@ -65,8 +65,8 @@ const noValidMoves = {
   'white': false
 }
 
-let $game
-let $grid
+// let $game
+// let $grid
 let $blackScore
 let $whiteScore
 let $turn
@@ -74,8 +74,8 @@ let $message
 let $screens
 let $start
 
-let audioPlayer
-const audioPlayerArr = []
+// let audioPlayer
+// const audioPlayerArr = []
 
 function debug(note){
   if(debugLog){
@@ -127,17 +127,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
 //   nextTurn()
 //
 // }
-function endTurn(){
-  $message.html('')
-
-  history[turnCount+1] = JSON.parse(JSON.stringify(gridClassArray))
-
-  //Allow click
-  clickable = true
-
-  //Increase the turn count
-  turnCount++
-}
+// function endTurn(){
+//   $message.html('')
+//
+//   history[turnCount+1] = JSON.parse(JSON.stringify(gridClassArray))
+//
+//   //Allow click
+//   clickable = true
+//
+//   //Increase the turn count
+//   turnCount++
+// }
 // function nextTurn(){
 //   //Work out scores
 //   calculateScores()
@@ -186,7 +186,18 @@ function endTurn(){
 // }
 
 const directions = [-width,(-2*width)+1,-width+1,-1,0,1,width-1,(2*width)-1,width]
+const directionLookUp = {
+  'upLeft': [],
+  'up': [],
+  'upRight': [],
+  'left': [],
+  'here': [],
+  'right': [],
+  'downleft': [],
+  'down': [],
+  'downRight': []
 
+}
 function createLookups(){
 
   // const $topTiles = $grid.find('.even:first-child')
@@ -204,15 +215,17 @@ function createLookups(){
 
   // $leftTiles.merge()
 
-  let numEdges = 11
+  const numEdges = 11
 
   let i = 0
   leftIds.push(i)
   while(i<numberOfTiles-width){
     i+=width
     leftIds.push(i)
+    directionLookUp.left.push(i)
     i+=width-1
     leftIds.push(i)
+    directionLookUp.left.push(i)
   }
 
   i = width-1
@@ -716,7 +729,7 @@ function createLookups(){
 class GameLevel{
   constructor($game,level){
     this.level = level
-    console.log(this.level)
+    console.log('Level:',this.level)
     this.$game = $game
 
 
@@ -749,15 +762,14 @@ class GameLevel{
   }
   buildRows(){
     //Build rows
-    console.log(this.myProp)
-    console.log(' build Rows $(this.grid)',$(this.$grid) )
+    // console.log(' build Rows $(this.grid)',$(this.$grid) )
     let row = ''
     for(let i=0;i<(2*width)-1;i++){
       if(i%2===0) row = '<div class="even"></div>'
       if(i%2===1) row = '<div class="odd"></div>'
       $(this.$grid).append(row)
     }
-    console.log(' build Rows $(this.grid)',$(this.$grid) )
+    // console.log(' build Rows $(this.grid)',$(this.$grid) )
   }
   buildTiles(){
     //Build tiles
@@ -901,7 +913,7 @@ class GameLevel{
     clickable = true
     gridClassArray = []
     // console.log('resetVariables this.$hexArray', this.$hexArray)
-    $(this.$hexArray).removeClass('black').removeClass('white').removeClass('invert')
+    // $(this.$hexArray).removeClass('black').removeClass('white').removeClass('invert')
     // this.addTile($(this.$hexArray[12]), 'black')
     // this.addTile($(this.$hexArray[7]), 'white')
     // this.addTile($(this.$hexArray[30]), 'black')
@@ -916,9 +928,27 @@ class GameLevel{
     //   return selected
     // }
 
-    const selected = this.selectRandom()
     // level = 1
+    let selected
+    let startingSquares
     switch(level){
+      case 0:
+        for(let i=0; i < numberOfTiles;i++){
+          $(this.$hexArray[i]).removeClass('hidden')
+        }
+        $(this.$hexArray[selected]).addClass('invert')
+        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
+        $(this.$hexArray[25]).removeClass('hidden').addClass('white')
+        $(this.$hexArray[30]).removeClass('hidden').addClass('black')
+        $(this.$hexArray[24]).removeClass('hidden').addClass('white')
+        startingSquares = [19,25,30,24]
+        selected = 19
+        while(startingSquares.includes(selected)){
+          selected = this.selectRandom()
+        }
+        this.addTile(this.$hexArray[selected],'invert')
+        break
+
       case 1:
         $(this.$hexArray[25]).removeClass('hidden').addClass('white')
         $(this.$hexArray[30]).removeClass('hidden').addClass('black')
@@ -947,6 +977,11 @@ class GameLevel{
         $(this.$hexArray[25]).removeClass('hidden').addClass('white')
         $(this.$hexArray[30]).removeClass('hidden').addClass('black')
         $(this.$hexArray[24]).removeClass('hidden').addClass('white')
+        startingSquares = [19,25,30,24]
+        selected = 19
+        while(startingSquares.includes(selected)){
+          selected = this.selectRandom()
+        }
         this.addTile(this.$hexArray[selected],'invert')
         // this.addTile(this.$hexArray[selected],'bomb')
         break
@@ -1313,8 +1348,8 @@ class GameLevel{
     if(winner === 'tie')$message.html('It\'s a tie!')
     else $message.html(`${winner} wins!`)
     level++
-    $screens.hide()
-    $start.show()
+    // $screens.hide()
+    // $start.show()
   }
   invertCapture(tile){
     if($(tile).hasClass('invert')){
@@ -1338,22 +1373,28 @@ class GameLevel{
     debug()
     const tile = $(e.currentTarget)
 
+    //Check if there are some valid moves to play
+    //If neither player has valid Moves
+    //Game Over
     if(!this.validMovesArr.some((elem)=>elem)){
       noValidMoves[player] = true
-      console.log(noValidMoves)
-      if(noValidMoves[opponent] === true){
-        this.gameOver()
-        return
-      }
 
       console.log('No Valid Moves')
       this.endTurn()
       this.nextTurn()
+      const nextPlayerValid = (this.validMovesArr.some((elem)=>elem))
+      console.log(nextPlayerValid)
+      if(!nextPlayerValid){
+        this.$hexArray.off()
+        this.gameOver()
+        return
+      }
+
       this.cpuPlay()
 
-      $message.html('No Valid Moves')
+      // $message.html('No Valid Moves')
       //Invalid move
-      console.log('Invalid')
+      // console.log('Invalid')
       return
     }
 
@@ -1606,14 +1647,16 @@ function init(){
   $screens = $('.screen')
   $start = $('.start')
   const $settings = $('.settings')
-  const $startButton = $('.startButton')
+  const $startButton = $('.start-button')
+  const $twoPlayerButton = $('.two-player-button')
   const $level1Button = $('.level1')
   const $level2Button = $('.level2')
   const $level3Button = $('.level3')
   const $level4Button = $('.level4')
   // const $startButtonText = $startButton.find('h2')
-  // const $startButtonSingle = $('.startButtonSingle')
-  const $menuButton = $('.menuButton')
+  // const $startButton-single = $('.start-button-single')
+  const $menuButton = $('.menu-button')
+  console.log('$menuButton',$menuButton)
   const $resetButton = $('.reset')
   const $undoButton = $('.undo')
   const $redoButton = $('.redo')
@@ -1626,11 +1669,11 @@ function init(){
   $level2Button.on('click', ()=>goToGame(2))
   $level3Button.on('click', ()=>goToGame(3))
   $level4Button.on('click', ()=>goToGame(4))
-  $startButton.on('click', ()=>goToGame(false))
-  // $startButtonSingle.on('click', goToSingleGame)
+  $twoPlayerButton.on('click', ()=>goToGame(0,false))
+  // $startButton-single.on('click', goToSingleGame)
   $menuButton.on('click', goToMenu)
   $settingsButton.on('click', goToSettings)
-  $resetButton.on('click', resetVars)
+  // $resetButton.on('click', resetVars)
   $undoButton.on('click', undoMove)
   $redoButton.on('click', redoMove)
   $settingsSaveButton.on('click', saveSettings)
@@ -1640,6 +1683,8 @@ function init(){
     if(gameLevel){
       level = gameLevel
       cpu = true
+    }else{
+      level = 0
     }
     gameStart = true
     // resetVars()
@@ -1658,11 +1703,19 @@ function init(){
   // }
 
   function goToMenu(){
+    console.log('Go To menu level', level)
     // $startButtonText
     // if(turnCount) $startButtonText.html('Continue')
     // else $startButtonText.html('Vs')
     // if(turnCount) $startButton.html('Continue Game')
     // else $startButton.html('New Game')
+    const $startHexs = $start.find(`.level${level}`)
+    console.log('$startHexs',$startHexs)
+    setTimeout(function () {
+
+      $startHexs.removeClass('hidden')
+    }, 1000)
+
     $screens.hide()
     $start.show()
   }

@@ -582,8 +582,8 @@ function init(){
   const $start = $('.start')
   const $game = $('.game')
   const $settings = $('.settings')
-  const $startButton = $('.startButton')
-  const $startButtonSingle = $('.startButtonSingle')
+  const $start-button = $('.start-button')
+  const $start-button-single = $('.start-button-single')
   const $menuButton = $('.menuButton')
   const $resetButton = $('.reset')
   const $undoButton = $('.undo')
@@ -592,8 +592,8 @@ function init(){
   const $form = $('.form')
   const $settingsSaveButton = $form.find('button')
 
-  $startButton.on('click', goToGame)
-  $startButtonSingle.on('click', goToSingleGame)
+  $start-button.on('click', goToGame)
+  $start-button-single.on('click', goToSingleGame)
   $menuButton.on('click', goToMenu)
   $settingsButton.on('click', goToSettings)
   $resetButton.on('click', resetVars)
@@ -615,8 +615,8 @@ function init(){
   }
 
   function goToMenu(){
-    if(turnCount) $startButton.html('Continue Game')
-    else $startButton.html('New Game')
+    if(turnCount) $start-button.html('Continue Game')
+    else $start-button.html('New Game')
     $screens.hide()
     $start.show()
   }
