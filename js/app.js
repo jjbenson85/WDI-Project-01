@@ -1,7 +1,7 @@
 //LOGS
 // const validMovesLog = false
-const debugLog = false
-let debugCounter = 0
+// const debugLog = false
+// let debugCounter = 0
 const delay = 250
 
 // class Game{
@@ -25,7 +25,7 @@ const downRightIds = []
 const upIds = []
 const downIds = []
 
-const showNumbers = true
+const showNumbers = false
 
 // const gridToneArray = []
 const srcArray = [
@@ -81,12 +81,12 @@ let $turnIcon
 // let audioPlayer
 // const audioPlayerArr = []
 
-function debug(note){
-  if(debugLog){
-    const argumentsArray = [].slice.apply(arguments.callee.caller.arguments)
-    console.log(`debug:${debugCounter++} ${arguments.callee.caller.name}(${argumentsArray||'No Args'}) ${note||''}`)
-  }
-}
+// function debug(note){
+//   if(debugLog){
+//     const argumentsArray = [].slice.apply(arguments.callee.caller.arguments)
+//     console.log(`debug:${debugCounter++} ${arguments.callee.caller.name}(${argumentsArray||'No Args'}) ${note||''}`)
+//   }
+// }
 
 document.addEventListener('DOMContentLoaded', ()=>{
   init()
@@ -914,7 +914,7 @@ class GameLevel{
   updatePlayerAndOpponent(){
     opponent = turnCount%2 === 0 ? 'black':'white'
     player = turnCount%2 === 0 ? 'white':'black'
-    debug(`player:${player} opponent:${opponent}`)
+    // debug(`player:${player} opponent:${opponent}`)
     $turnIcon.removeClass(opponent).addClass(player)
 
   }
@@ -1452,7 +1452,7 @@ class GameLevel{
   }
   play(e){
     if(!clickable)return
-    debug()
+    // debug()
     const tile = $(e.currentTarget)
 
     //Check if there are some valid moves to play
@@ -1716,7 +1716,7 @@ function redoMove(){
 //   })
 // }
 function init(){
-  debug()
+  // debug()
   // navbarScroll()
   createLookups()
 //
