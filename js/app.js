@@ -45,7 +45,7 @@ const srcArray = [
 ]
 
 let gameStart = false
-let level = 4
+let level = 16
 const $hexArray = []
 let gridClassArray = []
 const history = []
@@ -904,10 +904,10 @@ class GameLevel{
     this.audioPlayerArr[tone].play()
   }
 
-  selectRandom(){
+  selectRandom(arr){
     const rndm = Math.random()
-    const selected = Math.floor(rndm*numberOfTiles)
-    if($(this.$hexArray[selected]).hasClass('white')||$(this.$hexArray[selected]).hasClass('black')) return this.selectRandom()
+    const selected = arr[Math.floor(rndm*arr.length)]
+    //if($(this.$hexArray[selected]).hasClass('white')||$(this.$hexArray[selected]).hasClass('black')) return this.selectRandom()
     return selected
   }
 
@@ -975,7 +975,7 @@ class GameLevel{
 
         selected = startingSquares[0]
         while(startingSquares.includes(selected)){
-          selected = this.selectRandom()
+          selected = this.selectRandom(boardSquares)
         }
         $(this.$hexArray[selected]).addClass('invert')
         break
@@ -1022,34 +1022,82 @@ class GameLevel{
         boardSquares = [19,24,25,29,30,31,34,35,36,37,40,41,42,46,47,52]
         blackSquares = [30,41]
         whiteSquares = [35,36]
+        startingSquares = [30,41,35,36]
+        selected = startingSquares[0]
+        $(this.$hexArray[47]).addClass('invert')
+        // while(startingSquares.includes(selected)){
+        //   selected = this.selectRandom(boardSquares)
+        // }
+        // console.log('selected',selected)
         break
 
       case 6:
         boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
         blackSquares = [30,41]
         whiteSquares = [35,36]
+        $(this.$hexArray[47]).addClass('bomb')
+
         break
 
       case 7:
-        $(this.$hexArray[selected]).addClass('invert')
-        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
         break
 
       case 8:
-        $(this.$hexArray[selected]).addClass('invert')
-        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
         break
 
       case 9:
-        $(this.$hexArray[selected]).addClass('invert')
-        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
         break
 
       case 10:
-        $(this.$hexArray[selected]).addClass('invert')
-        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
         break
 
+      case 11:
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
+        break
+
+      case 12:
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
+        break
+
+      case 13:
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
+        break
+
+      case 14:
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
+        break
+
+      case 15:
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
+        break
+
+      case 16:
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
+        break
     }
     this.createLevel(boardSquares,blackSquares,whiteSquares)
     // history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
@@ -1805,12 +1853,14 @@ function init(){
     // else $startButtonText.html('Vs')
     // if(turnCount) $startButton.html('Continue Game')
     // else $startButton.html('New Game')
-    const $startHexs = $start.find(`.level${level}`)
-    console.log('$startHexs',$startHexs)
-    setTimeout(function () {
+    for(let i=2;i<=level;i++){
+      const $startHexs = $start.find(`.level${i}`)
+      console.log('$startHexs i',i)
+      setTimeout(function () {
+        $startHexs.removeClass('hidden')
+      }, 500*(i-2))
 
-      $startHexs.removeClass('hidden')
-    }, 1000)
+    }
 
     $screens.hide()
     $start.show()
