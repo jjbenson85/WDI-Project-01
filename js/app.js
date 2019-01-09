@@ -29,19 +29,19 @@ const showNumbers = true
 
 let gridToneArray = []
 const srcArray = [
-  '1_C3.wav',
-  // '2_Cs3.wav',
-  '3_D3.wav',
-  '4_Eb3.wav',
-  '5_E3.wav',
-  '6_F3.wav',
-  // '7_Fs3.wav',
-  '8_G3.wav',
-  // '9_Gs3.wav',
-  '10_A3.wav',
-  '11_Bb3.wav',
-  // '12_B3.wav',
-  '13_C4.wav'
+  '1_C3.m4a',
+  // '2_Cs3.m4a',
+  '3_D3.m4a',
+  '4_Eb3.m4a',
+  '5_E3.m4a',
+  '6_F3.m4a',
+  // '7_Fs3.m4a',
+  '8_G3.m4a',
+  // '9_Gs3.m4a',
+  '10_A3.m4a',
+  '11_Bb3.m4a',
+  // '12_B3.m4a',
+  '13_C4.m4a'
 ]
 
 let gameStart = false
@@ -862,7 +862,7 @@ class GameLevel{
     this.gridToneArray = []
     for(let i=0;i<9;i++){
       this.audioPlayer = document.createElement('audio')
-      this.audioPlayer.src = 'assets/'+srcArray[i]
+      this.audioPlayer.src = 'sounds/'+srcArray[i]
       this.audioPlayerArr.push(this.audioPlayer)
 
     }
