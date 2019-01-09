@@ -54,8 +54,8 @@ let cpuType = 'random'
 let turnCount
 let whiteCount
 let blackCount
-let emptyCount
-let winner
+// let emptyCount
+// let winner
 // let validMovesArr
 let player
 let opponent
@@ -67,12 +67,16 @@ const noValidMoves = {
 
 // let $game
 // let $grid
-let $blackScore
-let $whiteScore
+// let $blackScore
+// let $whiteScore
 let $turn
 let $message
 let $screens
 let $start
+// let $balance
+// let $tracker
+let $footer
+let $turnIcon
 
 // let audioPlayer
 // const audioPlayerArr = []
@@ -754,8 +758,8 @@ class GameLevel{
     $(this.$grid).empty()
 
     const $scores = $('.scores')
-    $blackScore = $scores.find('.black')
-    $whiteScore = $scores.find('.white')
+    // $blackScore = $scores.find('.black')
+    // $whiteScore = $scores.find('.white')
 
     $turn = $('.turn')
     $message = $('.message')
@@ -841,8 +845,14 @@ class GameLevel{
   addTile(tile, player, sound=true){
     // console.log('addtile', tile)
     // debug()
-    opponent = 'black'
-    if(player === 'black') opponent = 'white'
+    if(player === 'black') {
+      opponent = 'white'
+      // blackCount++
+    }else{
+      opponent = 'black'
+      // whiteCount++
+    }
+    // this.updateScores()
     $(tile).removeClass(opponent).removeClass('valid')
     $(tile).addClass(player)
 
@@ -905,6 +915,7 @@ class GameLevel{
     opponent = turnCount%2 === 0 ? 'black':'white'
     player = turnCount%2 === 0 ? 'white':'black'
     debug(`player:${player} opponent:${opponent}`)
+    $turnIcon.removeClass(opponent).addClass(player)
 
   }
   createLevel(boardSquares,blackSquares,whiteSquares){
@@ -922,8 +933,11 @@ class GameLevel{
     turnCount = 0
     clickable = true
     gridClassArray = []
+    // $balance.css('width','50%')
+    // $tracker.css('opacity','0.5')
+    $footer.removeClass('white').removeClass('black')
     // console.log('resetVariables this.$hexArray', this.$hexArray)
-    // $(this.$hexArray).removeClass('black').removeClass('white').removeClass('invert')
+    $(this.$hexArray).removeClass('black').removeClass('white').removeClass('invert')
     // this.addTile($(this.$hexArray[12]), 'black')
     // this.addTile($(this.$hexArray[7]), 'white')
     // this.addTile($(this.$hexArray[30]), 'black')
@@ -1005,7 +1019,7 @@ class GameLevel{
         break
 
       case 5:
-        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        boardSquares = [19,24,25,29,30,31,34,35,36,37,40,41,42,46,47,52]
         blackSquares = [30,41]
         whiteSquares = [35,36]
         break
@@ -1279,24 +1293,39 @@ class GameLevel{
     //Increase counter
     whiteCount = 0
     blackCount = 0
-    let hiddenCount = 0
-    emptyCount = 0
+    // let hiddenCount = 0
+    // emptyCount = 0
     //Check game if game is over
     for(let i=0;i<numberOfTiles;i++){
-      const tileState = this.isOccupied($hexArray[i])
+      const tileState = this.isOccupied(this.$hexArray[i])
       if(tileState==='white') whiteCount++
       else if(tileState==='black') blackCount++
-      else if(tileState==='hidden') hiddenCount++
-      else emptyCount++
+      // else if(tileState==='hidden') hiddenCount++
+      // else emptyCount++
     }
+    console.log('whiteCount',whiteCount,'blackCount',blackCount)
+    this.winner = 'black'
+    if(whiteCount>blackCount) this.winner = 'white'
+    if(whiteCount===blackCount) this.winner = 'tie'
+
+    // let balance
+    // if(blackCount>whiteCount) balance = (blackCount/whiteCount)*80
+    // else if(blackCount<whiteCount) balance = (whiteCount/blackCount)*80
+    // else balance = 40
+    // balance += 10
+    // $balance.css('width',`${balance}%`)
+
   }
   updateScores(){
-    //Update Scores
-    $blackScore.html(`Black: ${blackCount}`)
-    $whiteScore.html(`White: ${whiteCount}`)
-    winner = 'black'
-    if(whiteCount>blackCount) winner = 'white'
-    if(whiteCount===blackCount) winner = 'tie'
+    // let balance
+    // if(blackCount<whiteCount) balance = (blackCount/whiteCount)*80
+    // else if(blackCount>whiteCount) balance = (whiteCount/blackCount)*80
+    // else balance = 40
+    // balance += 10
+    // $balance.css('width',`${balance}%`)
+    // $tracker.css('opacity',`${balance/100}`)
+    $footer.removeClass('white').removeClass('black').addClass(this.winner)
+
   }
   nextTurn(){
     //Work out scores
@@ -1371,10 +1400,24 @@ class GameLevel{
     }
   }
   gameOver(){
-    console.log('Game Over')
-    if(winner === 'tie')$message.html('It\'s a tie!')
-    else $message.html(`${winner} wins!`)
-    level++
+    console.log('Game Over winner is', this.winner)
+    // if(winner === 'tie')$message.html('It\'s a tie!')
+    // else $message.html(`${winner} wins!`)
+
+    if(this.winner === 'white'){
+      this.$hexArray.off()
+
+      console.log('You Win')
+      level++
+    }else{
+      console.log('You Lose')
+      setTimeout(function() {
+        this.resetVariables()
+        this.updatePlayerAndOpponent()
+        this.getValidMoves()
+      }, 500)
+      return
+    }
     const that = this
     this.$grid.addClass('hideLeft')
     setTimeout(function() {
@@ -1424,7 +1467,7 @@ class GameLevel{
       const nextPlayerValid = (this.validMovesArr.some((elem)=>elem))
       console.log(nextPlayerValid)
       if(!nextPlayerValid){
-        this.$hexArray.off()
+        // this.$hexArray.off()
         this.gameOver()
         return
       }
@@ -1483,9 +1526,9 @@ class GameLevel{
         that.nextTurn()
         that.cpuPlay()
         //Check for end of Game
-        if(emptyCount===0){
-          this.gameOver()
-        }
+        // if(emptyCount===0){
+        //   this.gameOver()
+        // }
       },wait)
     }
 
@@ -1685,9 +1728,13 @@ function init(){
 
   $screens = $('.screen')
   $start = $('.start')
+  // $balance = $('.balance')
+  // $tracker = $('.tracker.white')
+  $footer = $('footer')
+  $turnIcon = $footer.find('.hex')
   // $gameOver = $('.gameOver')
   const $settings = $('.settings')
-  const $startButton = $('.start-button')
+  // const $startButton = $('.start-button')
   const $twoPlayerButton = $('.two-player-button')
   const $level1Button = $('.level1')
   const $level2Button = $('.level2')
@@ -1697,7 +1744,7 @@ function init(){
   // const $startButton-single = $('.start-button-single')
   const $menuButton = $('.menu-button')
   console.log('$menuButton',$menuButton)
-  const $resetButton = $('.reset')
+  // const $resetButton = $('.reset')
   const $undoButton = $('.undo')
   const $redoButton = $('.redo')
   const $settingsButton = $('.settingsButton')
@@ -1715,9 +1762,9 @@ function init(){
   $menuButton.on('click', goToMenu)
   $settingsButton.on('click', goToSettings)
   // $resetButton.on('click', resetVars)
-  $undoButton.on('click', undoMove)
-  $redoButton.on('click', redoMove)
-  $settingsSaveButton.on('click', saveSettings)
+  // $undoButton.on('click', undoMove)
+  // $redoButton.on('click', redoMove)
+  // $settingsSaveButton.on('click', saveSettings)
 
   function goToGame(gameLevel){
     cpu = false
