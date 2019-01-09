@@ -303,58 +303,48 @@ header{
     }
   }
   &.invert{
-    &.white, &.black{
-      transform: translateY(-40px);
-      animation: bounceBlack $anim-time;
-    }
     &.white{
-      .diamond{
-        .seg{
-          color: white;
-          border-color: white !important;
-        }
-        &:first-child{
-          .seg{  background: $invert-white1;  }
-        }
-        &:nth-child(2){
-          .seg{  background: $invert-white2;  }
-        }
-        &:nth-child(3){
-          .seg{  background: $invert-white3;  }
-        }
+      .diamond{.seg{border-color: white !important;}
+        &:first-child{.seg{  background: $invert-white1;  } }
+        &:nth-child(2){.seg{  background: $invert-white2;  } }
+        &:nth-child(3){.seg{  background: $invert-white3;  } }
       }
     }
     &.black{
-      .diamond{
-        // background:$black;
-        .seg{color: white;  border-color: white !important;
-        }
-        &:first-child{
-          .seg{  background: $invert-black1;  }
-        }
-        &:nth-child(2){
-          .seg{  background: $invert-black2;  }
-        }
-        &:nth-child(3){
-          .seg{  background: $invert-black3;  }
-        }
+      .diamond{.seg{color: white;  border-color: white !important;}
+        &:first-child{.seg{  background: $invert-black1;  } }
+        &:nth-child(2){.seg{  background: $invert-black2;  } }
+        &:nth-child(3){.seg{  background: $invert-black3;  } }
       }
     }
     .diamond{
-      // background:$black;
-      .seg{
-        color: white;
-        border-color: white !important;
+      .seg{border-color: white !important;}
+      &:first-child{.seg{background: $invert1;} }
+      &:nth-child(2){.seg{background: $invert2;} }
+      &:nth-child(3){.seg{background: $invert3;} }
+    }
+  }
+
+  &.bomb{
+    &.white{
+      .diamond{.seg{border-color: white !important;}
+        &:first-child{.seg{  background: $bomb-white1;  } }
+        &:nth-child(2){.seg{  background: $bomb-white2;  } }
+        &:nth-child(3){.seg{  background: $bomb-white3;  } }
       }
-      &:first-child{
-        .seg{background: $invert1;}
+    }
+    &.black{
+      .diamond{.seg{color: white;  border-color: white !important;}
+        &:first-child{.seg{  background: $bomb-black1;  } }
+        &:nth-child(2){.seg{  background: $bomb-black2;  } }
+        &:nth-child(3){.seg{  background: $bomb-black3;  } }
       }
-      &:nth-child(2){
-        .seg{background: $invert2;}
-      }
-      &:nth-child(3){
-        .seg{background: $invert3;}
-      }
+    }
+    .diamond{
+      .seg{border-color: white !important;}
+      &:first-child{.seg{background: $bomb1;} }
+      &:nth-child(2){.seg{background: $bomb2;} }
+      &:nth-child(3){.seg{background: $bomb3;} }
     }
   }
 

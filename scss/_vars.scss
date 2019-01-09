@@ -131,3 +131,15 @@ $invert-white3:#CDC;
 $invert-black1:#252;
 $invert-black2:#141;
 $invert-black3:#030;
+
+$bomb1:$blue1;
+$bomb2:$blue2;
+$bomb3:$blue3;
+
+$bomb-white1:lighten( $bomb1, 50% );
+$bomb-white2:lighten( $bomb1, 60% );
+$bomb-white3:lighten( $bomb1, 70% );
+
+$bomb-black1:darken( $bomb1, 0% );
+$bomb-black2:darken( $bomb1, 10% );
+$bomb-black3:darken( $bomb1, 20% );

@@ -186,11 +186,7 @@ header {
       background: #222; }
     .hex.black .diamond:nth-child(3) .seg {
       background: #111; }
-  .hex.invert.white, .hex.invert.black {
-    transform: translateY(-40px);
-    animation: bounceBlack 500ms; }
   .hex.invert.white .diamond .seg {
-    color: white;
     border-color: white !important; }
   .hex.invert.white .diamond:first-child .seg {
     background: #EFE; }
@@ -208,7 +204,6 @@ header {
   .hex.invert.black .diamond:nth-child(3) .seg {
     background: #030; }
   .hex.invert .diamond .seg {
-    color: white;
     border-color: white !important; }
   .hex.invert .diamond:first-child .seg {
     background: #363; }
@@ -216,6 +211,31 @@ header {
     background: #224422; }
   .hex.invert .diamond:nth-child(3) .seg {
     background: #112211; }
+  .hex.bomb.white .diamond .seg {
+    border-color: white !important; }
+  .hex.bomb.white .diamond:first-child .seg {
+    background: #c4d5e6; }
+  .hex.bomb.white .diamond:nth-child(2) .seg {
+    background: #e7eef5; }
+  .hex.bomb.white .diamond:nth-child(3) .seg {
+    background: white; }
+  .hex.bomb.black .diamond .seg {
+    color: white;
+    border-color: white !important; }
+  .hex.bomb.black .diamond:first-child .seg {
+    background: #335577; }
+  .hex.bomb.black .diamond:nth-child(2) .seg {
+    background: #243c53; }
+  .hex.bomb.black .diamond:nth-child(3) .seg {
+    background: #142230; }
+  .hex.bomb .diamond .seg {
+    border-color: white !important; }
+  .hex.bomb .diamond:first-child .seg {
+    background: #357; }
+  .hex.bomb .diamond:nth-child(2) .seg {
+    background: #7ca2c7; }
+  .hex.bomb .diamond:nth-child(3) .seg {
+    background: #5888b8; }
 
 body {
   margin: 0; }
