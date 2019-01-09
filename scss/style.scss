@@ -121,14 +121,26 @@ header{
 
 .hex-grid{
   width: 100%;
-  transform: scale(0.6);
+  transform: scale($game-scale);
   // margin-left: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
   margin-left: -20px;
   margin-top: 170px;
+  // transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: transform 1000ms, opacity 1000ms;
+  &.hideLeft{
+    opacity:0;
+    transform: scale($game-scale) translateX(-1000px);
+    transition: all 1000ms;
+
+  }
+  &.hideRight{
+    opacity:0;
+    transform: scale($game-scale) translateX(1000px);
+    transition: all 1ms;
+  }
   // &.start{
   //   transform: scale(1);
   //   margin-left: 0;
@@ -167,7 +179,7 @@ header{
 
   }
   &.hidden{
-    opacity: 0;
+    opacity: 0.5;
     transform: translateY(50px);
     pointer-events: none;
   }
@@ -210,59 +222,27 @@ header{
 
 
   &:hover{
-
-    &.white, &.black{
-      // pointer-events: none;
-      // animation: hexHide 2000ms;
-      // transform: translate(0px);
-
-      // opacity: 0.5;
-    }
-    // background:red;
     .diamond{
-      // background:$white;
-      &:first-child{
-        .seg{border-color: $in-valid1;}
-      }
-      &:nth-child(2){
-        .seg{border-color: $in-valid2;}
-      }
-      &:nth-child(3){
-        .seg{border-color: $in-valid3;}
-      }
+      .seg{border-color: $in-valid1;}
     }
-
   }
   &.valid{
     &:hover{
       cursor:pointer;
-      // background:green;
       .diamond{
-        // background:$white;
-        &:first-child{
-          .seg{border-color: $valid1;}
-        }
-        &:nth-child(2){
-          .seg{border-color: $valid2;}
-        }
-        &:nth-child(3){
-          .seg{border-color: $valid3;}
-        }
+        .seg{border-color: $valid1;}
       }
     }
   }
 
   &.white{
-    // transform: rotate(240deg)translate(32px,100px);
     transform: translateY(-40px);
     animation: bounceWhite $anim-time;
 
     .diamond{
-      // background:$white;
       .seg{
         color: black;
         border-color: white !important;
-        // box-shadow: 0px 0px 15px 2px $white;
         animation: bounceSegWhite $anim-time;
       }
       &:first-child{
@@ -277,88 +257,59 @@ header{
     }
   }
   &.black{
-    // transform: rotate(120deg)translate(-143px,40px);
     transform: translateY(-40px);
     animation: bounceBlack $anim-time;
     .diamond{
-      // background:$black;
       .seg{
         color: white;
         border-color: #555 !important;
       }
       &:first-child{
-        .seg{
-          background: $black3;
-        }
+        .seg{background: $black3;}
       }
       &:nth-child(2){
-        .seg{
-          background: $black2;
-        }
+        .seg{background: $black2;}
       }
       &:nth-child(3){
-        .seg{
-          background: $black1;
-        }
+        .seg{background: $black1;}
       }
     }
   }
   &.invert{
-    // transform: rotate(120deg)translate(-143px,40px);
     &.white, &.black{
-
       transform: translateY(-40px);
       animation: bounceBlack $anim-time;
-      // .seg{
-      //   background: $invert1 !important;
-      // }
-
     }
     &.white{
       .diamond{
-        // background:$black;
         .seg{
           color: white;
           border-color: white !important;
         }
         &:first-child{
-          .seg{
-            background: $invert-white1;
-          }
+          .seg{  background: $invert-white1;  }
         }
         &:nth-child(2){
-          .seg{
-            background: $invert-white2;
-          }
+          .seg{  background: $invert-white2;  }
         }
         &:nth-child(3){
-          .seg{
-            background: $invert-white3;
-          }
+          .seg{  background: $invert-white3;  }
         }
       }
     }
     &.black{
       .diamond{
         // background:$black;
-        .seg{
-          color: white;
-          border-color: white !important;
+        .seg{color: white;  border-color: white !important;
         }
         &:first-child{
-          .seg{
-            background: $invert-black1;
-          }
+          .seg{  background: $invert-black1;  }
         }
         &:nth-child(2){
-          .seg{
-            background: $invert-black2;
-          }
+          .seg{  background: $invert-black2;  }
         }
         &:nth-child(3){
-          .seg{
-            background: $invert-black3;
-          }
+          .seg{  background: $invert-black3;  }
         }
       }
     }
@@ -369,19 +320,13 @@ header{
         border-color: white !important;
       }
       &:first-child{
-        .seg{
-          background: $invert1;
-        }
+        .seg{background: $invert1;}
       }
       &:nth-child(2){
-        .seg{
-          background: $invert2;
-        }
+        .seg{background: $invert2;}
       }
       &:nth-child(3){
-        .seg{
-          background: $invert3;
-        }
+        .seg{background: $invert3;}
       }
     }
   }
@@ -599,6 +544,8 @@ main {
     // background-color: yellow;
     width: 70%;
     height: 90vh;
+    transition: all 1000ms;
+
 
     .info{
       // background-color: green;

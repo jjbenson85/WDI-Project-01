@@ -9,7 +9,7 @@ $anim-time: 500ms;
 $intro-colour:rgba(255,255,222,1);
 $intro-colour-trans:rgba($intro-colour,0.6);
 
-
+$game-scale: 0.6;
 
 $grey1:#99A;
 $grey2:#888;
@@ -115,9 +115,9 @@ $red12:darken($red10, 10% );
 // $green2:#060;
 // $green3:#050;
 
-$valid1:$green1;
-$valid2:$green2;
-$valid3:$green3;
+$valid1:$green5;
+$in-valid1:$red4;
+
 
 
 $invert1:$green1;
@@ -131,7 +131,3 @@ $invert-white3:#CDC;
 $invert-black1:#252;
 $invert-black2:#141;
 $invert-black3:#030;
-
-$in-valid1:#800;
-$in-valid2:#700;
-$in-valid3:#600;

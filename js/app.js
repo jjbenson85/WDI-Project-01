@@ -45,7 +45,7 @@ const srcArray = [
 ]
 
 let gameStart = false
-let level = 1
+let level = 4
 const $hexArray = []
 let gridClassArray = []
 const history = []
@@ -907,7 +907,17 @@ class GameLevel{
     debug(`player:${player} opponent:${opponent}`)
 
   }
-
+  createLevel(boardSquares,blackSquares,whiteSquares){
+    boardSquares.forEach((elem)=>{
+      $(this.$hexArray[elem]).removeClass('hidden')
+    })
+    blackSquares.forEach((elem)=>{
+      $(this.$hexArray[elem]).addClass('black')
+    })
+    whiteSquares.forEach((elem)=>{
+      $(this.$hexArray[elem]).addClass('white')
+    })
+  }
   resetVariables(){
     turnCount = 0
     clickable = true
@@ -930,88 +940,105 @@ class GameLevel{
 
     // level = 1
     let selected
-    let startingSquares
+    let startingSquares = []
+    let boardSquares  = []
+    let blackSquares  = []
+    let whiteSquares  = []
     switch(level){
       case 0:
         for(let i=0; i < numberOfTiles;i++){
-          $(this.$hexArray[i]).removeClass('hidden')
+          // $(this.$hexArray[i]).removeClass('hidden')
+          boardSquares.push(i)
         }
-        $(this.$hexArray[selected]).addClass('invert')
-        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[25]).removeClass('hidden').addClass('white')
-        $(this.$hexArray[30]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[24]).removeClass('hidden').addClass('white')
+        // $(this.$hexArray[19]).removeClass('hidden').addClass('black')
+        // $(this.$hexArray[25]).removeClass('hidden').addClass('white')
+        // $(this.$hexArray[30]).removeClass('hidden').addClass('black')
+        // $(this.$hexArray[24]).removeClass('hidden').addClass('white')
+
         startingSquares = [19,25,30,24]
-        selected = 19
+        blackSquares = [19,30]
+        whiteSquares = [24,25]
+
+        selected = startingSquares[0]
         while(startingSquares.includes(selected)){
           selected = this.selectRandom()
         }
-        this.addTile(this.$hexArray[selected],'invert')
+        $(this.$hexArray[selected]).addClass('invert')
         break
 
       case 1:
-        $(this.$hexArray[25]).removeClass('hidden').addClass('white')
-        $(this.$hexArray[30]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[35]).removeClass('hidden')
+        // $(this.$hexArray[25]).removeClass('hidden').addClass('white')
+        // $(this.$hexArray[30]).removeClass('hidden').addClass('black')
+        // $(this.$hexArray[35]).removeClass('hidden')
+        boardSquares = [25,30,35]
+        blackSquares = [30]
+        whiteSquares = [25]
         break
+
       case 2:
-        $(this.$hexArray[46]).removeClass('hidden')
-        $(this.$hexArray[41]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[36]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[31]).removeClass('hidden').addClass('white')
+        // $(this.$hexArray[46]).removeClass('hidden')
+        // $(this.$hexArray[41]).removeClass('hidden').addClass('black')
+        // $(this.$hexArray[36]).removeClass('hidden').addClass('black')
+        // $(this.$hexArray[31]).removeClass('hidden').addClass('white')
         // this.addTile(this.$hexArray[selected],'invert')
+        boardSquares = [46,41,36,31,52,47,42,37]
+        blackSquares = [41,36]
+        whiteSquares = [31]
         break
+
       case 3:
-        $(this.$hexArray[41]).removeClass('hidden')
-        $(this.$hexArray[35]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[29]).removeClass('hidden').addClass('white')
-        $(this.$hexArray[36]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[31]).removeClass('hidden').addClass('white')
+        // $(this.$hexArray[41]).removeClass('hidden')
+        // $(this.$hexArray[35]).removeClass('hidden').addClass('black')
+        // $(this.$hexArray[29]).removeClass('hidden').addClass('white')
+        // $(this.$hexArray[36]).removeClass('hidden').addClass('black')
+        // $(this.$hexArray[31]).removeClass('hidden').addClass('white')
+
+        boardSquares = [41,35,29,36,31]
+        blackSquares = [35,36]
+        whiteSquares = [29,31]
         break
+
       case 4:
-        for(let i=0; i < numberOfTiles;i++){
-          $(this.$hexArray[i]).removeClass('hidden')
-        }
-        $(this.$hexArray[selected]).addClass('invert')
-        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[25]).removeClass('hidden').addClass('white')
-        $(this.$hexArray[30]).removeClass('hidden').addClass('black')
-        $(this.$hexArray[24]).removeClass('hidden').addClass('white')
-        startingSquares = [19,25,30,24]
-        selected = 19
-        while(startingSquares.includes(selected)){
-          selected = this.selectRandom()
-        }
-        this.addTile(this.$hexArray[selected],'invert')
-        // this.addTile(this.$hexArray[selected],'bomb')
+        boardSquares = [19,24,25,29,30,31,34,35,36,37,40,41,42,45,46,47,48,39,43]
+        blackSquares = [40,35,30,36,42]
+        whiteSquares = [39,29,19,31,43]
         break
+
       case 5:
-        $(this.$hexArray[selected]).addClass('invert')
-        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
         break
+
       case 6:
-        $(this.$hexArray[selected]).addClass('invert')
-        $(this.$hexArray[19]).removeClass('hidden').addClass('black')
+        boardSquares = [23,24,25,26,29,30,31,34,35,36,37,40,41,42,45,46,47,48]
+        blackSquares = [30,41]
+        whiteSquares = [35,36]
         break
+
       case 7:
         $(this.$hexArray[selected]).addClass('invert')
         $(this.$hexArray[19]).removeClass('hidden').addClass('black')
         break
+
       case 8:
         $(this.$hexArray[selected]).addClass('invert')
         $(this.$hexArray[19]).removeClass('hidden').addClass('black')
         break
+
       case 9:
         $(this.$hexArray[selected]).addClass('invert')
         $(this.$hexArray[19]).removeClass('hidden').addClass('black')
         break
+
       case 10:
         $(this.$hexArray[selected]).addClass('invert')
         $(this.$hexArray[19]).removeClass('hidden').addClass('black')
         break
-    }
 
-    history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
+    }
+    this.createLevel(boardSquares,blackSquares,whiteSquares)
+    // history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
 
     // nextTurn()
   }
@@ -1348,6 +1375,18 @@ class GameLevel{
     if(winner === 'tie')$message.html('It\'s a tie!')
     else $message.html(`${winner} wins!`)
     level++
+    const that = this
+    this.$grid.addClass('hideLeft')
+    setTimeout(function() {
+      that.$grid.addClass('hideRight')
+      that.$grid.removeClass('hideLeft')
+      new GameLevel($(that.$game),level)
+    }, 500)
+    setTimeout(function() {
+      that.$grid.removeClass('hideRight')
+      // new GameLevel($(that.$game),level)
+    }, 1000)
+    // $gameOver.show()
     // $screens.hide()
     // $start.show()
   }
@@ -1646,6 +1685,7 @@ function init(){
 
   $screens = $('.screen')
   $start = $('.start')
+  // $gameOver = $('.gameOver')
   const $settings = $('.settings')
   const $startButton = $('.start-button')
   const $twoPlayerButton = $('.two-player-button')
@@ -1666,6 +1706,7 @@ function init(){
 
   // $startButton.on('click', goToGame)
   $level1Button.on('click', ()=>goToGame(1))
+  // $level1Button.on('click', ()=>goToGame(4))
   $level2Button.on('click', ()=>goToGame(2))
   $level3Button.on('click', ()=>goToGame(3))
   $level4Button.on('click', ()=>goToGame(4))
@@ -1689,7 +1730,9 @@ function init(){
     gameStart = true
     // resetVars()
     // $game.empty()
-    const gameLevel1 = new GameLevel($($game),level)
+
+    new GameLevel($($game),level)
+
     $screens.hide()
     $game.show()
   }
