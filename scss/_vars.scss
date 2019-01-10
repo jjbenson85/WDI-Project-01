@@ -27,31 +27,32 @@ $bg-blue1:#357;
 $bg-blue2:#325;
 
 
-$blue1:#357;
-// $blue1:#732;
-$blue-lighten:lighten( $blue1, 40% );
-$green1:#363;
-$green-lighten:lighten( $green1, 40% );
-$yellow1:#761;
-$yellow-lighten:lighten( $yellow1, 40% );
-$red1:#622;
-$red-lighten:lighten( $red1, 40% );
+$blue-base:#357;
+$green-base:#363;
+$yellow-base:#761;
+$red-base:#622;
 
-$blue2:darken( $blue-lighten, 10% );
-$blue3:darken( $blue-lighten, 20% );
+$green1:lighten( $green-base, 40% );
+$yellow1:lighten( $yellow-base, 40% );
+$red1:lighten( $red-base, 40% );
+$blue1:lighten( $blue-base, 40% );
 
 
-$blue4: mix($blue-lighten, $green-lighten,75);
+$blue2:darken( $blue1, 10% );
+$blue3:darken( $blue1, 20% );
+
+
+$blue4: mix($blue1, $green1,75);
 $blue5:darken($blue4, 10% );
 $blue6:darken( $blue4, 20% );
 
 
-$blue7: mix($blue-lighten, $green-lighten,50);
+$blue7: mix($blue1, $green1,50);
 $blue8:darken($blue7, 10% );
 $blue9:darken($blue7, 10% );
 
 
-$blue10: mix($blue-lighten, $green-lighten,25);
+$blue10: mix($blue1, $green1,25);
 $blue11:darken($blue10, 10% );
 $blue12:darken($blue10, 10% );
 
@@ -59,15 +60,15 @@ $blue12:darken($blue10, 10% );
 $green2:darken( $green1, 10% );
 $green3:darken( $green1, 20% );
 
-$green4:mix($green-lighten, $yellow-lighten,75);
+$green4:mix($green1, $yellow1,75);
 $green5:darken($green4, 10% );
 $green6:darken( $green4, 20% );
 
-$green7:mix($green-lighten, $yellow-lighten,50);
+$green7:mix($green1, $yellow1,50);
 $green8:darken($green7, 10% );
 $green9:darken($green7, 10% );
 
-$green10:mix($green-lighten, $yellow-lighten,25);
+$green10:mix($green1, $yellow1,25);
 $green11:darken($green10, 10% );
 $green12:darken($green10, 10% );
 
@@ -75,15 +76,15 @@ $green12:darken($green10, 10% );
 $yellow2:darken( $yellow1, 10% );
 $yellow3:darken( $yellow1, 20% );
 
-$yellow4:mix($yellow-lighten, $red-lighten,75);
+$yellow4:mix($yellow1, $red1,75);
 $yellow5:darken($yellow4, 10% );
 $yellow6:darken( $yellow4, 20% );
 
-$yellow7:mix($yellow-lighten, $red-lighten,50);
+$yellow7:mix($yellow1, $red1,50);
 $yellow8:darken($yellow7, 10% );
 $yellow9:darken($yellow7, 10% );
 
-$yellow10:mix($yellow-lighten, $red-lighten,25);
+$yellow10:mix($yellow1, $red1,25);
 $yellow11:darken($yellow10, 10% );
 $yellow12:darken($yellow10, 10% );
 
@@ -91,15 +92,15 @@ $yellow12:darken($yellow10, 10% );
 $red2:darken( $red1, 10% );
 $red3:darken( $red1, 20% );
 
-$red4:mix($red-lighten, $blue-lighten,75);
+$red4:mix($red1, $blue1,75);
 $red5:darken($red4, 10% );
 $red6:darken( $red4, 20% );
 
-$red7:mix($red-lighten, $blue-lighten,50);
+$red7:mix($red1, $blue1,50);
 $red8:darken($red7, 10% );
 $red9:darken($red7, 10% );
 
-$red10:mix($red-lighten, $blue-lighten,25);
+$red10:mix($red1, $blue1,25);
 $red11:darken($red10, 10% );
 $red12:darken($red10, 10% );
 

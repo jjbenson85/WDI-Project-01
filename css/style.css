@@ -40,7 +40,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: -20px;
+  margin-left: 50px;
   margin-top: 170px;
   transition: transform 750ms, opacity 1000ms; }
   .hex-grid.hideLeft {
@@ -88,7 +88,7 @@ body {
     .hex .diamond:first-child .seg {
       background: #778; }
   .hex .diamond:nth-child(2) {
-    transform: rotate(30deg) translate(10px, -127px); }
+    transform: rotate(30deg) translate(10px, -128px); }
     .hex .diamond:nth-child(2) .seg {
       background: #888; }
   .hex .diamond:nth-child(3) {
@@ -143,19 +143,19 @@ body {
     background: #000; } }
 @keyframes bombSeg1 {
   0%,100% {
-    background: #622; }
+    background: #d58080; }
   50% {
-    background: #761; } }
+    background: #ead56a; } }
 @keyframes bombSeg2 {
   0%,100% {
-    background: #401515; }
+    background: #c85959; }
   50% {
-    background: #4a400b; } }
+    background: #e3c83e; } }
 @keyframes bombSeg3 {
   0%,100% {
-    background: #1a0909; }
+    background: #b33c3c; }
   50% {
-    background: #1e1a04; } }
+    background: #d0b31e; } }
   .hex.invert.white .diamond .seg {
     border-color: #EEE !important; }
   .hex.invert.black .diamond .seg {
@@ -216,7 +216,7 @@ main {
     main .start .hex.level1 .diamond:nth-child(2) .seg {
       background: #7ca2c7; }
     main .start .hex.level1 .diamond:nth-child(3) .seg {
-      background: #357; }
+      background: #a0bbd6; }
     main .start .hex.level2 .diamond:first-child .seg {
       background: #5d94a2; }
     main .start .hex.level2 .diamond:nth-child(2) .seg {
@@ -236,11 +236,11 @@ main {
     main .start .hex.level4 .diamond:nth-child(3) .seg {
       background: #9bc8a8; }
     main .start .hex.level5 .diamond:first-child .seg {
-      background: #112211; }
+      background: #55aa55; }
     main .start .hex.level5 .diamond:nth-child(2) .seg {
-      background: #224422; }
+      background: #77bb77; }
     main .start .hex.level5 .diamond:nth-child(3) .seg {
-      background: #363; }
+      background: #99cc99; }
     main .start .hex.level6 .diamond:first-child .seg {
       background: #7aab4a; }
     main .start .hex.level6 .diamond:nth-child(2) .seg {
@@ -260,11 +260,11 @@ main {
     main .start .hex.level8 .diamond:nth-child(3) .seg {
       background: #d6d376; }
     main .start .hex.level9 .diamond:first-child .seg {
-      background: #1e1a04; }
+      background: #d0b31e; }
     main .start .hex.level9 .diamond:nth-child(2) .seg {
-      background: #4a400b; }
+      background: #e3c83e; }
     main .start .hex.level9 .diamond:nth-child(3) .seg {
-      background: #761; }
+      background: #ead56a; }
     main .start .hex.level10 .diamond:first-child .seg {
       background: #ca9625; }
     main .start .hex.level10 .diamond:nth-child(2) .seg {
@@ -284,11 +284,11 @@ main {
     main .start .hex.level12 .diamond:nth-child(3) .seg {
       background: #da957b; }
     main .start .hex.level13 .diamond:first-child .seg {
-      background: #1a0909; }
+      background: #b33c3c; }
     main .start .hex.level13 .diamond:nth-child(2) .seg {
-      background: #401515; }
+      background: #c85959; }
     main .start .hex.level13 .diamond:nth-child(3) .seg {
-      background: #622; }
+      background: #d58080; }
     main .start .hex.level14 .diamond:first-child .seg {
       background: #a24f59; }
     main .start .hex.level14 .diamond:nth-child(2) .seg {
@@ -332,10 +332,22 @@ main {
         color: white;
         transform: rotate(45deg);
         margin-left: 10px; }
-  main .settings {
-    background-color: orange; }
-    main .settings .form {
-      text-align: justify; }
+  main .fireworks-container {
+    display: none;
+    position: fixed; }
+    main .fireworks-container .fireworks {
+      width: 250px;
+      height: 250px;
+      background-size: contain;
+      background-repeat: no-repeat; }
+      main .fireworks-container .fireworks.fireworks1 {
+        background-image: url("../images/fireworks1.gif"); }
+      main .fireworks-container .fireworks.fireworks2 {
+        transform: scale(1.1) translate(-100px, -310px);
+        background-image: url("../images/fireworks2.gif"); }
+      main .fireworks-container .fireworks.fireworks3 {
+        transform: scale(1.3) translate(100px, -400px);
+        background-image: url("../images/fireworks3.gif"); }
   main .game {
     display: none;
     flex-direction: row;

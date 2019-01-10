@@ -32,7 +32,7 @@ const $hexArray = []
 let gridClassArray = []
 const history = []
 let cpu
-let cpuType = 'random'
+let cpuType = 'greedy'
 let turnCount
 let whiteCount
 let blackCount
@@ -49,6 +49,7 @@ let $screens
 let $start
 let $footer
 let $turnIcon
+let $fireworks
 
 document.addEventListener('DOMContentLoaded', ()=>{
   init()
@@ -1145,6 +1146,11 @@ class GameLevel{
       if(arr) flipArr.push(arr)
     })
 
+    //Sort array in size order so longest plays sounds
+    flipArr.sort(function(a, b){
+      return b.length - a.length
+    })
+
     //If the flip array contains some tiles to flip then return it
     //This is a valid move
     if(flipArr.length) return flipArr
@@ -1216,6 +1222,7 @@ class GameLevel{
     let selected
     let selectedLen
     let list
+    let selectedTile
 
     if(this.validMovesArr.length===0) {
       $(this.$hexArray[20]).click()
@@ -1253,15 +1260,29 @@ class GameLevel{
       case 'greedy':
         selected = 0
         selectedLen = 0
-        for(let i=0;i<numberOfTiles;i++){
-          if(this.validMovesArr[i]){
-            if(this.validMovesArr[i].length > selectedLen) {
-              selected = $(this.$hexArray[i])
-              selectedLen = this.validMovesArr[i].length
+        for(let i = 0 ; i<numberOfTiles;i++){
+          if(this.validMovesArr[i] === true){
+            const tile = this.$hexArray[i]
+            const availableMoves = this.getTilesToFlip(tile)
+            const len = availableMoves[0].length
+            if (len > selectedLen) {
+              selected = i
+              selectedLen = len
             }
-            selected.click()
           }
+
         }
+        selectedTile = this.$hexArray[selected]
+        selectedTile.click()
+        // for(let i=0;i<numberOfTiles;i++){
+        //   if(this.validMovesArr[i]){
+        //     if(this.validMovesArr[i].length > selectedLen) {
+        //       selected = $(this.$hexArray[i])
+        //       selectedLen = this.validMovesArr[i].length
+        //     }
+        //     selected.click()
+        //   }
+        // }
         break
     }
   }
@@ -1282,12 +1303,22 @@ class GameLevel{
     const that = this
     if(this.winner === 'white'){
       //disable clicks
+      if(level===16 || cpu === false){
+        $fireworks = $('.fireworks-container')
+        $fireworks.show()
+        return
+      }
       this.$hexArray.off()
 
-      console.log('You Win')
+      console.log('White Wins')
       level++
     }else{
-      console.log('You Lose')
+      console.log('Black Wins')
+      if(cpu === false){
+        $fireworks = $('.fireworks-container')
+        $fireworks.show()
+        return
+      }
       setTimeout(function() {
         that.resetVariables()
         that.updatePlayerAndOpponent()
@@ -1299,6 +1330,8 @@ class GameLevel{
     setTimeout(function() {
       that.$grid.addClass('hideRight')
       that.$grid.removeClass('hideLeft')
+      $fireworks.hide()
+      console.log('$fireworks',$fireworks)
       new GameLevel($(that.$game),level)
     }, 500)
     setTimeout(function() {
@@ -1385,9 +1418,9 @@ class GameLevel{
       const thisPlayer = player
 
       //Sort array in size order so longest plays sounds
-      tilesToFlip.sort(function(a, b){
-        return b.length - a.length
-      })
+      // tilesToFlip.sort(function(a, b){
+      //   return b.length - a.length
+      // })
 
       tilesToFlip.forEach((elem, index)=>{
 
