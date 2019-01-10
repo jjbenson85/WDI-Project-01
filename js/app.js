@@ -1281,6 +1281,7 @@ class GameLevel{
     // this.gameEnd = true
     const that = this
     if(this.winner === 'white'){
+      //disable clicks
       this.$hexArray.off()
 
       console.log('You Win')

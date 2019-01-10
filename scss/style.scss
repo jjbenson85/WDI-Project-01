@@ -157,17 +157,17 @@ body{
   margin-left: -20px;
   margin-top: 170px;
   // transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transition: transform 1000ms, opacity 1000ms;
+  transition: transform 750ms, opacity 1000ms;
   &.hideLeft{
     opacity:0;
     transform: scale($game-scale) translateX(-1000px);
-    transition: all 1000ms;
+    // transition: all 0ms ;
 
   }
   &.hideRight{
     opacity:0;
     transform: scale($game-scale) translateX(1000px);
-    transition: all 1ms;
+    transition: none;
   }
   // &.start{
   //   transform: scale(1);
