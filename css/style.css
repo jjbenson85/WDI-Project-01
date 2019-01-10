@@ -127,7 +127,7 @@ header {
   height: 100px;
   transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55); }
   .hex.hidden {
-    opacity: 0.5;
+    opacity: 0;
     transform: translateY(50px);
     pointer-events: none; }
   .hex .seg {
@@ -186,56 +186,56 @@ header {
       background: #222; }
     .hex.black .diamond:nth-child(3) .seg {
       background: #111; }
+@keyframes invertSeg1 {
+  0%,100% {
+    background: #EEE; }
+  50% {
+    background: #111; } }
+@keyframes invertSeg2 {
+  0%,100% {
+    background: #DDD; }
+  50% {
+    background: #222; } }
+@keyframes invertSeg3 {
+  0%,100% {
+    background: #CCC; }
+  50% {
+    background: #000; } }
+@keyframes bombSeg1 {
+  0%,100% {
+    background: #622; }
+  50% {
+    background: #761; } }
+@keyframes bombSeg2 {
+  0%,100% {
+    background: #401515; }
+  50% {
+    background: #4a400b; } }
+@keyframes bombSeg3 {
+  0%,100% {
+    background: #1a0909; }
+  50% {
+    background: #1e1a04; } }
   .hex.invert.white .diamond .seg {
-    border-color: white !important; }
-  .hex.invert.white .diamond:first-child .seg {
-    background: #EFE; }
-  .hex.invert.white .diamond:nth-child(2) .seg {
-    background: #DED; }
-  .hex.invert.white .diamond:nth-child(3) .seg {
-    background: #CDC; }
+    border-color: #EEE !important; }
   .hex.invert.black .diamond .seg {
-    color: white;
-    border-color: white !important; }
-  .hex.invert.black .diamond:first-child .seg {
-    background: #252; }
-  .hex.invert.black .diamond:nth-child(2) .seg {
-    background: #141; }
-  .hex.invert.black .diamond:nth-child(3) .seg {
-    background: #030; }
-  .hex.invert .diamond .seg {
-    border-color: white !important; }
+    border-color: #111 !important; }
   .hex.invert .diamond:first-child .seg {
-    background: #363; }
+    animation: invertSeg3 5s infinite; }
   .hex.invert .diamond:nth-child(2) .seg {
-    background: #224422; }
+    animation: invertSeg2 5s infinite; }
   .hex.invert .diamond:nth-child(3) .seg {
-    background: #112211; }
+    animation: invertSeg1 5s infinite; }
   .hex.bomb.white .diamond .seg {
-    border-color: white !important; }
-  .hex.bomb.white .diamond:first-child .seg {
-    background: #c4d5e6; }
-  .hex.bomb.white .diamond:nth-child(2) .seg {
-    background: #e7eef5; }
-  .hex.bomb.white .diamond:nth-child(3) .seg {
-    background: white; }
+    border-color: #EEE !important; }
   .hex.bomb.black .diamond .seg {
-    color: white;
-    border-color: white !important; }
-  .hex.bomb.black .diamond:first-child .seg {
-    background: #335577; }
-  .hex.bomb.black .diamond:nth-child(2) .seg {
-    background: #243c53; }
-  .hex.bomb.black .diamond:nth-child(3) .seg {
-    background: #142230; }
-  .hex.bomb .diamond .seg {
-    border-color: white !important; }
+    border-color: #111 !important; }
   .hex.bomb .diamond:first-child .seg {
-    background: #357; }
+    animation: bombSeg3 5s infinite; }
   .hex.bomb .diamond:nth-child(2) .seg {
-    background: #7ca2c7; }
+    animation: bombSeg2 5s infinite; }
   .hex.bomb .diamond:nth-child(3) .seg {
-    background: #5888b8; }
+    animation: bombSeg1 5s infinite; }
 
 body {
   margin: 0; }
@@ -445,7 +445,8 @@ footer {
   height: 80px;
   background: #A6A6A6;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: space-between;
   transition: all 1000ms; }
   footer.white {
     background: #EEE; }

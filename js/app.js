@@ -626,7 +626,7 @@ function createLookups(){
 //   debug(`player:${player} opponent:${opponent}`)
 //
 // }
-// function invertCapture(tile){
+// function specialCapture(tile){
 //   if($(tile).hasClass('invert')){
 //     for(let i=0;i<numberOfTiles;i++){
 //       if($($hexArray[i]).hasClass('white')){
@@ -702,7 +702,7 @@ function createLookups(){
 //         const timerId = setTimeout(function(){
 //           if(index===0)addTile(thisTile, thisPlayer)
 //           else addTile(thisTile, thisPlayer, false)
-//           invertCapture(thisTile)
+//           specialCapture(thisTile)
 //           timerArr.pop()
 //         },delay*(i+1))
 //         timerArr.push(timerId)
@@ -711,7 +711,7 @@ function createLookups(){
 //       // console.log(turnCount,'delay*(index+1)',delay*(index+1),'index',index)
 //     })
 //
-//     invertCapture(tile)
+//     specialCapture(tile)
 //
 //     const wait = timerArr.length*delay
 //     setTimeout(function(){
@@ -978,6 +978,12 @@ class GameLevel{
           selected = this.selectRandom(boardSquares)
         }
         $(this.$hexArray[selected]).addClass('invert')
+        startingSquares.push(selected)
+
+        while(startingSquares.includes(selected)){
+          selected = this.selectRandom(boardSquares)
+        }
+        $(this.$hexArray[selected]).addClass('bomb')
         break
 
       case 1:
@@ -1481,7 +1487,7 @@ class GameLevel{
     // $screens.hide()
     // $start.show()
   }
-  invertCapture(tile){
+  specialCapture(tile){
     if($(tile).hasClass('invert')){
       for(let i=0;i<numberOfTiles;i++){
         if($(this.$hexArray[i]).hasClass('white')){
@@ -1491,11 +1497,15 @@ class GameLevel{
           $(this.$hexArray[i]).removeClass('black')
           $(this.$hexArray[i]).addClass('white')
         }
-        // if(this.gridClassArray[i] === 'white') this.gridClassArray[i] === 'black'
-        // if(this.gridClassArray[i] === 'black') this.gridClassArray[i] === 'white'
       }
       $(tile).addClass(player)
       $(tile).removeClass(opponent)
+    }
+    if($(tile).hasClass('bomb')){
+      const remove = this.getNeighbours(tile)
+      $(remove).addClass('hidden')
+      // $(tile).addClass(player)
+      // $(tile).removeClass(opponent)
     }
   }
   play(e){
@@ -1557,7 +1567,7 @@ class GameLevel{
 
             if(index===0) that.addTile(thisTile, thisPlayer)
             else that.addTile(thisTile, thisPlayer, false)
-            that.invertCapture(thisTile)
+            that.specialCapture(thisTile)
             timerArr.pop()
           },delay*(i+1))
 
@@ -1566,7 +1576,7 @@ class GameLevel{
         })
       })
 
-      this.invertCapture(tile)
+      this.specialCapture(tile)
 
       const wait = timerArr.length*delay
       setTimeout(function(){
