@@ -155,7 +155,8 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 50px;
+  // margin-left: 50px;
+  margin-left: -25px;
   margin-top: 170px;
   // transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transition: transform 750ms, opacity 1000ms;
@@ -416,9 +417,9 @@ main {
     display: flex;
     width:50%;
     height:100%;
-    transform: scale(1);
+    transform: scale(0.9);
     margin-left: 0;
-    margin-top: 60px;
+    margin-top: 10px;
     // background-color: $grey1;
     .intro{
       margin-bottom:0px;
