@@ -9,7 +9,7 @@ const numberOfTiles = 112
 // const downRightIds = []
 // const upIds = []
 // const downIds = []
-const showNumbers = true
+const showNumbers = false
 const srcArray = [
   '1_C3.m4a',
   // '2_Cs3.m4a',
@@ -417,7 +417,9 @@ class GameLevel{
     opponent = turnCount%2 === 0 ? 'black':'white'
     player = turnCount%2 === 0 ? 'white':'black'
     // debug(`player:${player} opponent:${opponent}`)
-    $turnIcon.removeClass(opponent).addClass(player)
+    // if(this.gameEnd===false){
+      $turnIcon.removeClass(opponent).addClass(player)
+    // }
 
   }
   createLevel(boardSquares,blackSquares,whiteSquares){
@@ -478,6 +480,7 @@ class GameLevel{
   resetVariables(){
     turnCount = 0
     clickable = true
+    // this.gameEnd = false
     gridClassArray = []
     // $balance.css('width','50%')
     // $tracker.css('opacity','0.5')
@@ -723,40 +726,40 @@ class GameLevel{
       break
 
       case 8:
-      // levelDesign =[['X','X','X','X','X','X','X','X'],
-      //                 ['X','X','X','X','X','X','X'],
-      //               ['X','X','X','X','X','X','X','X'],
-      //                 ['X','X','X','X','X','X','X'],
-      //               ['X','X','X','X','X','X','X','X'],
-      //                 ['X','-','-','-','-','-','X'],
-      //               ['X','X','-','-','-','-','X','X'],
-      //                 ['X','-','-','B','-','-','X'],
-      //               ['X','X','-','W','W','-','X','X'],
-      //                 ['X','-','-','B','-','-','X'],
-      //               ['X','X','-','-','-','-','X','X'],
-      //                 ['X','-','-','-','-','-','X'],
-      //               ['X','X','X','X','X','X','X','X'],
-      //                 ['X','X','X','X','X','X','X'],
-      //               ['X','X','X','X','X','X','X','X']]
-      //
-      // break
       levelDesign =[['X','X','X','X','X','X','X','X'],
                       ['X','X','X','X','X','X','X'],
                     ['X','X','X','X','X','X','X','X'],
                       ['X','X','X','X','X','X','X'],
                     ['X','X','X','X','X','X','X','X'],
-                      ['X','X','-','-','-','X','X'],
+                      ['X','-','-','-','-','-','X'],
                     ['X','X','-','-','-','-','X','X'],
-                      ['X','X','-','B','-','X','X'],
+                      ['X','-','-','B','-','-','X'],
                     ['X','X','-','W','W','-','X','X'],
-                      ['X','X','-','B','-','X','X'],
-                    ['X','X','-','-','-','-','X','X'],
-                      ['X','X','-','i','-','X','X'],
+                      ['X','-','-','B','-','-','X'],
+                    ['X','X','-','i','-','-','X','X'],
+                      ['X','-','-','-','-','-','X'],
                     ['X','X','X','X','X','X','X','X'],
                       ['X','X','X','X','X','X','X'],
                     ['X','X','X','X','X','X','X','X']]
 
       break
+      // levelDesign =[['X','X','X','X','X','X','X','X'],
+      //                 ['X','X','X','X','X','X','X'],
+      //               ['X','X','X','X','X','X','X','X'],
+      //                 ['X','X','X','X','X','X','X'],
+      //               ['X','X','X','X','X','X','X','X'],
+      //                 ['X','X','-','-','-','X','X'],
+      //               ['X','X','-','-','-','-','X','X'],
+      //                 ['X','X','-','B','-','X','X'],
+      //               ['X','X','-','W','W','-','X','X'],
+      //                 ['X','X','-','B','-','X','X'],
+      //               ['X','X','-','-','-','-','X','X'],
+      //                 ['X','X','-','i','-','X','X'],
+      //               ['X','X','X','X','X','X','X','X'],
+      //                 ['X','X','X','X','X','X','X'],
+      //               ['X','X','X','X','X','X','X','X']]
+      //
+      // break
 
       case 9:
       levelDesign =[['X','X','X','X','X','X','X','X'],
@@ -877,13 +880,13 @@ class GameLevel{
                       ['X','X','-','X','X','X','X'],
                     ['X','X','-','-','-','X','X','X'],
                       ['X','-','-','-','-','X','X'],
-                    ['X','-','X','-','-','-','X','X'],
-                      ['X','-','X','-','-','-','X'],
-                    ['X','-','-','X','-','-','-','X'],
-                      ['X','-','-','X','-','-','X'],
-                    ['X','-','-','-','X','-','-','X'],
-                      ['X','-','-','-','X','-','X'],
-                    ['X','X','-','-','-','-','-','X'],
+                    ['X','-','-','X','-','-','X','X'],
+                      ['X','-','X','X','-','-','X'],
+                    ['X','-','-','X','X','-','-','X'],
+                      ['X','-','-','X','X','-','X'],
+                    ['X','-','B','-','X','-','-','X'],
+                      ['X','W','W','-','_','-','X'],
+                    ['X','X','B','-','-','-','-','X'],
                       ['X','X','-','-','-','-','X'],
                     ['X','X','X','-','-','-','X','X'],
                       ['X','X','X','X','X','X','X'],
@@ -913,7 +916,11 @@ class GameLevel{
     this.levelBuilder(levelDesign)
 
     // this.createLevel(boardSquares,blackSquares,whiteSquares)
-    // history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
+    for(let i = 0;i<numberOfTiles;i++){
+      gridClassArray[i] = $(this.$hexArray).eq(i).attr('class').split(' ')[1]
+      console.log(gridClassArray[i])
+    }
+    history[turnCount] = JSON.parse(JSON.stringify(gridClassArray))
 
     // neXtTurn()
   }
@@ -1271,7 +1278,7 @@ class GameLevel{
     console.log('Game Over winner is', this.winner)
     // if(winner === 'tie')$message.html('It\'s a tie!')
     // else $message.html(`${winner} wins!`)
-
+    // this.gameEnd = true
     const that = this
     if(this.winner === 'white'){
       this.$hexArray.off()
@@ -1375,6 +1382,12 @@ class GameLevel{
       //Flip each tile for this move
       const that = this
       const thisPlayer = player
+
+      //Sort array in size order so longest plays sounds
+      tilesToFlip.sort(function(a, b){
+        return b.length - a.length
+      })
+
       tilesToFlip.forEach((elem, index)=>{
 
         elem.forEach((thisTile, i)=>{
@@ -1410,15 +1423,54 @@ class GameLevel{
     }
 
   }
+  undoRedoUpdate(){
+
+    gridClassArray = []
+    for(let i=0;i<numberOfTiles;i++){
+      const tile = this.$hexArray[i]
+      $(tile).removeClass('black').removeClass('white')
+    }
+    console.log('history', history, turnCount)
+    history[turnCount].forEach((elem,index)=>{
+      const tile = this.$hexArray[index]
+      if(elem != undefined){
+        $(tile).addClass(elem)
+        gridClassArray[index] = elem
+
+      }
+    })
+    this.nextTurn()
+  }
+  undoMove(){
+
+    function action(that){
+      // console.log('action')
+      turnCount--
+      if(turnCount<0)turnCount=0
+      that.undoRedoUpdate()
+    }
+
+    const that = this
+    //If playing computer, undo two moves
+    if(cpu){
+      setTimeout(function(){action(that)},500)
+    }
+
+    action(that)
+
+  }
+
   addClickEvents(){
     // console.log('from the click handler', this)
     //Add on click
+    const $undoButton = $('.undo')
+    $undoButton.on('click', (e) => this.undoMove(e))
     $(this.$hexArray).on('click', (e) => this.play(e))
     $(this.$hexArray).on('mouseenter', (e) => this.validHoverOn(e, $(this.$hexArray)))
   }
 }
 
-function buildGame(){
+// buildGame(){
   // GET HTML ELEMENTS
 //   $game = $('.game')
 //   $grid = $game.find('.hex-grid')
@@ -1511,7 +1563,7 @@ function buildGame(){
   // //Add on click
   // $hexArray.on('click', play)
   // $hexArray.on('mouseenter',validHoverOn)
-}
+// }
 
 
 function undoRedoUpdate(){
@@ -1529,7 +1581,7 @@ function undoRedoUpdate(){
   nextTurn()
 }
 function undoMove(){
-
+  console.log('undo move')
   function action(){
     // console.log('action')
     turnCount--
@@ -1598,7 +1650,7 @@ function init(){
   const $twoPlayerButton = $('.two-player')
   const $levelButtons = $('.level')
   const $menuButton = $('.home')
-  // const $undoButton = $('.undo')
+
   // const $redoButton = $('.redo')
 
   $screens = $('.screen')
@@ -1626,7 +1678,7 @@ function init(){
       level = 0
     }
     gameStart = true
-
+    $turnIcon.removeClass('hidden').addClass('white')
     new GameLevel($($game),level)
 
     $screens.hide()
@@ -1636,6 +1688,7 @@ function init(){
 
   function goToMenu(){
     console.log('Go To menu level', level)
+    $turnIcon.removeClass('white').removeClass('black').addClass('hidden')
     for(let i=2;i<=level;i++){
       const $startHexs = $start.find(`.level${i}`)
       console.log('$startHexs i',i)

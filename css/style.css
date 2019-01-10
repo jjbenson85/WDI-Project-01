@@ -68,7 +68,7 @@ body {
   height: 100px;
   transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55); }
   .hex.hidden {
-    opacity: 0.5;
+    opacity: 0;
     transform: translateY(50px);
     pointer-events: none; }
   .hex .seg {
@@ -97,11 +97,11 @@ body {
     .hex .diamond:nth-child(3) .seg {
       background: #99A; }
   .hex:hover .diamond .seg {
-    border-color: #b33c3c; }
+    border-color: #c88f96; }
   .hex.valid:hover {
     cursor: pointer; }
     .hex.valid:hover .diamond .seg {
-      border-color: #448844; }
+      border-color: #93bf69; }
   .hex.white {
     transform: translateY(-40px);
     animation: bounceWhite 500ms; }
@@ -198,7 +198,7 @@ main {
   main .start {
     display: flex;
     width: 50%;
-    height: 75%;
+    height: 100%;
     transform: scale(1);
     margin-left: 0;
     margin-top: 60px; }
@@ -212,104 +212,112 @@ main {
         transform: rotate(-45deg); }
       main .start .intro .angle2 {
         transform: rotate(45deg) translate(44px, -310px); }
-    main .start .hex.level1:first-child .seg {
+    main .start .hex.level1 .diamond:first-child .seg {
       background: #5888b8; }
-    main .start .hex.level1:nth-child(2) .seg {
+    main .start .hex.level1 .diamond:nth-child(2) .seg {
       background: #7ca2c7; }
-    main .start .hex.level1:nth-child(3) .seg {
+    main .start .hex.level1 .diamond:nth-child(3) .seg {
       background: #357; }
-    main .start .hex.level2:first-child .seg {
+    main .start .hex.level2 .diamond:first-child .seg {
       background: #5d94a2; }
-    main .start .hex.level2:nth-child(2) .seg {
+    main .start .hex.level2 .diamond:nth-child(2) .seg {
       background: #7eaab4; }
-    main .start .hex.level2:nth-child(3) .seg {
+    main .start .hex.level2 .diamond:nth-child(3) .seg {
       background: #9ebfc7; }
-    main .start .hex.level3:first-child .seg {
+    main .start .hex.level3 .diamond:first-child .seg {
       background: #7db1a1; }
-    main .start .hex.level3:nth-child(2) .seg {
+    main .start .hex.level3 .diamond:nth-child(2) .seg {
       background: #7db1a1; }
-    main .start .hex.level3:nth-child(3) .seg {
+    main .start .hex.level3 .diamond:nth-child(3) .seg {
       background: #9dc4b8; }
-    main .start .hex.level4:first-child .seg {
+    main .start .hex.level4 .diamond:first-child .seg {
       background: #7ab68b; }
-    main .start .hex.level4:nth-child(2) .seg {
+    main .start .hex.level4 .diamond:nth-child(2) .seg {
       background: #7ab68b; }
-    main .start .hex.level4:nth-child(3) .seg {
+    main .start .hex.level4 .diamond:nth-child(3) .seg {
       background: #9bc8a8; }
-    main .start .hex.level5:first-child .seg {
+    main .start .hex.level5 .diamond:first-child .seg {
       background: #112211; }
-    main .start .hex.level5:nth-child(2) .seg {
+    main .start .hex.level5 .diamond:nth-child(2) .seg {
       background: #224422; }
-    main .start .hex.level5:nth-child(3) .seg {
+    main .start .hex.level5 .diamond:nth-child(3) .seg {
       background: #363; }
-    main .start .hex.level6:first-child .seg {
-      background: #336633; }
-    main .start .hex.level6:nth-child(2) .seg {
-      background: #448844; }
-    main .start .hex.level6:nth-child(3) .seg {
-      background: #55aa55; }
-    main .start .hex.level7:first-child .seg {
-      background: #77bb77; }
-    main .start .hex.level7:nth-child(2) .seg {
-      background: #77bb77; }
-    main .start .hex.level7:nth-child(3) .seg {
-      background: #99cc99; }
-    main .start .hex.level8:first-child .seg {
-      background: #bbddbb; }
-    main .start .hex.level8:nth-child(2) .seg {
-      background: #bbddbb; }
-    main .start .hex.level8:nth-child(3) .seg {
-      background: #ddeedd; }
-    main .start .hex.level9:first-child .seg {
+    main .start .hex.level6 .diamond:first-child .seg {
+      background: #7aab4a; }
+    main .start .hex.level6 .diamond:nth-child(2) .seg {
+      background: #93bf69; }
+    main .start .hex.level6 .diamond:nth-child(3) .seg {
+      background: #adce8d; }
+    main .start .hex.level7 .diamond:first-child .seg {
+      background: #b0c35d; }
+    main .start .hex.level7 .diamond:nth-child(2) .seg {
+      background: #b0c35d; }
+    main .start .hex.level7 .diamond:nth-child(3) .seg {
+      background: #c2d182; }
+    main .start .hex.level8 .diamond:first-child .seg {
+      background: #cac64f; }
+    main .start .hex.level8 .diamond:nth-child(2) .seg {
+      background: #cac64f; }
+    main .start .hex.level8 .diamond:nth-child(3) .seg {
+      background: #d6d376; }
+    main .start .hex.level9 .diamond:first-child .seg {
       background: #1e1a04; }
-    main .start .hex.level9:nth-child(2) .seg {
+    main .start .hex.level9 .diamond:nth-child(2) .seg {
       background: #4a400b; }
-    main .start .hex.level9:nth-child(3) .seg {
+    main .start .hex.level9 .diamond:nth-child(3) .seg {
       background: #761; }
-    main .start .hex.level10:first-child .seg {
-      background: #776611; }
-    main .start .hex.level10:nth-child(2) .seg {
-      background: #a48c17; }
-    main .start .hex.level10:nth-child(3) .seg {
-      background: #d0b31e; }
-    main .start .hex.level11:first-child .seg {
-      background: #e3c83e; }
-    main .start .hex.level11:nth-child(2) .seg {
-      background: #e3c83e; }
-    main .start .hex.level11:nth-child(3) .seg {
-      background: #ead56a; }
-    main .start .hex.level12:first-child .seg {
-      background: #f0e197; }
-    main .start .hex.level12:nth-child(2) .seg {
-      background: #f0e197; }
-    main .start .hex.level12:nth-child(3) .seg {
-      background: #f7eec4; }
-    main .start .hex.level13:first-child .seg {
+    main .start .hex.level10 .diamond:first-child .seg {
+      background: #ca9625; }
+    main .start .hex.level10 .diamond:nth-child(2) .seg {
+      background: #ddad45; }
+    main .start .hex.level10 .diamond:nth-child(3) .seg {
+      background: #e5c070; }
+    main .start .hex.level11 .diamond:first-child .seg {
+      background: #d7924b; }
+    main .start .hex.level11 .diamond:nth-child(2) .seg {
+      background: #d7924b; }
+    main .start .hex.level11 .diamond:nth-child(3) .seg {
+      background: #e0ab75; }
+    main .start .hex.level12 .diamond:first-child .seg {
+      background: #cf7553; }
+    main .start .hex.level12 .diamond:nth-child(2) .seg {
+      background: #cf7553; }
+    main .start .hex.level12 .diamond:nth-child(3) .seg {
+      background: #da957b; }
+    main .start .hex.level13 .diamond:first-child .seg {
       background: #1a0909; }
-    main .start .hex.level13:nth-child(2) .seg {
+    main .start .hex.level13 .diamond:nth-child(2) .seg {
       background: #401515; }
-    main .start .hex.level13:nth-child(3) .seg {
+    main .start .hex.level13 .diamond:nth-child(3) .seg {
       background: #622; }
-    main .start .hex.level14:first-child .seg {
-      background: #662222; }
-    main .start .hex.level14:nth-child(2) .seg {
-      background: #8c2f2f; }
-    main .start .hex.level14:nth-child(3) .seg {
-      background: #b33c3c; }
-    main .start .hex.level15:first-child .seg {
-      background: #c85959; }
-    main .start .hex.level15:nth-child(2) .seg {
-      background: #c85959; }
-    main .start .hex.level15:nth-child(3) .seg {
-      background: #d58080; }
-    main .start .hex.level16:first-child .seg {
-      background: #e1a6a6; }
-    main .start .hex.level16:nth-child(2) .seg {
-      background: #e1a6a6; }
-    main .start .hex.level16:nth-child(3) .seg {
-      background: #eecccc; }
-    main .start .hex:hover.settingsButton, main .start .hex:hover.start-button, main .start .hex:hover.start-button-single {
-      transform: translateY(-40px); }
+    main .start .hex.level14 .diamond:first-child .seg {
+      background: #a24f59; }
+    main .start .hex.level14 .diamond:nth-child(2) .seg {
+      background: #b76d76; }
+    main .start .hex.level14 .diamond:nth-child(3) .seg {
+      background: #c88f96; }
+    main .start .hex.level15 .diamond:first-child .seg {
+      background: #a68091; }
+    main .start .hex.level15 .diamond:nth-child(2) .seg {
+      background: #a68091; }
+    main .start .hex.level15 .diamond:nth-child(3) .seg {
+      background: #bb9eab; }
+    main .start .hex.level16 .diamond:first-child .seg {
+      background: #908fab; }
+    main .start .hex.level16 .diamond:nth-child(2) .seg {
+      background: #908fab; }
+    main .start .hex.level16 .diamond:nth-child(3) .seg {
+      background: #adacc1; }
+    main .start .hex.hidden {
+      opacity: 1; }
+      main .start .hex.hidden .diamond:first-child .seg {
+        background: #778; }
+      main .start .hex.hidden .diamond:nth-child(2) .seg {
+        background: #888; }
+      main .start .hex.hidden .diamond:nth-child(3) .seg {
+        background: #99A; }
+    main .start .hex:hover.level {
+      transform: translateY(-36px); }
     main .start .hex:hover .seg {
       color: black;
       border-color: white !important; }
@@ -335,49 +343,6 @@ main {
     width: 70%;
     height: 90vh;
     transition: all 1000ms; }
-    main .game .info {
-      width: 30%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      margin-left: 10px; }
-      main .game .info h1 {
-        font-size: 2em;
-        margin: 0;
-        text-align: center;
-        color: #111111;
-        border: 2px solid #111111;
-        background-color: #A6A6A6; }
-      main .game .info .turn {
-        font-size: 1.5em;
-        text-align: center;
-        color: #FEFEFE;
-        border: 2px solid #FEFEFE;
-        background-color: #111111; }
-      main .game .info .scores {
-        font-size: 1em;
-        text-align: center;
-        color: #111111;
-        border: 2px solid #111111;
-        background-color: #FEFEFE; }
-      main .game .info .message {
-        font-size: 1em;
-        text-align: center;
-        color: #111111;
-        border: 2px solid #111111;
-        background-color: #FEFEFE;
-        min-height: 1em; }
-      main .game .info .options {
-        display: flex;
-        justify-content: space-around; }
-      main .game .info .undoRedo {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-end;
-        height: 70%;
-        width: auto;
-        padding-bottom: 20px; }
 
 footer {
   position: absolute;
@@ -394,9 +359,9 @@ footer {
   footer.black {
     background: #111; }
   footer .hex-scale {
-    transform: scale(0.6) translateY(-20px); }
-    footer .hex-scale .hex {
-      transform: translateY(-40px); }
+    transform: scale(0.6) translateY(-40px); }
+    footer .hex-scale .white, footer .hex-scale .black {
+      animation: none; }
   footer .left {
     display: flex;
     justify-content: flex-start; }
@@ -406,11 +371,11 @@ footer {
       margin: 5px;
       width: 70px;
       border: 2px solid #111;
-      background-color: #778;
+      background-color: #A6A6A6;
       outline: 0;
       border-radius: 4px; }
       footer .left button:hover {
-        background-color: #99A; }
+        background-color: #DDD; }
   footer .two-player i:first-child {
     color: white; }
   footer .two-player i:last-child {
