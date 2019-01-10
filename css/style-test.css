@@ -1,0 +1,74 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0; }
+
+* {
+  box-sizing: border-box; }
+
+.hex-grid, .hex-scale {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  padding: 100px;
+  left: -2.85%; }
+  .hex-grid .odd, .hex-scale .odd {
+    position: relative;
+    width: 100%;
+    margin-top: -9%;
+    margin-bottom: -9%;
+    left: 6.3%; }
+    .hex-grid .odd:after, .hex-scale .odd:after {
+      content: "";
+      display: block;
+      padding-bottom: 0%; }
+  .hex-grid .even, .hex-grid .odd, .hex-scale .even, .hex-scale .odd {
+    display: flex; }
+    .hex-grid .even .hex, .hex-grid .odd .hex, .hex-scale .even .hex, .hex-scale .odd .hex {
+      position: relative;
+      width: 50%; }
+      .hex-grid .even .hex:hover, .hex-grid .odd .hex:hover, .hex-scale .even .hex:hover, .hex-scale .odd .hex:hover {
+        transform: translateY(-10%); }
+      .hex-grid .even .hex .diamond, .hex-grid .odd .hex .diamond, .hex-scale .even .hex .diamond, .hex-scale .odd .hex .diamond {
+        position: absolute;
+        width: 71%;
+        height: 71%;
+        left: 14.5%;
+        top: -12%;
+        background: #a0bbd6;
+        border: 0.1vw solid black;
+        border-radius: 4px;
+        opacity: 1;
+        transform: scaleY(0.577) rotate(45deg); }
+        .hex-grid .even .hex .diamond:after, .hex-grid .odd .hex .diamond:after, .hex-scale .even .hex .diamond:after, .hex-scale .odd .hex .diamond:after {
+          content: '';
+          background: #7ca2c7;
+          opacity: 1;
+          display: block;
+          position: absolute;
+          transform: skewX(45deg);
+          top: 100%;
+          left: 50%;
+          width: 100%;
+          height: 100%;
+          border: 0.1vw solid black;
+          border-radius: 4px; }
+        .hex-grid .even .hex .diamond:before, .hex-grid .odd .hex .diamond:before, .hex-scale .even .hex .diamond:before, .hex-scale .odd .hex .diamond:before {
+          content: '';
+          background: #5888b8;
+          opacity: 1;
+          display: block;
+          position: absolute;
+          transform: skewY(45deg);
+          top: 50%;
+          left: 100%;
+          width: 100%;
+          height: 100%;
+          border: 0.1vw solid black;
+          border-radius: 4px; }
+      .hex-grid .even .hex:after, .hex-grid .odd .hex:after, .hex-scale .even .hex:after, .hex-scale .odd .hex:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%; }
+
+/*# sourceMappingURL=style-test.css.map */

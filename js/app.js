@@ -175,12 +175,16 @@ class GameLevel{
     this.$grid = $(this.$game).find('.hex-grid')
     $(this.$grid).empty()
 
-    const $scores = $('.scores')
+    // const $scores = $('.scores')
     // $blackScore = $scores.find('.black')
     // $whiteScore = $scores.find('.white')
 
+    //??????????
     $turn = $('.turn')
     $message = $('.message')
+
+
+    $fireworks = $('.fireworks-container')
   }
   buildRows(){
     //Build rows
@@ -1304,7 +1308,7 @@ class GameLevel{
     if(this.winner === 'white'){
       //disable clicks
       if(level===16 || cpu === false){
-        $fireworks = $('.fireworks-container')
+        // $fireworks = $('.fireworks-container')
         $fireworks.show()
         return
       }
