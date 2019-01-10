@@ -68,7 +68,7 @@ body {
   height: 100px;
   transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55); }
   .hex.hidden {
-    opacity: 0;
+    opacity: 0.5;
     transform: translateY(50px);
     pointer-events: none; }
   .hex .seg {
