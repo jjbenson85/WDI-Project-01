@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/levels.js" charset="utf-8"></script>
   <script src="js/app.js" charset="utf-8"></script>
 </head>
 <body>
@@ -20,7 +21,6 @@
         <div class="angle2">
           TURN
         </div>
-
       </div>
       <div class="hex-grid start">
         <div class="odd">
@@ -75,9 +75,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -96,45 +94,37 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
           <div data-id="7" class="hex level level7 start-button-single hidden">
             <div class="diamond">
               <div class="scale">
-                <div class="seg"></div>
-              </div>
+                <div class="seg"></div></div>
+            </div>
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"></div></div>
             </div>
             <div class="diamond">
               <div class="scale">
                 <div class="seg"></div>
-              </div>
-            </div>
-            <div class="diamond">
-              <div class="scale">
-                <div class="seg">
-                </div>
               </div>
             </div>
           </div>
           <div data-id="9" class="hex level level9 start-button-single hidden">
             <div class="diamond">
               <div class="scale">
-                <div class="seg"></div>
-              </div>
+                <div class="seg"></div></div>
+            </div>
+            <div class="diamond">
+              <div class="scale">
+                <div class="seg"></div></div>
             </div>
             <div class="diamond">
               <div class="scale">
                 <div class="seg"></div>
-              </div>
-            </div>
-            <div class="diamond">
-              <div class="scale">
-                <div class="seg">
-                </div>
               </div>
             </div>
           </div>
@@ -154,9 +144,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -173,8 +161,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -191,8 +178,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -209,9 +195,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -230,9 +214,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -249,8 +231,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -267,8 +248,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -288,8 +268,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -306,9 +285,7 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
@@ -327,46 +304,19 @@
             </div>
             <div class="diamond">
               <div class="scale">
-                <div class="seg">
-                </div>
+                <div class="seg"></div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
-      <!-- <button class='start-button-single'>Single Player</button>
-      <button class='start-button'>Two Player</button>
-      <button class='settingsButton'>Settings</button> -->
-    </div>
-    <!-- <div class="screen settings">
-      <h1>Settings</h1>
-      <p>Change some settings</p>
-      <form class="form" action="index.html" method="post">
-        <label for="cpu-type">Select CPU Type</label><br>
-        <input type="radio" name="cpu-type" value="first" checked> First<br>
-        <input type="radio" name="cpu-type" value="random"> Random<br>
-        <input type="radio" name="cpu-type" value="greedy"> Greedy<br>
-
-        <label for="board-size">Select Board Size</label><br>
-        <input type="radio" name="board-size" value="4" > 4<br>
-        <input type="radio" name="board-size" value="6"> 6<br>
-        <input type="radio" name="board-size" value="8" checked> 8<br>
-        <input type="radio" name="board-size" value="10" checked> 10<br>
-
-
-
-        <button type="submit" name="button">Save Settings</button>
-      </form>
-      <button class="menuButton">Main Menu</button>
-    </div> -->
-
     <div class="fireworks-container">
       <div class="fireworks fireworks1"></div>
       <div class="fireworks fireworks2"></div>
       <div class="fireworks fireworks3"></div>
     </div>
     <div class="screen game">
-
       <div class="hex-grid">
       </div>
     </div>
@@ -375,34 +325,30 @@
         <button class="home">
           <i class="fas fa-home"></i>
         </button>
-        <button class="two-player">
+        <button data-id="0" class="two-player level">
           <i class="fas fa-male"></i>
           <i class="fas fa-male"></i>
         </button>
-        <!-- <button class="undo">
-          <i class="fas fa-undo"></i>
-        </button> -->
       </div>
-
       <div class="hex-scale">
         <div class="hex hidden undo">
-        <div class="diamond">
-          <div class="scale">
-            <div class="seg"></div>
+          <div class="diamond">
+            <div class="scale">
+              <div class="seg"></div>
+            </div>
           </div>
-        </div>
-        <div class="diamond">
-          <div class="scale">
-            <div class="seg"></div>
+          <div class="diamond">
+            <div class="scale">
+              <div class="seg"></div>
+            </div>
           </div>
-        </div>
-        <div class="diamond">
-          <div class="scale">
-            <div class="seg">
+          <div class="diamond">
+            <div class="scale">
+              <div class="seg">
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </footer>
   </main>

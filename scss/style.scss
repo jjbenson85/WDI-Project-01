@@ -1,182 +1,73 @@
 @import '_vars';
 
-// @keyframes hexHide{
-//   0%{
-//     transform: translateY(-40px);
-//   }
-//   25%{
-//     transform: translateY(0px);
-//   }
-//   75%{
-//     transform: translateY(0px);
-//   }
-//   100%{
-//     transform: translateY(-40px);
-//   }
-// }
+@keyframes invertSeg1{
+  0%,100%{background: $white1;}
+  50%{background: $black1;}
+}
+@keyframes invertSeg2{
+  0%,100%{background: $white2;}
+  50%{background: $black2;}
+}
+@keyframes invertSeg3{
+  0%,100%{background: $white3;}
+  50%{background: $black3;}
+}
+@keyframes bombSeg1{
+  0%,100%{background: $red1;}
+  50%{background: $yellow1;}
+}
+@keyframes bombSeg2{
+  0%,100%{background: $red2;}
+  50%{background: $yellow2;}
+}
+@keyframes bombSeg3{
+  0%,100%{background: $red3;}
+  50%{background: $yellow3;}
+}
+
 @keyframes bounceWhite{
-  0%{
-    transform: translateY(-40px);
-  }
-  25%{
-    transform: translateY(-50px);
-  }
-  75%{
-    transform: translateY(-30px);
-  }
-  100%{
-    transform: translateY(-40px);
-  }
+  0%{transform: translateY(-40px);}
+  25%{transform: translateY(-50px);}
+  75%{transform: translateY(-30px);}
+  100%{transform: translateY(-40px);}
 }
+
 @keyframes bounceSegWhite{
-  0%{
-    box-shadow: 0px 0px 15px 2px $white;
-  }
-  25%{
-    box-shadow: 0px 0px 15px 4px $white;
-  }
-  75%{
-    box-shadow: 0px 0px 5px 2px $white;
-  }
-  100%{
-    box-shadow: 0px 0px 15px 2px $white;
-  }
+  0%{box-shadow: 0px 0px 15px 2px $white;}
+  25%{box-shadow: 0px 0px 15px 4px $white;}
+  75%{box-shadow: 0px 0px 5px 2px $white;}
+  100%{box-shadow: 0px 0px 15px 2px $white;}
 }
+
 @keyframes bounceBlack{
   0%{transform: translateY(-40px);}
   25%{transform: translateY(-50px);}
   75%{transform: translateY(-30px);}
   100%{transform: translateY(-40px);}
 }
-html, body {margin: 0; height: 100%; overflow: hidden}
-body{
+html, body {
+  margin: 0; height: 100%; overflow: hidden;
   font-family: 'Roboto', sans-serif;
-   margin: 0;
 }
-
-// header{
-//   position: absolute;
-//   top: 0;
-//   width: 100%;
-//   height: 150px;
-//   background: rgba(0,0,0,0);
-//
-//  .progress{
-//    display: flex;
-//    margin-top: 50px;
-//    .balance{
-//      transition: all 500ms;
-//      width:50%;
-//      height:100px;
-//    }
-//
-//    .tracker{
-//      height:50px;
-//      width:50px;
-//      &.white{
-//        background: black;
-//        margin-left:-25px;
-//        opacity:0.5;
-//      }
-//      &.black{
-//        margin-left:-50px;
-//        background: white;
-//      }
-//
-//    }
-//  }
-//
-//
-//   &:hover, &.down{
-//     nav,{
-//     top: 0px;
-//     opacity: 1;
-//     }
-//   }
-//     nav {
-//       display: flex;
-//       justify-content: space-between;
-//       background-color: #333;
-//       position: fixed;
-//       top: -60px;
-//       opacity: 0;
-//       width: 100%;
-//       // display: block;
-//       transition: top 0.3s;
-//
-//       transition: all 500ms;
-//
-//       .left{
-//         // flex-grow: 1;
-//         display: flex;
-//         justify-content: flex-start;
-//       }
-//       .center{
-//         // flex-grow: 1;
-//         display: flex;
-//         justify-content: center;
-//       }
-//       .right{
-//         // flex-grow: 1;
-//         justify-content: flex-end;
-//         display: flex;
-//       }
-//
-//        button, p {
-//         // float: left;
-//         display: block;
-//         color: #f2f2f2;
-//         background-color: inherit;
-//         border: none;
-//         text-align: center;
-//         padding: 15px;
-//         margin: 0px;
-//         text-decoration: none;
-//         font-size: 1.5em;
-//       }
-//
-//       button:hover {
-//         background-color: #ddd;
-//         color: black;
-//       }
-//
-//   }
-//
-//
-//
-// }
-
 
 .hex-grid{
   width: 100%;
-  // transform: scale($game-scale);
-  transform: scale($game-scale);// translateY(-400px);
-  // margin-left: 100px;
+  transform: scale($game-scale);
   display: flex;
   flex-direction: column;
   align-items: center;
-  // margin-left: 50px;
   margin-left: -25px;
   margin-top: 170px;
-  // transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transition: transform 750ms, opacity 1000ms;
   &.hideLeft{
     opacity:0;
     transform: scale($game-scale) translateX(-1000px);
-    // transition: all 0ms ;
-
   }
   &.hideRight{
     opacity:0;
     transform: scale($game-scale) translateX(1000px);
     transition: none;
   }
-  // &.start{
-  //   transform: scale(1);
-  //   margin-left: 0;
-  //   margin-top: 60px;
-  //   // margin-top: 250px;
-  // }
 }
 
 .even, .odd{
@@ -184,35 +75,22 @@ body{
   display: flex;
   align-items: center;
 }
-.even{
-
-}
-
 .odd{
   margin-top: -167px;
   margin-bottom: -167px;
 }
-
 .hex{
   position: relative;
   margin-right: 45px;
   width: 100px;
   height: 100px;
-
-  // transform: rotate(0deg);
-
-
   transition: all $anim-time cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  // transition: transform 2000ms;
-
 
   &.hidden{
     opacity: 0;
     transform: translateY(50px);
     pointer-events: none;
   }
-
-
 
   .seg{
     position: relative;
@@ -221,19 +99,15 @@ body{
     transform:rotate(225deg);
     font-size: 2em;
     text-align: center;
-
     background: grey;
     border: 2px solid rgba(0,0,0,0);
     box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.1);
-
     transition: all $anim-time ease-in-out;
   }
   .scale{
     transform:scaleX(0.577);
-
   }
   .diamond{
-
     &:first-child{
       transform: rotate(-30deg) translate(0px,0px);
       .seg{background: $grey3;}
@@ -248,20 +122,14 @@ body{
     }
   }
 
-
   &:hover{
-    .diamond{
-      .seg{border-color: $in-valid1;}
+      .diamond{.seg{border-color: $in-valid1;}}
     }
-  }
-  &.valid{
-    &:hover{
+
+  &.valid:hover{
       cursor:pointer;
-      .diamond{
-        .seg{border-color: $valid1;}
-      }
+      .diamond{.seg{border-color: $valid1;}}
     }
-  }
 
   &.white{
     transform: translateY(-40px);
@@ -273,15 +141,9 @@ body{
         border-color: white !important;
         animation: bounceSegWhite $anim-time;
       }
-      &:first-child{
-        .seg{background: $white3;}
-      }
-      &:nth-child(2){
-        .seg{background: $white2;}
-      }
-      &:nth-child(3){
-        .seg{background: $white1;}
-      }
+      &:first-child{.seg{background: $white3;}}
+      &:nth-child(2){.seg{background: $white2;}}
+      &:nth-child(3){.seg{background: $white1;}}
     }
   }
   &.black{
@@ -292,50 +154,15 @@ body{
         color: white;
         border-color: #555 !important;
       }
-      &:first-child{
-        .seg{background: $black3;}
-      }
-      &:nth-child(2){
-        .seg{background: $black2;}
-      }
-      &:nth-child(3){
-        .seg{background: $black1;}
-      }
+      &:first-child{.seg{background: $black3;}}
+      &:nth-child(2){.seg{background: $black2;}}
+      &:nth-child(3){.seg{background: $black1;}}
     }
   }
-  @keyframes invertSeg1{
-    0%,100%{background: $white1;}
-    50%{background: $black1;}
-  }
-  @keyframes invertSeg2{
-    0%,100%{background: $white2;}
-    50%{background: $black2;}
-  }
-  @keyframes invertSeg3{
-    0%,100%{background: $white3;}
-    50%{background: $black3;}
-  }
-  @keyframes bombSeg1{
-    0%,100%{background: $red1;}
-    50%{background: $yellow1;}
-  }
-  @keyframes bombSeg2{
-    0%,100%{background: $red2;}
-    50%{background: $yellow2;}
-  }
-  @keyframes bombSeg3{
-    0%,100%{background: $red3;}
-    50%{background: $yellow3;}
-  }
+
   &.invert{
-    &.white{
-      .diamond{.seg{border-color: $white1 !important;}
-      }
-    }
-    &.black{
-      .diamond{.seg{border-color: $black1 !important;}
-      }
-    }
+    &.white{.diamond{.seg{border-color: $white1 !important;}}}
+    &.black{.diamond{.seg{border-color: $black1 !important;}}}
     .diamond{
       &:first-child{.seg{animation: invertSeg3 5s infinite;} }
       &:nth-child(2){.seg{animation: invertSeg2 5s infinite;} }
@@ -344,59 +171,17 @@ body{
   }
 
   &.bomb{
-    &.white{
-      .diamond{.seg{border-color: $white1 !important;}
-      }
-    }
-    &.black{
-      .diamond{.seg{border-color: $black1 !important;}
-      }
-    }
+    &.white{.diamond{.seg{border-color: $white1 !important;}}}
+    &.black{.diamond{.seg{border-color: $black1 !important;}}}
     .diamond{
       &:first-child{.seg{animation: bombSeg3 5s infinite;} }
       &:nth-child(2){.seg{animation: bombSeg2 5s infinite;} }
       &:nth-child(3){.seg{animation: bombSeg1 5s infinite;} }
     }
   }
-
-  // &::before, &::after{
-  //   display: inline-block;
-  //   position: absolute;
-  //   width:inherit; height:inherit;
-  //   border-radius: inherit;
-  //   background: inherit;
-  //   content: '';
-  // }
-  // &::before{
-  //   // transform: rotate(90deg);
-  //   transform-origin: top left;
-  //   // transform: translateX(-50px) scaleY(-1);
-  //   background: red;
-  // }
-  // &::after{
-  //   transform:  skewX(0deg) rotateZ(0deg) rotateY(0deg) scaleX(-1);
-  //   transform-origin: bottom right;
-  //   // right:-70pxx
-  //   // top:-104px;
-  //   // transform: rotate(-60deg);
-  //   background: yellow;
-  //   //translate(151px, -88px)
-  // }
-
-
-}
-
-
-body{
-  margin:0;
 }
 main {
-  // background-color: $grey1;
   background-image: linear-gradient($bg-blue2, $bg-blue1);
-   // background-image: url("../images/landscape.jpg");
-   // background-position: center;
-   // background-repeat: no-repeat;
-   // background-size:cover;
   display:flex;
   width: 100%;
   height:100vh;
@@ -420,12 +205,12 @@ main {
     transform: scale(0.9);
     margin-left: 0;
     margin-top: 10px;
-    // background-color: $grey1;
+
     .intro{
       margin-bottom:0px;
       color: $intro-colour;
       font-size: 10em;
-      // border: 2px solid rgba(0,0,0,0);
+
       text-shadow: 0px 0px 20px $intro-colour-trans;
       transform: translate(-110px,100px) rotateX(55deg);
       .angle1{
@@ -433,12 +218,7 @@ main {
       }
       .angle2{
         transform: rotate(45deg) translate(44px, -310px);
-
       }
-    }
-    .odd{
-      // margin-top: 0px;
-      // margin-bottom: -166px;
     }
     .hex{
       .seg{
@@ -567,16 +347,11 @@ main {
       }
     }
   }
-  // .settings{
-  //   background-color: orange;
-  //   .form{
-  //     text-align:justify;
-  //   }
-  // }
+
   .fireworks-container{
     display:none;
     position: fixed;
-    // transform: translate(0px,-1000px);
+
     .fireworks{
       width:250px;
       height: 250px;
@@ -586,29 +361,21 @@ main {
         background-image: url('../images/fireworks1.gif');
       }
       &.fireworks2{
-        // margin-top: -100px;
-        // margin-left: -100px;
         transform: scale(1.1) translate(-100px,-310px);
         background-image: url('../images/fireworks2.gif');
       }
       &.fireworks3{
-        // margin-top: -290px;
-        // margin-left: 100px;
         transform: scale(1.3) translate(100px, -400px);
-        // transform: translate(100px,-290px);
         background-image: url('../images/fireworks3.gif');
       }
     }
-
   }
   .game{
-
     display:none;
     flex-direction: row;
     width: 70%;
     height: 90vh;
     transition: all 1000ms;
-
   }
 }
 
@@ -622,13 +389,12 @@ footer{
   flex-direction: row;
   justify-content: space-between;
   transition: all 1000ms;
+
   &.white{
     background: $white1;
-
   }
   &.black{
     background:$black1;
-
   }
   .hex-scale{
     transform: scale(0.6) translateY(-40px);
@@ -663,12 +429,4 @@ footer{
       color: black;
     }
   }
-  // .hex{
-  //   &.white{
-  //       transform: scale(0.6) translateY(-20px);
-  //   }
-  //   &.black{
-  //       transform: scale(0.6) translateY(-20px);
-  //   }
-  // }
 }

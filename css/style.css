@@ -1,3 +1,33 @@
+@keyframes invertSeg1 {
+  0%,100% {
+    background: #EEE; }
+  50% {
+    background: #111; } }
+@keyframes invertSeg2 {
+  0%,100% {
+    background: #DDD; }
+  50% {
+    background: #222; } }
+@keyframes invertSeg3 {
+  0%,100% {
+    background: #CCC; }
+  50% {
+    background: #000; } }
+@keyframes bombSeg1 {
+  0%,100% {
+    background: #d58080; }
+  50% {
+    background: #ead56a; } }
+@keyframes bombSeg2 {
+  0%,100% {
+    background: #c85959; }
+  50% {
+    background: #e3c83e; } }
+@keyframes bombSeg3 {
+  0%,100% {
+    background: #b33c3c; }
+  50% {
+    background: #d0b31e; } }
 @keyframes bounceWhite {
   0% {
     transform: translateY(-40px); }
@@ -28,11 +58,8 @@
 html, body {
   margin: 0;
   height: 100%;
-  overflow: hidden; }
-
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0; }
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif; }
 
 .hex-grid {
   width: 100%;
@@ -126,36 +153,6 @@ body {
       background: #222; }
     .hex.black .diamond:nth-child(3) .seg {
       background: #111; }
-@keyframes invertSeg1 {
-  0%,100% {
-    background: #EEE; }
-  50% {
-    background: #111; } }
-@keyframes invertSeg2 {
-  0%,100% {
-    background: #DDD; }
-  50% {
-    background: #222; } }
-@keyframes invertSeg3 {
-  0%,100% {
-    background: #CCC; }
-  50% {
-    background: #000; } }
-@keyframes bombSeg1 {
-  0%,100% {
-    background: #d58080; }
-  50% {
-    background: #ead56a; } }
-@keyframes bombSeg2 {
-  0%,100% {
-    background: #c85959; }
-  50% {
-    background: #e3c83e; } }
-@keyframes bombSeg3 {
-  0%,100% {
-    background: #b33c3c; }
-  50% {
-    background: #d0b31e; } }
   .hex.invert.white .diamond .seg {
     border-color: #EEE !important; }
   .hex.invert.black .diamond .seg {
@@ -176,9 +173,6 @@ body {
     animation: bombSeg2 5s infinite; }
   .hex.bomb .diamond:nth-child(3) .seg {
     animation: bombSeg1 5s infinite; }
-
-body {
-  margin: 0; }
 
 main {
   background-image: linear-gradient(#325, #357);

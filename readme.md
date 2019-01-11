@@ -34,41 +34,52 @@ When there are no more possible moves to play, the colour with the most pieces o
 
 
 ### Game Instructions
-The game begins on the main menu. This shows the levels that have been unlocked, represented by coloured cubes.
+1. The game begins on the main menu. This shows the levels that have been unlocked, represented by coloured cubes.  
 
-The home icon (in the bottom left of the screen) will bring you back to this screen when clicked.
+ The home icon (in the bottom left of the screen) will bring you back to this screen when clicked.
 
-The black and white people button will start a two player game.
+ The black and white people button will start a two player game.
 
-To start the first level, click on the blue cube.
+ To start the first level, click on the blue cube.
 
-![Screenshot - Start Screen](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level1.png?raw=true)
+ ![Screenshot - Start Screen](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level1.png?raw=true)
 
 2. For the first few levels, you are limited in the moves you can take, to show you how the game is played.
 
-![screenshot - Level 1](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-level1.png?raw=true)
+ ![screenshot - Level 1](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-level1.png?raw=true)
 
-3. Valid moves have a green border when hovered over. Invalid moves show a red border.
+3. When you hover over the board, it shows you if you can place a cube.
 
-![screenshot - Level 1](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-level1.png?raw=true)
+  - Valid moves have a green border when hovered over.
+
+  ![screenshot - Valid move](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-valid-move.png?raw=true)
+
+ - Invalid moves show a red border.
+
+ ![screenshot - Invalid move](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-invalid-move.png?raw=true)
 
 4. The cube on the bottom right of the screen changes colour to indicate the current players turn.
 The border of the bottom bar changes colour to show the current leader.
 
 5. There are special cubes, that when taken perform an action.
 
--The 'invert' cube will turn all black cubes white and white cubes black every time it is captured.
+  The 'invert' cube will turn all black cubes white and white cubes black every time it is captured.
 
-![screenshot - Mines](https://user-images.githubusercontent.com/40343797/45220908-b4f46c00-b2a7-11e8-9460-2a4dee40d0ae.png)
+  ![screenshot - Invert cube](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-invert.png?raw=true)
+
+ The 'bomb' cube will remove itself and its neighbours from the board
+
+ ![screenshot - Bomb cube](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-bomb.png?raw=true)
 
 
 6. Pressing the menu button will return you to the menu, and show you the levels you have unlocked.
 
-![screenshot - Main menu level 6 unlocked](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level6.png?raw=true)
+  ![screenshot - Main menu level 6 unlocked](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level6.png?raw=true)
 
-7. The two player game uses the maximum sized board and has one invert square on it.
+7. The two player game uses the maximum sized board and has one invert cube on it.
 Players take turns placing cubes.
-![screenshot - Main menu level 6 unlocked](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level6.png?raw=true)
+
+  ![screenshot - Two-player game](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-2player.png?raw=true)
 
 ## Process
 
