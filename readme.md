@@ -24,7 +24,7 @@ You can find a hosted version here ----> [jjbenson85.github.io/WDI-Project-01](h
 ### Game overview
 Nocturn is a grid based game based on the classic boardgame Reversi a.k.a Othello.
 
-The aim of the game is to turn black opponent cubes into your white cubes. On your turn, you place a cube on the board. Any opponent cubes in a line between the cube you placed and your existing cubes on the board change to your colour.
+The aim of the game is to have the most cubes of your colour on the board. On your turn, you change a grey cube to your colour, white. Any opponent cubes in a line between the cube you placed and your existing cubes on the board change to your colour.
 
 Your opponent then takes a turn and tries to capture your cubes!
 
@@ -34,31 +34,41 @@ When there are no more possible moves to play, the colour with the most pieces o
 
 
 ### Game Instructions
-1. The game begins on the main menu. This shows the levels that have been unlocked, represented by coloured cubes.
+The game begins on the main menu. This shows the levels that have been unlocked, represented by coloured cubes.
 
-The home icon in the bottom left of the screen will bring you back to this screen.
+The home icon (in the bottom left of the screen) will bring you back to this screen when clicked.
 
 The black and white people button will start a two player game.
 
 To start the first level, click on the blue cube.
 
-![Nocturn Start Screen](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level1.png?raw=true)
+![Screenshot - Start Screen](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level1.png?raw=true)
 
-2. Once the game begins, there is short animation of a boat entering onto the screen and the player's submarine appears below the boat. Once the submarine appears, it can be controlled by the player using the ← ↑ → ↓ keys.
+2. For the first few levels, you are limited in the moves you can take, to show you how the game is played.
 
-![screenshot - Beginning position](https://user-images.githubusercontent.com/40343797/45220870-8ececc00-b2a7-11e8-804a-c271278a428f.png)
+![screenshot - Level 1](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-level1.png?raw=true)
 
-3. Points are gained when the submarine is moved into a fish or other marine life. This 'captures' the specimen and points are gained. The fishes are randomly spawned and each type of fish has different movement patterns. Different types of fish are spawned at different levels and at different probabilities. Generally the fish with higher score values are only spawned at the lower depths and spawned less frequently.
+3. Valid moves have a green border when hovered over. Invalid moves show a red border.
 
-![screenshot - Fish types](https://user-images.githubusercontent.com/40343797/45220971-e53c0a80-b2a7-11e8-9942-714db52793d9.png)
+![screenshot - Level 1](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-level1.png?raw=true)
 
-4. If the submarine moves into an underwater mine, the mine will explode. This deducts an amount from your remaining Air Supply.
+4. The cube on the bottom right of the screen changes colour to indicate the current players turn.
+The border of the bottom bar changes colour to show the current leader.
+
+5. There are special cubes, that when taken perform an action.
+
+-The 'invert' cube will turn all black cubes white and white cubes black every time it is captured.
 
 ![screenshot - Mines](https://user-images.githubusercontent.com/40343797/45220908-b4f46c00-b2a7-11e8-9460-2a4dee40d0ae.png)
 
-5. Your Air Supply is shown in the air tank on the left of the screen. You must return to the surface before the Air Supply runs out. If you do not return to the surface before your Air Supply runs out, the game will end and your points will be lost. A beeping sound and flashing Air Supply will warn you when your Air Supply is running low.
 
-![screenshot - End Modal Successful](https://user-images.githubusercontent.com/40343797/45221008-04d33300-b2a8-11e8-999e-62b50286c8ec.png)
+6. Pressing the menu button will return you to the menu, and show you the levels you have unlocked.
+
+![screenshot - Main menu level 6 unlocked](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level6.png?raw=true)
+
+7. The two player game uses the maximum sized board and has one invert square on it.
+Players take turns placing cubes.
+![screenshot - Main menu level 6 unlocked](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level6.png?raw=true)
 
 ## Process
 
