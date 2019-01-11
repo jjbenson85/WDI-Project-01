@@ -26,7 +26,6 @@ $black3:#000;
 $bg-blue1:#357;
 $bg-blue2:#325;
 
-
 $blue-base:#357;
 $green-base:#363;
 $yellow-base:#761;
@@ -104,45 +103,5 @@ $red10:mix($red1, $blue1,25);
 $red11:darken($red10, 10% );
 $red12:darken($red10, 10% );
 
-
-
-
-// $white1:$black;
-// $white2:$grey;
-// $white3:$white;
-//
-// $black1:$grey;
-// $black2:$white;
-// $black3:$black;
-// $green1:#070;
-// $green2:#060;
-// $green3:#050;
-
 $valid1:$green5;
 $in-valid1:$red4;
-
-
-
-$invert1:$green1;
-$invert2:$green2;
-$invert3:$green3;
-
-$invert-white1:#EFE;
-$invert-white2:#DED;
-$invert-white3:#CDC;
-
-$invert-black1:#252;
-$invert-black2:#141;
-$invert-black3:#030;
-
-$bomb1:$blue1;
-$bomb2:$blue2;
-$bomb3:$blue3;
-
-$bomb-white1:lighten( $bomb1, 50% );
-$bomb-white2:lighten( $bomb1, 60% );
-$bomb-white3:lighten( $bomb1, 70% );
-
-$bomb-black1:darken( $bomb1, 0% );
-$bomb-black2:darken( $bomb1, 10% );
-$bomb-black3:darken( $bomb1, 20% );

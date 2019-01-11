@@ -128,8 +128,9 @@ html, body {
     cursor: pointer; }
     .hex.valid:hover .diamond .seg {
       border-color: #93bf69; }
+  .hex.white, .hex.black {
+    transform: translateY(-40px); }
   .hex.white {
-    transform: translateY(-40px);
     animation: bounceWhite 500ms; }
     .hex.white .diamond .seg {
       color: black;
@@ -142,7 +143,6 @@ html, body {
     .hex.white .diamond:nth-child(3) .seg {
       background: #EEE; }
   .hex.black {
-    transform: translateY(-40px);
     animation: bounceBlack 500ms; }
     .hex.black .diamond .seg {
       color: white;

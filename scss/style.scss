@@ -1,50 +1,5 @@
-@import '_vars';
+@import '_vars','_animations';
 
-@keyframes invertSeg1{
-  0%,100%{background: $white1;}
-  50%{background: $black1;}
-}
-@keyframes invertSeg2{
-  0%,100%{background: $white2;}
-  50%{background: $black2;}
-}
-@keyframes invertSeg3{
-  0%,100%{background: $white3;}
-  50%{background: $black3;}
-}
-@keyframes bombSeg1{
-  0%,100%{background: $red1;}
-  50%{background: $yellow1;}
-}
-@keyframes bombSeg2{
-  0%,100%{background: $red2;}
-  50%{background: $yellow2;}
-}
-@keyframes bombSeg3{
-  0%,100%{background: $red3;}
-  50%{background: $yellow3;}
-}
-
-@keyframes bounceWhite{
-  0%{transform: translateY(-40px);}
-  25%{transform: translateY(-50px);}
-  75%{transform: translateY(-30px);}
-  100%{transform: translateY(-40px);}
-}
-
-@keyframes bounceSegWhite{
-  0%{box-shadow: 0px 0px 15px 2px $white;}
-  25%{box-shadow: 0px 0px 15px 4px $white;}
-  75%{box-shadow: 0px 0px 5px 2px $white;}
-  100%{box-shadow: 0px 0px 15px 2px $white;}
-}
-
-@keyframes bounceBlack{
-  0%{transform: translateY(-40px);}
-  25%{transform: translateY(-50px);}
-  75%{transform: translateY(-30px);}
-  100%{transform: translateY(-40px);}
-}
 html, body {
   margin: 0; height: 100%; overflow: hidden;
   font-family: 'Roboto', sans-serif;
@@ -131,10 +86,11 @@ html, body {
       .diamond{.seg{border-color: $valid1;}}
     }
 
-  &.white{
+  &.white, &.black{
     transform: translateY(-40px);
+  }
+  &.white{
     animation: bounceWhite $anim-time;
-
     .diamond{
       .seg{
         color: black;
@@ -147,7 +103,6 @@ html, body {
     }
   }
   &.black{
-    transform: translateY(-40px);
     animation: bounceBlack $anim-time;
     .diamond{
       .seg{
@@ -210,7 +165,6 @@ main {
       margin-bottom:0px;
       color: $intro-colour;
       font-size: 10em;
-
       text-shadow: 0px 0px 20px $intro-colour-trans;
       transform: translate(-110px,100px) rotateX(55deg);
       .angle1{
@@ -221,11 +175,6 @@ main {
       }
     }
     .hex{
-      .seg{
-        // color: black;
-        // border-color: white !important;
-      }
-
       &.level1{.diamond{
         &:first-child{.seg{background: $blue3;}}
         &:nth-child(2){.seg{background: $blue2;}}
@@ -316,9 +265,6 @@ main {
       }
 
       &:hover{
-        // &.settingsButton, &.start-button, &.start-button-single{
-        //   transform: translateY(-40px);
-        // }
         &.level{
           transform: translateY(-36px);
         }
@@ -326,15 +272,9 @@ main {
           color: black;
           border-color: white !important;
         }
-        &:first-child{
-          .seg{background: $white3;}
-        }
-        &:nth-child(2){
-          .seg{background: $white2;}
-        }
-        &:nth-child(3){
-          .seg{background: $white1;}
-        }
+        &:first-child{.seg{background: $white3;} }
+        &:nth-child(2){.seg{background: $white2;} }
+        &:nth-child(3){.seg{background: $white1;} }
       }
     }
     .seg{
@@ -343,7 +283,6 @@ main {
         color:white;
         transform: rotate(45deg);
         margin-left:10px;
-        // margin-top:-4px;
       }
     }
   }
@@ -418,8 +357,6 @@ footer{
         background-color: $white2;
       }
     }
-  }
-  .home{
   }
   .two-player{
     i:first-child{
