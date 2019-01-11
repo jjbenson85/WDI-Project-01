@@ -17,26 +17,32 @@
 
 ## My Game - NOCTURN
 
-![NOCTURN](https://user-images.githubusercontent.com/40343797/45214662-fc243200-b292-11e8-9c52-5a1053aa8c0a.png)
+![Nocturn](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level1.png?raw=true)
 
 You can find a hosted version here ----> [jjbenson85.github.io/WDI-Project-01](https://jjbenson85.github.io/WDI-Project-01)
 
 ### Game overview
-Deep Sea Dive is a one person game inspired by the French conservationist and filmmaker Jacques Cousteau. The aim is to capture as many specimen of sea life and return to the surface before the air supply runs out.
+Nocturn is a grid based game based on the classic boardgame Reversi a.k.a Othello.
 
-The player controls the movement of a submarine in order to capture the fish and avoid underwater mines.
+The aim of the game is to turn black opponent cubes into your white cubes. On your turn, you place a cube on the board. Any opponent cubes in a line between the cube you placed and your existing cubes on the board change to your colour.
 
+Your opponent then takes a turn and tries to capture your cubes!
 
-### Controls
-- Submarine movements: ← ↑ → ↓ keys
-- Start game: "Start" button or pressing "D"
-- End game: "End Game" button or pressing "S"
-- Toggle mute: Speaker Icon or pressing "Q"
+You have to place a cube if you can, and you cannot place a cube if it will not capture an opponent piece. If you can not place a piece, you skip your turn.
+
+When there are no more possible moves to play, the colour with the most pieces on the board wins!
+
 
 ### Game Instructions
-1. The game begins with a welcome modal introducing the aim of the game. The game is started by clicking on the "Start" button or by pressing "D".
+1. The game begins on the main menu. This shows the levels that have been unlocked, represented by coloured cubes.
 
-![screenshot - Start Modal](https://user-images.githubusercontent.com/40343797/45220826-6777ff00-b2a7-11e8-8511-8a5f00bc0b74.png)
+The home icon in the bottom left of the screen will bring you back to this screen.
+
+The black and white people button will start a two player game.
+
+To start the first level, click on the blue cube.
+
+![Nocturn Start Screen](https://github.com/jjbenson85/WDI-Project-01/blob/master/images/readme/Nocturn-menu-level1.png?raw=true)
 
 2. Once the game begins, there is short animation of a boat entering onto the screen and the player's submarine appears below the boat. Once the submarine appears, it can be controlled by the player using the ← ↑ → ↓ keys.
 
