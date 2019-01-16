@@ -83,49 +83,61 @@ Players take turns placing cubes.
 
 ## Process
 
-The starting point for this game was creating the basic grid layout on which the submarine could move. This was created by a list of 'div's in the HTML. Each cell within the grid was an individual element. These cells are nestled within a container. The submarine, and fish were created by applying classes to the elements within the grid. When the submarine or fish is moved, their class is removed from the cell of their current position and applied to the new cell.
+I started the project by building a small grid of square divs and creating the basic Reversi game logic.
 
-I created fish as objects which contain their points value, an array of their movement patterns, their age and the class which is being applied to the cell that they are in. The class relates to a css class with a corresponding background image of the fish type. When a fish is created it is added to an array of fish in play.
+The steps in creating the basic logic were:
+  * Adding a css class to the grid to indicate the different players.
+  * Only being able to add a class if the neighbour is an opponent.
+  * Changing the class of the opponent tile if it is surrounded by player tiles.
+  * Searching along the length of opponent tiles to enable more than one opponent to be changed at a time.
+  * Preventing tile captures wrapping around the edges of the board.
+  * Adding up the tiles to determine the scores.
+  * Indicating the game is over when no more tiles can be added.
+  * Creating a CPU player, with three different strategies.
 
-While the game is running, a function runs through the array of fish in play and moves each fish the corresponding amount within their movement patterns.
+  I then added some extra features
+  * Converting the grid to an Isometric view.
+  * Adding sounds and animations to the tile captures.
+  * Converting the game to a Class.
+  * Created a history array and undo and redo function
+  * Creating a start screen with level selection
+  * Created some level designs
 
-A function was also created which checks if a fish has been caught. This runs through the array of fish in play to check if its location is the same as that of the submarine. If it has been caught, it is removed from the array of fish in play and its corresponding points value to added to the player's score.
 
-Once I had this mechanics working, I worked on adding a timer countdown which displayed as an air supply within the player's air tank. The height of the air supply element is a proportion of the amount of time left.
+  Once I had the logic, I decided to add some basic styling and create the isometric cube look.
 
-I then moved onto the task of allowing the position of the submarine to control the scrolling of the grid. This also required stoping the default behaviour of controls to prevent the user from scrolling through the grid to a position where the submarine was not visible.
+  This created some challenges as the rows alternate in length which changed how the board edge detection would work. (My initial solution to this involved creating a lookup table for all of the edge pieces, but I changed this to a border of hidden tiles. The hidden tile test allows the board to vary in size and have different shapes that can alter during the game and still work, as well as reducing the amount of code.)
 
-As the game continued to develop I created a fish constructor function which created the fish objects and also contained the method which allowed the fish to move. I had initially also created a method which allowed the fish, when they were caught or swam off screen, to be removed from the fish in played array and remove their classes from the grid. However, I later changed this to a key within the fish object which specified whether the fish was active or not. During the game, a function now runs through the array of fish in play and removes any fish which have been set to no longer active.
+  I then created a history array, that stores the state of the board for every move. This allows for an undo and redo button. This was useful for checking bugs.
 
-The final significant element was creating a variable which specified whether the submarine was at the top of the surface when the air supply had reached zero. I created a modal with content which varied depending on whether the player had returned to the surface by the end of the game.
+  I refactored the game to run in its own class. The class takes the a level as an argument which the builds the appropriate board design.
+
+  I created a start screen which shows the levels as the player unlocks them.
+
 
 ### Challenges
 
-This game involves quite a lot of different things going on at the same time. It was a challenge to make sure the gaming mechanics were being being timed correctly. It was also important that I created code logic that could cope with expanding numbers of different fish characters in play at the same time.
+Searching the line
 
-There were several tricky tasks including the scrolling of the grid being controlled by the submarine and the animation of the fish.
+Creating the hexagon
+
+Edge detecting
+
 
 ### Wins
 
-Creating cascading animations and sounds really helped the game come alive and gave me more creative control over the feel of the play. I invested a lot of time in the stying of the game, particularly the animations and air supply tank to give them a consistent and professional feel. I was particularly pleased with my 'Fish' constructor function which I then used to randomly generate different fish.
+Searching the line direction function
 
-![Fish constructor function from app.js](https://user-images.githubusercontent.com/40343797/50378462-b7968980-062a-11e9-95b7-54e358bfb320.png)
+Level building function
 
+Scss colours
 
-When fish were created, they were added to an array of 'fishInPlay'. I was then able to call this function every 200 milliseconds to move every fish on the board.
-
-```
-function moveFish(){
-
-  fishInPlay.forEach(fish => fish.move());
-
-} // moves every fish 1 position in their respective movementPatternArrays
-```
+New Hexagon
 
 ## Future features
 
-If I had more time, I would like to try and make the game playable on a touchscreen device. I would need to make a control panel that would appear on a touch device to replace the keyboard inputs.
-
-Different levels could be added to the game with different patterns of mine positioning and different fish spawning at different depths.
-
-I would also like to improve the animations of the submarine (such as adding animated bubbles when it is moving) and improving the animations of the fish, particularly in allowing them to move diagonally.
+Use new Hexagon
+Responsive
+More sounds
+Improve timing
+Improve performance on mobile
