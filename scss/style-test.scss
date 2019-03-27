@@ -50,37 +50,30 @@ body{
         border-radius: 4px;
         opacity: 1;
         transform: scaleY(0.577) rotate(45deg);
-        &:after{
+        &:after, &:before{
           content: '';
-          background: $blue2;
           opacity: 1;
           display: block;
           position: absolute;
-          transform: skewX(45deg);
           top: 100%;
-          left: 50%;
-          width: 100%;
-          height: 100%;
-          border: 0.1vw solid black;
-          border-radius: 4px;
-
-        }
-        &:before{
-          content: '';
-          background: $blue3;
-          opacity: 1;
-          display: block;
-          position: absolute;
-          transform: skewY(45deg);
-          top: 50%;
           left: 100%;
           width: 100%;
           height: 100%;
           border: 0.1vw solid black;
           border-radius: 4px;
-
+        }
+        &:after{
+          background: $blue2;
+          transform: skewX(45deg);
+          left: 50%;
+        }
+        &:before{
+          background: $blue3;
+          transform: skewY(45deg);
+          top: 50%;
         }
       }
+
       &:after {
         content: "";
         display: block;

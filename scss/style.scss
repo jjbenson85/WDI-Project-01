@@ -5,6 +5,14 @@ html, body {
   font-family: 'Roboto', sans-serif;
 }
 
+@mixin colorCube($col1, $col2, $col3){
+  .diamond{
+    &:first-child{.seg{background: $col3;}}
+    &:nth-child(2){.seg{background: $col2;}}
+    &:nth-child(3){.seg{background: $col1;}}
+  }
+}
+
 .hex-grid{
   width: 100%;
   transform: scale($game-scale);
@@ -175,11 +183,14 @@ main {
       }
     }
     .hex{
-      &.level1{.diamond{
-        &:first-child{.seg{background: $blue3;}}
-        &:nth-child(2){.seg{background: $blue2;}}
-        &:nth-child(3){.seg{background: $blue1;}}
-      } }
+      &.level1{
+        // .diamond{
+        // &:first-child{.seg{background: $blue3;}}
+        // &:nth-child(2){.seg{background: $blue2;}}
+        // &:nth-child(3){.seg{background: $blue1;}}
+        @include colorCube($blue1,$blue2, $blue3)
+      // }
+      }
       &.level2{.diamond{
         &:first-child{.seg{background: $blue6;}}
         &:nth-child(2){.seg{background: $blue5;}}

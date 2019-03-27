@@ -337,21 +337,22 @@ class GameLevel{
     const id = this.getTileId(tile)
     const neighbours = this.neighbourLookup[id]
 
-    //for each neighbour check it is a valid move
-    neighbours.some((neighbourTile, index)=>{
+    //for each neighbour check if any is a valid move
+    return neighbours.some((neighbourTile, index)=>{
       //If element is string it is not a valid tile
       if(typeof neighbourTile === 'string') return
-      const arr = this.validFlip(neighbourTile,index)
 
-      if(arr) flipArr.push(arr)
+      //Valid flip array returns false or an array
+      return !!this.validFlip(neighbourTile,index)
+
     })
 
-    //If the flip array contains some tiles to flip then return it
-    //This is a valid move
-    if(flipArr.length) return true
-
-    //Otherwise return false, this move is not valid
-    return false
+    // //If the flip array contains some tiles to flip then return it
+    // //This is a valid move
+    // if(flipArr.length) return true
+    //
+    // //Otherwise return false, this move is not valid
+    // return false
   }
 
   getValidMoves(){
@@ -387,16 +388,16 @@ class GameLevel{
     })
 
     //Sort array in size order so longest plays sounds
-    flipArr.sort(function(a, b){
+    return flipArr.sort(function(a, b){
       return b.length - a.length
     })
 
     //If the flip array contains some tiles to flip then return it
     //This is a valid move
-    if(flipArr.length) return flipArr
+    // if(flipArr.length) return flipArr
 
     //Otherwise return false, this move is not valid
-    return false
+    // return false
   }
 
   endTurn(){
@@ -542,7 +543,8 @@ class GameLevel{
       // $fireworks.hide()
 
       // new GameLevel(this.$game,level)
-      console.log('over',this.gameLets)
+
+      console.log('gameLets.level',this.gameLets.level)
       new GameLevel(this.$game, this.gameConst, this.gameLets, this.gameDom)
     }, 500)
     setTimeout(()=> {

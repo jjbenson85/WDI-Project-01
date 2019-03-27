@@ -28,25 +28,25 @@ const gameConst={
 
 }
 
-const numberOfTiles = 112
-const showNumbers = false
-const cpuType = 'greedy'
-const delay = 250
-const srcArray = [
-  '1_C3.m4a',
-  // '2_Cs3.m4a',
-  '3_D3.m4a',
-  '4_Eb3.m4a',
-  '5_E3.m4a',
-  '6_F3.m4a',
-  // '7_Fs3.m4a',
-  '8_G3.m4a',
-  // '9_Gs3.m4a',
-  '10_A3.m4a',
-  '11_Bb3.m4a',
-  // '12_B3.m4a',
-  '13_C4.m4a'
-]
+// const numberOfTiles = 112
+// const showNumbers = false
+// const cpuType = 'greedy'
+// const delay = 250
+// const srcArray = [
+//   '1_C3.m4a',
+//   // '2_Cs3.m4a',
+//   '3_D3.m4a',
+//   '4_Eb3.m4a',
+//   '5_E3.m4a',
+//   '6_F3.m4a',
+//   // '7_Fs3.m4a',
+//   '8_G3.m4a',
+//   // '9_Gs3.m4a',
+//   '10_A3.m4a',
+//   '11_Bb3.m4a',
+//   // '12_B3.m4a',
+//   '13_C4.m4a'
+// ]
 
 const gameLets={
   level: 16,
@@ -66,21 +66,21 @@ const gameLets={
   }
 }
 
-let level = 16
+const level = 16
 let prevLevel = 1
-let gridClassArray = []
-const history = []
-let cpu
-let turnCount
-let whiteCount
-let blackCount
-let player
-let opponent
-let clickable = true
-const noValidMoves = {
-  'black': false,
-  'white': false
-}
+// let gridClassArray = []
+// const history = []
+// let cpu
+// let turnCount
+// let whiteCount
+// let blackCount
+// let player
+// let opponent
+// let clickable = true
+// const noValidMoves = {
+//   'black': false,
+//   'white': false
+// }
 
 
 const gameDom={
@@ -92,13 +92,13 @@ let $screens
 let $start
 let $footer
 let $turnIcon
-let $fireworks
+// let $fireworks
 
 document.addEventListener('DOMContentLoaded', ()=>{
   init()
 })
 
-const directions = [-width,(-2*width)+1,-width+1,-1,0,1,width-1,(2*width)-1,width]
+// const directions = [-width,(-2*width)+1,-width+1,-1,0,1,width-1,(2*width)-1,width]
 
 function init(){
 
@@ -126,8 +126,10 @@ function init(){
   function goToGame(gameLevel){
     gameLets.cpu = !!level
     gameLets.level = gameLevel
+    console.log('gameLets.level',  gameLets.level)
+
     $turnIcon.removeClass('hidden').addClass('white')
-    console.log('gameConst',gameConst)
+    // console.log('gameConst',gameConst)
     new GameLevel($($game),gameConst, gameLets, gameDom)
 
     $screens.hide()
@@ -135,15 +137,15 @@ function init(){
   }
 
   function goToMenu(){
-    console.log('Go To menu level', level)
+    console.log('Go To menu level', gameLets.level)
     $turnIcon.removeClass('white').removeClass('black').addClass('hidden')
-    for(let i=prevLevel;i<=level;i++){
+    for(let i=prevLevel;i<=gameLets.level;i++){
       const $startHexs = $start.find(`.level${i}`)
       setTimeout(function () {
         $startHexs.removeClass('hidden')
       }, 100*(i-prevLevel))
     }
-    prevLevel = level
+    prevLevel = gameLets.level
     $screens.hide()
     $start.show()
   }

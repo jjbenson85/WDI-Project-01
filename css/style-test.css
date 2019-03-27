@@ -40,32 +40,25 @@ body {
         border-radius: 4px;
         opacity: 1;
         transform: scaleY(0.577) rotate(45deg); }
-        .hex-grid .even .hex .diamond:after, .hex-grid .odd .hex .diamond:after, .hex-scale .even .hex .diamond:after, .hex-scale .odd .hex .diamond:after {
+        .hex-grid .even .hex .diamond:after, .hex-grid .even .hex .diamond:before, .hex-grid .odd .hex .diamond:after, .hex-grid .odd .hex .diamond:before, .hex-scale .even .hex .diamond:after, .hex-scale .even .hex .diamond:before, .hex-scale .odd .hex .diamond:after, .hex-scale .odd .hex .diamond:before {
           content: '';
-          background: #7ca2c7;
           opacity: 1;
           display: block;
           position: absolute;
-          transform: skewX(45deg);
           top: 100%;
-          left: 50%;
-          width: 100%;
-          height: 100%;
-          border: 0.1vw solid black;
-          border-radius: 4px; }
-        .hex-grid .even .hex .diamond:before, .hex-grid .odd .hex .diamond:before, .hex-scale .even .hex .diamond:before, .hex-scale .odd .hex .diamond:before {
-          content: '';
-          background: #5888b8;
-          opacity: 1;
-          display: block;
-          position: absolute;
-          transform: skewY(45deg);
-          top: 50%;
           left: 100%;
           width: 100%;
           height: 100%;
           border: 0.1vw solid black;
           border-radius: 4px; }
+        .hex-grid .even .hex .diamond:after, .hex-grid .odd .hex .diamond:after, .hex-scale .even .hex .diamond:after, .hex-scale .odd .hex .diamond:after {
+          background: #7ca2c7;
+          transform: skewX(45deg);
+          left: 50%; }
+        .hex-grid .even .hex .diamond:before, .hex-grid .odd .hex .diamond:before, .hex-scale .even .hex .diamond:before, .hex-scale .odd .hex .diamond:before {
+          background: #5888b8;
+          transform: skewY(45deg);
+          top: 50%; }
       .hex-grid .even .hex:after, .hex-grid .odd .hex:after, .hex-scale .even .hex:after, .hex-scale .odd .hex:after {
         content: "";
         display: block;
